@@ -53,6 +53,6 @@ email: rafael.slo@outlook.com # your email address
 # youtube_id: # your youtube channel id (youtube.com/@<youtube_id>)
 # zotero_username: # your zotero username
 custom_social: # can be any name here other than the ones already defined above
-  # logo: https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png?20140125013055 # can be png, svg, jpg
+  logo: https://www.pngfind.com/pngs/m/53-533322_linked-in-logo-linkedin-logo-png-images-free.png # can be png, svg, jpg
   title: LinkedIn
   url: https://www.linkedin.com/in/rafael-slo/

@@ -2,25 +2,25 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>PhD(c) in Medical Technology, NTNU</a>. rafael.slo@outlook.com. 
+subtitle: <a href='#'>PhD(c) in Medical Technology, NTNU</a> 
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-selected_papers: true # includes a list of papers marked as "selected={true}"
+selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 
 announcements:
-  enabled: false # includes a list of news items
+  enabled: true # includes a list of news items
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
+  limit: 3 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
   enabled: true
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
+  limit: 5 # leave blank to include all the blog posts
 ---
 
 𝘽𝙖𝙘𝙠𝙜𝙧𝙤𝙪𝙣𝙙: As a Clinical Bioinformatician by training, I hold a Bachelor's degree in Biology (BSc), two postgraduate diplomas (Molecular Biomedicine & Applied Statistics to Health Sciences) and a Master's degree in Clinical Bioinformatics (MSc) with a major in Clinical Decision Support. I am currently pursuing a Ph.D. in Medical Technology at NTNU, focusing on stratifying small-cell lung cancer patients by cancer subtype and identifying novel biomarkers. My goal is to improve patient stratification by discovering mechanisms of treatment resistance and vulnerabilities, improving both treatment outcomes and prognosis.
