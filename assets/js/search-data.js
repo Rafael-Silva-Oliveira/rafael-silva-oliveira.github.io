@@ -60,12 +60,12 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/12rules/";
-            },},{id: "news-a-simple-inline-announcement",
-          title: 'A simple inline announcement.',
+            },},{id: "news-accepted-to-phd-program-medical-technology-at-ntnu-trondheim-norway",
+          title: 'Accepted to PhD program (Medical Technology) at NTNU, Trondheim, Norway',
           description: "",
-          section: "News",},{id: "projects-project-1",
-          title: 'project 1',
-          description: "with background image",
+          section: "News",},{id: "projects-to-be-added",
+          title: 'To be added!',
+          description: "To be added",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
             },},{
