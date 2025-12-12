@@ -44,9 +44,9 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/teaching/";
           },
-        },{id: "post-subtyping-of-cancer-subtypes-using-cnmf-and-literature-markers",
+        },{id: "post-cancer-subtyping-using-cnmf-and-literature-markers",
         
-          title: "Subtyping of cancer subtypes using cNMF and literature markers",
+          title: "Cancer subtyping using cNMF and literature markers",
         
         description: "An example of usage of cNMF to identify cancer subtypes",
         section: "Posts",
