@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://rafael-silva-oliveira.github.io/al-folio/sitemap.xml
+Sitemap: https://rafael-silva-oliveira.github.io/sitemap.xml
