@@ -24,8 +24,8 @@
       "name": "Norwegian University of Science and Technology",
       "position": "PhD Student",
       "url": "https://github.com/rafael-silva-oliveira",
-      "startDate": "2023-15-09",
-      "endDate": "2026-15-09",
+      "startDate": "2023-09-15",
+      "endDate": "2026-09-15",
       "summary": "The doctoral research project (100% computational) I'm working in is centered around the stratification of patients (i.e. cancer subtyping, high risk groups for progression/metastasis, etc), and the identification of biomarkers and individuals who may or may not respond to diverse treatment strategies such as chemoradiotherapy and immune checkpoint inhibitors in the context of small-cell lung cancer (SCLC) using transcriptomics data (bulk, scRNA and spatial transcriptomics).",
       "highlights": ["Spatial Transcriptomics", "Single-cell RNA-seq", "RNA-seq"]
     }
@@ -49,8 +49,8 @@
       "url": "https://www.ntnu.no/ansatte/rafael.oliveira",
       "area": "Bioinformatics and Spatial Transcriptomics",
       "studyType": "PhD",
-      "startDate": "2023-15-09",
-      "endDate": "2026-15-09",
+      "startDate": "2023-09-15",
+      "endDate": "2026-09-15",
       "courses": ["Advanced deep learning with Python","Bioinformatics Methods for Next Generation Sequencing","Norwegian for Foreigners A2/A1", "Norwegian for Foreigners B2/B1"]
     }
   ],
