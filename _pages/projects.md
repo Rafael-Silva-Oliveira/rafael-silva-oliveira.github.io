@@ -2,7 +2,7 @@
 layout: page
 title: projects
 permalink: /projects/
-description: This section is dedicated to some of my projects (mostly description) of projects I have been involved in. Will not be a focus on coding, but rather explanation of the methodology and the results (What, Why and How). For coding and tutorials, check out the blog posts and my GitHub repositories!
+description: This section is dedicated to (mostly) description and explanation of projects I have been involved in. This section will not have a focus on coding, but rather explanation of the methodology and the results (What, Why and How). For coding and tutorials, check out the blog posts and my GitHub repositories!
 nav: true
 nav_order: 3
 display_categories: [work, fun]
