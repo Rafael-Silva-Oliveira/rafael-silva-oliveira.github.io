@@ -59,7 +59,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2025/subtyping/";
+            window.location.href = "/blog/2025/distill/";
           
         },
       },{id: "books-12-rules-for-life",
