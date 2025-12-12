@@ -84,7 +84,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: SciencePond # blog_name will be displayed in your blog page
-blog_description: A place where bioinformaticians can learn more about all things related to bioinformatics and transcriptomics (bulk, scRNA and spatial transcriptomics)
+blog_description: A place where bioinformaticians can learn more about all things related to bioinformatics and transcriptomics.
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
