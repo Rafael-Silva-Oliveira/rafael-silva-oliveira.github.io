@@ -47,11 +47,51 @@
       "institution": "Norwegian University of Science and Technology, Trondheim, Norway",
       "location": "Trondheim, Norway",
       "url": "https://www.ntnu.no/ansatte/rafael.oliveira",
-      "area": "Bioinformatics and Spatial Transcriptomics",
+      "area": "Medical Technology",
       "studyType": "PhD",
-      "startDate": "2023-09-15",
-      "endDate": "2026-09-15",
+      "startDate": "2023-09",
+      "endDate": "2026-09",
       "courses": ["Advanced deep learning with Python","Bioinformatics Methods for Next Generation Sequencing","Norwegian for Foreigners A2/A1", "Norwegian for Foreigners B2/B1"]
+    },
+    {
+      "institution": "University of Aveiro",
+      "location": "Aveiro, Portugal",
+      "url": "https://www.ua.pt/pt/curso/461",
+      "area": "Clinical Bioinformatics (Biomedical Data Science)",
+      "studyType": "MSc",
+      "startDate": "2021-10",
+      "endDate": "2023-07",
+      "courses": []
+    },
+    {
+      "institution": "University of Aveiro",
+      "location": "Aveiro, Portugal",
+      "url": "https://www.ua.pt/en/curso/476/",
+      "area": "Applied Statistics to Health Sciences (Medical Statistics)",
+      "studyType": "Postgraduate Diploma (60 ECTS)",
+      "startDate": "2022-09",
+      "endDate": "2023-06",
+      "courses": []
+    },
+    {
+      "institution": "University of Aveiro",
+      "location": "Aveiro, Portugal",
+      "url": "https://www.ua.pt/pt/curso/127/",
+      "area": "Molecular Biomedicine",
+      "studyType": "Postgraduate Diploma (60 ECTS)",
+      "startDate": "2020-09",
+      "endDate": "2021-06",
+      "courses": []
+    },
+    {
+      "institution": "University of Aveiro",
+      "location": "Aveiro, Portugal",
+      "url": "https://www.ua.pt/pt/c/14/p/",
+      "area": "Biology (Life Sciences)",
+      "studyType": "BSc",
+      "startDate": "2017-09",
+      "endDate": "2020-06",
+      "courses": []
     }
   ],
   // "awards": [
