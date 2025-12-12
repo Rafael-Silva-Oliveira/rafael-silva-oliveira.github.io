@@ -23,8 +23,6 @@ authors:
     affiliations:
       name: IKOM, NTNU
 
-bibliography: 2018-12-22-distill.bib
-
 # Optionally, you can add a table of contents to your post.
 # NOTES:
 #   - make sure that TOC names match the actual section names
