@@ -3,7 +3,7 @@ layout: distill
 title: Subtyping of cancer subtypes using cNMF and literature markers
 description: An example of usage of cNMF to identify cancer subtypes
 tags: subtyping
-date: 2025-12-30
+date: 2025-11-11
 featured: true
 
 authors:
