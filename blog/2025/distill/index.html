@@ -467,7 +467,7 @@
 
 
 <span class="n">adata_nmf</span><span class="p">.</span><span class="n">obs</span>
-</pre></td> </tr></tbody></table></code></pre></figure> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+</pre></td> </tr></tbody></table></code></pre></figure> <p>Now that we have our subtypes, it is time to plot some of the known markers from SCLC and see which group has highest expression for each of the key markets. To explore this, let’s do some boxplots, showing the groups (i.e. subtypes) against key genes using the log_tpm_counts that we calculated earlier.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
 <td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -477,26 +477,35 @@
 7
 8
 9
-</pre></td> <td class="code"><pre><span class="n">key_markers_boxplot</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td> <td class="code"><pre><span class="c1"># Start by creating a dataframe with the log_tpm_counts and the ID_Samples
+</span><span class="n">key_markers_boxplot</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span>
 	<span class="n">adata_nmf</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="sh">"</span><span class="s">log_tpm_counts</span><span class="sh">"</span><span class="p">],</span>
 	<span class="n">columns</span><span class="o">=</span><span class="n">adata_nmf</span><span class="p">.</span><span class="n">var_names</span><span class="p">,</span>
 	<span class="n">index</span><span class="o">=</span><span class="n">adata_nmf</span><span class="p">.</span><span class="n">obs_names</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">key_markers_boxplot</span> <span class="o">=</span> <span class="n">key_markers_boxplot</span><span class="p">[[</span><span class="sh">"</span><span class="s">ASCL1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">NEUROD1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">POU2F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">YAP1</span><span class="sh">"</span><span class="p">]]</span>
+<span class="c1"># Subset just the key genes
+</span><span class="n">key_markers_boxplot</span> <span class="o">=</span> <span class="n">key_markers_boxplot</span><span class="p">[[</span><span class="sh">"</span><span class="s">ASCL1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">NEUROD1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">POU2F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">YAP1</span><span class="sh">"</span><span class="p">]]</span>
 
-<span class="n">merged_data</span> <span class="o">=</span> <span class="n">key_markers_boxplot</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="n">adata_nmf</span><span class="p">.</span><span class="n">obs</span><span class="p">[[</span><span class="sh">"</span><span class="s">nmf-group-de-novo</span><span class="sh">"</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="sh">"</span><span class="s">ID_Sample</span><span class="sh">"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="sh">"</span><span class="s">inner</span><span class="sh">"</span><span class="p">)</span>
-</pre></td> </tr></tbody></table></code></pre></figure> <h1 id="boxplot-subtypes-against-key-genes-such-as-ascl1-neurod1-yap1-pou2f3-using-log_tpm_counts">Boxplot subtypes against key genes such as ASCL1, NEUROD1, YAP1, POU2F3 using log_tpm_counts</h1> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
-<td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td> <td class="code"><pre><span class="k">for</span> <span class="n">key_genes</span> <span class="ow">in</span> <span class="p">[</span><span class="sh">"</span><span class="s">ASCL1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">NEUROD1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">YAP1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">POU2F3</span><span class="sh">"</span><span class="p">]:</span>
+<span class="c1"># Add the NMF grouping we calculated earlier using cNMF
+</span><span class="n">merged_data</span> <span class="o">=</span> <span class="n">key_markers_boxplot</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="n">adata_nmf</span><span class="p">.</span><span class="n">obs</span><span class="p">[[</span><span class="sh">"</span><span class="s">nmf-group-de-novo</span><span class="sh">"</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="sh">"</span><span class="s">ID_Sample</span><span class="sh">"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="sh">"</span><span class="s">inner</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Now, plot each of the key genes against the NMF groups
+</span><span class="k">for</span> <span class="n">key_genes</span> <span class="ow">in</span> <span class="p">[</span><span class="sh">"</span><span class="s">ASCL1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">NEUROD1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">YAP1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">POU2F3</span><span class="sh">"</span><span class="p">]:</span>
 	<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="p">.</span><span class="nf">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="sh">"</span><span class="s">nmf-group-de-novo</span><span class="sh">"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">key_genes</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">merged_data</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="sh">"</span><span class="s">Set2</span><span class="sh">"</span><span class="p">)</span>
 
 	<span class="n">ax</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="sh">"</span><span class="s">NMF groups</span><span class="sh">"</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="sh">"</span><span class="s">log TPM counts</span><span class="sh">"</span><span class="p">)</span>
@@ -505,7 +514,7 @@
 	<span class="n">ax</span><span class="p">.</span><span class="nf">set_xlabel</span><span class="p">(</span><span class="sh">"</span><span class="s">NMF groups</span><span class="sh">"</span><span class="p">)</span>	
 	<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
 	<span class="n">plt</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
-</pre></td> </tr></tbody></table></code></pre></figure> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+</pre></td> </tr></tbody></table></code></pre></figure> <p>This will give the following boxplots:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/ASCL1-480.webp 480w,/assets/img/subtyping/ASCL1-800.webp 800w,/assets/img/subtyping/ASCL1-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/subtyping/ASCL1.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/NEUROD1-480.webp 480w,/assets/img/subtyping/NEUROD1-800.webp 800w,/assets/img/subtyping/NEUROD1-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/subtyping/NEUROD1.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/YAP1-480.webp 480w,/assets/img/subtyping/YAP1-800.webp 800w,/assets/img/subtyping/YAP1-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/subtyping/YAP1.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/pou2f3-480.webp 480w,/assets/img/subtyping/pou2f3-800.webp 800w,/assets/img/subtyping/pou2f3-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/subtyping/pou2f3.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> <p>This gives us a good idea of which subtypes are associated with each of the key genes. Now, ideally, if we have the raw counts, the next step is to do some differential expression analysis to see which of the key markers from SCLC (or another cancer being analyzed) are differentially expressed between the subtypes. To do this, one can use the <code class="language-plaintext highlighter-rouge">pydeseq2</code> package, which is a popular tool for differential expression analysis in python. While it is not the focus of this tutorial, I will bring another tutorial later on showing an example of how to use <code class="language-plaintext highlighter-rouge">pydeseq2</code> and a modification to do both <code class="language-plaintext highlighter-rouge">one-vs-one</code> and <code class="language-plaintext highlighter-rouge">one-vs-all</code> comparisons.</p> <p>The next step is to do some more visualizations that will help us understand the subtypes better, this time using gene sets and a radial plot. The gene sets we will use (see code below) are <strong>NE</strong> (neuroendocrine), <strong>nonNE</strong> (non-neuroendocrine), <strong>T-eff</strong> (tumor-effector), <strong>B/PC</strong> (B-cell and plasma cell), and <strong>APM</strong> (antigen processing and presentation) and <strong>Checkpt</strong> (immune checkpoint).</p> <p>Additionally, we will also use a mapping between the numerical NMF groups, and the subtypes based on the boxplots made earlier. We see that cluster 1 has higher expression for ASCL1, so we associate this cluster to A subtype. Cluster 2 has higher expression for NEUROD1, so we associate this cluster to N subtype. Cluster 4 has higher expression for POU2F3, so we associate this cluster to P subtype. The last cluster, cluster 3 can, for now, be associated with the I subtype, even though the expression levels are not as visually different as the other markers.This will be done using a dictionary called <code class="language-plaintext highlighter-rouge">nmf_labels</code> that will map the NMF groups to the subtypes.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
 <td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -615,16 +624,7 @@
 107
 108
 109
-110
-111
-112
-113
-114
-115
-116
-117
-</pre></td> <td class="code"><pre><span class="c1"># Radial Plots ###########
-</span><span class="n">adata_analysis_radial</span> <span class="o">=</span> <span class="n">adata_nmf</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+</pre></td> <td class="code"><pre><span class="n">adata_analysis_radial</span> <span class="o">=</span> <span class="n">adata_nmf</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
 <span class="n">adata_analysis_radial</span><span class="p">.</span><span class="n">obs</span> <span class="o">=</span> <span class="n">adata_analysis_radial</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span>
     <span class="p">[</span>
         <span class="mi">1</span><span class="p">,</span>
@@ -635,15 +635,11 @@
     <span class="p">]</span>
 <span class="p">]</span>
 
-<span class="c1"># Ensure we're working with raw counts
+<span class="c1"># Since we already have the log_tpm_counts, we can use them directly, and then only scale them
 </span><span class="n">adata_analysis_radial</span><span class="p">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">adata_analysis_radial</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="sh">"</span><span class="s">log_tpm_counts</span><span class="sh">"</span><span class="p">].</span><span class="nf">copy</span><span class="p">()</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pp</span><span class="p">.</span><span class="nf">scale</span><span class="p">(</span><span class="n">adata_analysis_radial</span><span class="p">)</span>
 
-<span class="c1"># Normalize, log-transform, and scale the data
-# sc.pp.normalize_total(adata_analysis_radial, target_sum=1e6)
-# sc.pp.log1p(adata_analysis_radial)
-</span><span class="n">sc</span><span class="p">.</span><span class="n">pp</span><span class="p">.</span><span class="nf">scale</span><span class="p">(</span><span class="n">adata_analysis_radial</span><span class="p">)</span>
-<span class="c1"># "EMT": ["ZEB1", "ZEB2", "SNAI1", "TWIST1"],
-# Add gene categories
+<span class="c1"># These will be the gene sets we will use
 </span><span class="n">gene_categories</span> <span class="o">=</span> <span class="p">{</span>
     <span class="sh">"</span><span class="s">NE</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">CHGA</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">DLL3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">NEUROD1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">INSM1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">ASCL1</span><span class="sh">"</span><span class="p">],</span>
     <span class="sh">"</span><span class="s">nonNE</span><span class="sh">"</span><span class="p">:</span> <span class="p">[</span><span class="sh">"</span><span class="s">YAP1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">POU2F3</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">MYC</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">REST</span><span class="sh">"</span><span class="p">],</span>
@@ -683,7 +679,7 @@
     <span class="sh">"</span><span class="s">3</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">I</span><span class="sh">"</span><span class="p">,</span>
     <span class="sh">"</span><span class="s">4</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">P</span><span class="sh">"</span><span class="p">,</span>
 <span class="p">}</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">nmf_scores_norm</span><span class="p">.</span><span class="nf">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
 <span class="c1"># Colors for each NMF group
 </span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">#8A7EB5</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">#67C28E</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">#E75480</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">#FFA500</span><span class="sh">"</span><span class="p">]</span>
 <span class="n">color_map</span> <span class="o">=</span> <span class="p">{</span>
@@ -692,9 +688,6 @@
 </span>    <span class="sh">"</span><span class="s">3</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">#DC143C</span><span class="sh">"</span><span class="p">,</span>  <span class="c1"># I-nNE - Crimson (warm)
 </span>    <span class="sh">"</span><span class="s">4</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">#FF8C00</span><span class="sh">"</span><span class="p">,</span>  <span class="c1"># I-NE - DarkOrange (warm)
 </span><span class="p">}</span>
-
-
-<span class="nf">print</span><span class="p">(</span><span class="n">nmf_scores_norm</span><span class="p">.</span><span class="nf">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="sh">"</span><span class="s">polar</span><span class="sh">"</span><span class="p">)</span>
