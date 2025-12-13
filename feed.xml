@@ -1,4 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://rafael-silva-oliveira.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://rafael-silva-oliveira.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2025-12-13T21:56:38+00:00</updated><id>https://rafael-silva-oliveira.github.io/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">Cancer subtyping using cNMF and literature markers</title><link href="https://rafael-silva-oliveira.github.io/blog/2025/distill/" rel="alternate" type="text/html" title="Cancer subtyping using cNMF and literature markers"/><published>2025-12-12T00:00:00+00:00</published><updated>2025-12-12T00:00:00+00:00</updated><id>https://rafael-silva-oliveira.github.io/blog/2025/distill</id><content type="html" xml:base="https://rafael-silva-oliveira.github.io/blog/2025/distill/"><![CDATA[<h2 id="purpose-of-this-tutorial">Purpose of this tutorial</h2> <hr/> <h2 id="what-is-cnmf">What is cNMF?</h2> <hr/> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os.path</span>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://rafael-silva-oliveira.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://rafael-silva-oliveira.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2025-12-13T22:04:35+00:00</updated><id>https://rafael-silva-oliveira.github.io/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">Cancer subtyping using cNMF and literature markers</title><link href="https://rafael-silva-oliveira.github.io/blog/2025/distill/" rel="alternate" type="text/html" title="Cancer subtyping using cNMF and literature markers"/><published>2025-12-12T00:00:00+00:00</published><updated>2025-12-12T00:00:00+00:00</updated><id>https://rafael-silva-oliveira.github.io/blog/2025/distill</id><content type="html" xml:base="https://rafael-silva-oliveira.github.io/blog/2025/distill/"><![CDATA[<h2 id="purpose-of-this-tutorial">Purpose of this tutorial</h2> <hr/> <h2 id="what-is-cnmf">What is cNMF?</h2> <hr/> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">os.path</span>
 <span class="kn">from</span> <span class="n">lifelines</span> <span class="kn">import</span> <span class="n">CoxPHFitter</span>
 <span class="kn">from</span> <span class="n">lifelines.statistics</span> <span class="kn">import</span> <span class="n">logrank_test</span><span class="p">,</span> <span class="n">multivariate_logrank_test</span>
 <span class="kn">from</span> <span class="n">lifelines</span> <span class="kn">import</span> <span class="n">KaplanMeierFitter</span>
@@ -34,7 +70,7 @@
 <span class="n">plt</span><span class="p">.</span><span class="n">rcParams</span><span class="p">.</span><span class="nf">update</span><span class="p">({</span><span class="sh">"</span><span class="s">figure.figsize</span><span class="sh">"</span> <span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
                      <span class="sh">"</span><span class="s">axes.facecolor</span><span class="sh">"</span> <span class="p">:</span> <span class="sh">"</span><span class="s">white</span><span class="sh">"</span><span class="p">,</span>
                      <span class="sh">"</span><span class="s">axes.edgecolor</span><span class="sh">"</span><span class="p">:</span>  <span class="sh">"</span><span class="s">black</span><span class="sh">"</span><span class="p">})</span>
-</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
+</pre></td></tr></tbody></table></code></pre></figure> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
     <span class="n">_base_dir</span> <span class="o">=</span> <span class="nc">Path</span><span class="p">(</span><span class="n">__file__</span><span class="p">).</span><span class="nf">resolve</span><span class="p">().</span><span class="n">parent</span>
 <span class="k">except</span> <span class="nb">NameError</span><span class="p">:</span>
     <span class="n">_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">cwd</span><span class="p">()</span>
