@@ -185,8 +185,6 @@
 9
 10
 11
-12
-13
 </pre></td> <td class="code"><pre><span class="n">adata</span> <span class="o">=</span> <span class="n">ad</span><span class="p">.</span><span class="nc">AnnData</span><span class="p">(</span><span class="n">count_data</span><span class="p">)</span>
 
 <span class="n">adata</span><span class="p">.</span><span class="n">obs</span> <span class="o">=</span> <span class="n">clinical_metadata_subset</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
@@ -197,8 +195,6 @@
 
 <span class="n">adata</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="sh">"</span><span class="s">log_tpm_counts</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">log1p</span><span class="p">(</span><span class="n">count_data</span><span class="p">.</span><span class="n">values</span><span class="p">).</span><span class="nf">copy</span><span class="p">()</span>
 
-<span class="n">adata</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="sh">"</span><span class="s">z_log_tpm_counts</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">zscore</span><span class="p">(</span>
-    <span class="n">adata</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="sh">"</span><span class="s">log_tpm_counts</span><span class="sh">"</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="nf">copy</span><span class="p">()</span>
 <span class="n">adata</span><span class="p">.</span><span class="n">var</span><span class="p">.</span><span class="nf">set_index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></td> </tr></tbody></table></code></pre></figure> <p>While one could run cNMF using all the genes from the bulk dataset, only a few thousand genes are needed to identify the subtypes. There are several methods to select the most relevant genes, but for this tutorial, we will use the discovery set from the original publication (Gay et al. 2021). These can be found in the supplementary material of the paper (see DOI above).</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
 <td class="gutter gl"><pre class="lineno">1
