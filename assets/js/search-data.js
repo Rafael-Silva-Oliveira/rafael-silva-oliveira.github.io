@@ -37,13 +37,6 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "nav-teaching",
-          title: "teaching",
-          description: "Here are lectures I have done so far.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/teaching/";
-          },
         },{id: "post-cancer-subtyping-using-cnmf-and-literature-markers",
         
           title: "Cancer subtyping using cNMF and literature markers",
