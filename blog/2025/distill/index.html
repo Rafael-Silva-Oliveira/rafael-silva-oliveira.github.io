@@ -117,14 +117,12 @@
 49
 50
 51
-52
 </pre></td> <td class="code"><pre><span class="k">try</span><span class="p">:</span>
     <span class="n">_base_dir</span> <span class="o">=</span> <span class="nc">Path</span><span class="p">(</span><span class="n">__file__</span><span class="p">).</span><span class="nf">resolve</span><span class="p">().</span><span class="n">parent</span>
 <span class="k">except</span> <span class="nb">NameError</span><span class="p">:</span>
     <span class="n">_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">.</span><span class="nf">cwd</span><span class="p">()</span>
 
-<span class="c1"># The data folder is a subdirectory named 'EGAD00001001244' next to this script.
-</span><span class="n">data_file</span> <span class="o">=</span> <span class="n">_base_dir</span> <span class="o">/</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span> <span class="o">/</span> <span class="sh">"</span><span class="s">files</span><span class="sh">"</span> <span class="o">/</span> <span class="sh">"</span><span class="s">tpm_counts.csv</span><span class="sh">"</span>
+<span class="n">data_file</span> <span class="o">=</span> <span class="n">_base_dir</span> <span class="o">/</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span> <span class="o">/</span> <span class="sh">"</span><span class="s">files</span><span class="sh">"</span> <span class="o">/</span> <span class="sh">"</span><span class="s">tpm_counts.csv</span><span class="sh">"</span>
 
 <span class="n">count_data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="sh">"</span><span class="se">\t</span><span class="sh">"</span><span class="p">,</span>
     <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,)</span>
