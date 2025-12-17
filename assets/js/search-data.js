@@ -44,7 +44,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/teaching/";
           },
-        },{id: "books-12-rules-for-life",
+        },{id: "post-cancer-subtyping-using-cnmf-and-literature-markers",
+        
+          title: "Cancer subtyping using cNMF and literature markers",
+        
+        description: "An example of usage of cNMF to identify cancer subtypes",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/distill/";
+          
+        },
+      },{id: "books-12-rules-for-life",
           title: '12 rules for life',
           description: "",
           section: "Books",handler: () => {
