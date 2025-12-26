@@ -55,7 +55,11 @@
 			"studyType": "PhD",
 			"startDate": "2023-09",
 			"endDate": "2026-09",
-			"courses": ["Advanced deep learning with Python","Bioinformatics Methods for Next Generation Sequencing","Norwegian for Foreigners A2/A1", "Norwegian for Foreigners B2/B1"]
+			"courses": [
+				"Advanced deep learning with Python",
+				"Bioinformatics Methods for Next Generation Sequencing",
+				"Norwegian for Foreigners A2/A1", 
+				"Norwegian for Foreigners B2/B1"]
 		},
 		{
 			"institution": "University of Aveiro",
@@ -65,7 +69,13 @@
 			"studyType": "MSc",
 			"startDate": "2021-10",
 			"endDate": "2023-07",
-			"courses": []
+			"courses": [
+				"Data Analysis in Medical Sciences (Medical Statistics, Multivariate Data Analysis, Data Visualization ...)",
+				"Computer Science, Database and Programming skills (Algorithms, Python, R, SQL and UML, and Linux)",
+				"Machine Learning, Artificial Intelligence, Computer Vision, Big Data Analysis, and Deep Learning",
+				"Multidisciplinary approach to omics and Genome Medicine (Genomics, Transcriptomics, Proteomics, Metabolomics...)",
+				"Clinical Research, Clinical Decision Support and Clinical Data Management",
+				"GPA: 18/20"]
 		},
 		{
 			"institution": "University of Aveiro",
@@ -75,7 +85,10 @@
 			"studyType": "Postgraduate Diploma (60 ECTS)",
 			"startDate": "2022-09",
 			"endDate": "2023-06",
-			"courses": []
+			"courses": [
+				"Medical Statistics (12/12 ECTS) which provided solid concepts on topics such as parametric and non-parametric tests, equivalence tests, linear regression, logistic regression, meta-analysis, survival analysis, generalized linear models, ...",
+				"R programming (6 ECTS) which provided key concepts of R software to develop pipelines for data processing and statistical analysis.","Sampling and Experimental Design (6 ECTS) which focused primarily on experiment design using ANOVAS (one-way, two-way, ANCOVA, MANOVA, Repeated Measures, Block Anova, Factorial designs, ...), Mixed Models (hierarchical, staggered, GLMM, GEEs, etc) as well as sampling and statistical power.",
+				"GPA: 19/20"]
 		},
 		{
 			"institution": "University of Aveiro",
@@ -85,7 +98,12 @@
 			"studyType": "Postgraduate Diploma (60 ECTS)",
 			"startDate": "2020-09",
 			"endDate": "2021-06",
-			"courses": []
+			"courses": [
+				"Data Analysis (Biomedical Statistics and Bioinformatics)",
+				"Molecular mechanisms of disease, drug targets, biopharmaceuticals and Advanced therapy medicinal products (Genomics, Molecular Medicine, Systems Medicine, Biomarkers, Molecular Immunology and Immunotherapy, Neuroscience and Metabolic Diseases)",
+				"Clinical Research (Good clinical practice (GCP and ICH), drug development process, standard operating procedure (SOP), planning and preparation of a trial, subject recruitment and retention, QA and QC)",
+				"Lab Rotations: Internship experience @ CICECO for the development of cost-effective purification processes for high-value biopharmaceuticals (GPA for the internship: 19/20).",
+				"GPA: 18/20"]
 		},
 		{
 			"institution": "University of Aveiro",
@@ -95,7 +113,23 @@
 			"studyType": "BSc",
 			"startDate": "2017-09",
 			"endDate": "2020-06",
-			"courses": []
+			"courses": [
+				"Cell and Molecular Biology", 
+				"Microbiology", 
+				"Virology", 
+				"Genetics", 
+				"Physiology", 
+				"Bioinformatics and Biostatistics", 
+				"Molecular Pathology", 
+				"Organic Chemistry",
+				"Biochemistry and Metabolism",
+				"Genetic Engineering", 
+				"Food Biotechnology", 
+				"Tissue and Cell Culture",
+				"Plant Biotechnology",
+				"Human Biology",
+				"Thesis grade: 19/20",
+				"GPA: 17/20 (Graduated as top 10%)"]
 		}
 	],
 	"conferences": [
