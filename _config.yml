@@ -2,7 +2,7 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: blank # the website title (if blank, full name will be used instead)
+title: SciencePond | Rafael Oliveira's CV and Blog # the website title (if blank, full name will be used instead)
 first_name: Rafael
 last_name: Oliveira
 contact_note: >
@@ -87,6 +87,9 @@ blog_name: SciencePond # blog_name will be displayed in your blog page
 blog_description: Every pond is full of hidden life waiting to be discovered. SciencePond is a place for curious scientific minds to explore bioinformatics and uncover the hidden life within their data... because we all start somewhere.
 permalink: /blog/:year/:title/
 lsi: true # produce an index for related posts
+
+copyright: "Copyright 2026 Rafael Oliveira"
+
 
 # Pagination
 pagination:
