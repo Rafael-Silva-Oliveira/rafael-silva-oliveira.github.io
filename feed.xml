@@ -1,6 +1,350 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://rafael-silva-oliveira.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://rafael-silva-oliveira.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-03-18T10:11:07+00:00</updated><id>https://rafael-silva-oliveira.github.io/feed.xml</id><title type="html">SciencePond | Rafael Oliveira’s CV and Blog</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell Spatial Transcriptomics (Visium HD)</title><link href="https://rafael-silva-oliveira.github.io/blog/2026/distill/" rel="alternate" type="text/html" title="Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell Spatial Transcriptomics (Visium HD)"/><published>2026-03-14T00:00:00+00:00</published><updated>2026-03-14T00:00:00+00:00</updated><id>https://rafael-silva-oliveira.github.io/blog/2026/distill</id><content type="html" xml:base="https://rafael-silva-oliveira.github.io/blog/2026/distill/"><![CDATA[<h2 id="purpose-of-this-tutorial">Purpose of this tutorial</h2> <p>TODO</p> <hr/> <h2 id="spatial-transcriptomics-a-primer">Spatial Transcriptomics: A primer</h2> <p>TODO</p> <h3 id="what-does-spatial-transcriptomics-unlock-compared-to-other-transcriptomics-techniques">What does Spatial Transcriptomics unlock compared to other transcriptomics techniques?</h3> <p>Add image from my ppt with the fruit analogy</p> <h3 id="imaging-based-spatial-transcriptomics-ist">Imaging-based Spatial Transcriptomics (iST)</h3> <p>TODO</p> <h4 id="ish---in-situ-hybridization">ISH - in situ hybridization</h4> <h4 id="iss---in-situ-sequencing">ISS - in situ sequencing</h4> <h3 id="sequencing-based-spatial-transcriptomics-sst">Sequencing-based Spatial Transcriptomics (sST)</h3> <h4 id="isc---in-situ-capturing">ISC - in situ capturing</h4> <h3 id="shift-from-deconvolution-spot-based-to-cell-segmentation-bin-based">Shift from Deconvolution (spot based) to Cell Segmentation (bin based)</h3> <p>TODO Add image from my ppts</p> <hr/> <h2 id="exploring-a-visium-hd-dataset">Exploring a Visium HD Dataset</h2> <p>TODO</p> <h3 id="data-structure">Data Structure</h3> <p>TODO</p> <h3 id="pre-processing">Pre-processing</h3> <p>TODO</p> <p>Add code to remove sparse regions using connectivities (template code with existing images)</p> <hr/> <h2 id="cell-segmentation-in-singlecell-spatial-transcriptomics-using-sopa">Cell Segmentation in Single‑Cell Spatial Transcriptomics using SOPA</h2> <p>TODO</p> <h3 id="stardist">StarDist</h3> <p>TODO</p> <h3 id="proseg">Proseg</h3> <p>TODO</p> <hr/> <h2 id="spatial-clustering-and-domain-identification-with-novae">Spatial Clustering and Domain Identification with Novae</h2> <p>TODO</p> <hr/> <h2 id="cell-type-annotation-using-enrichmap-and-cell-type-gene-set-signatures">Cell Type Annotation using Enrichmap and Cell Type Gene Set Signatures</h2> <p>TODO</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
-</pre></td></tr></tbody></table></code></pre></figure> <h2 id="mention-gene-set-based-vs-reference-scrna-based-highlight-new-implementation-of-famous-rctd-in-python-httpsgithubcomp-gueguenrctd-py">Mention gene set based vs reference scRNA based (highlight new implementation of famous rctd in python!! https://github.com/p-gueguen/rctd-py)</h2> <h2 id="conclusion-and-next-steps">Conclusion and Next Steps</h2> <p>TODO</p>]]></content><author><name>Rafael Oliveira</name></author><category term="spatial-transcriptomics"/><summary type="html"><![CDATA[Example]]></summary></entry><entry><title type="html">Cancer subtyping using cNMF and literature markers</title><link href="https://rafael-silva-oliveira.github.io/blog/2025/distill/" rel="alternate" type="text/html" title="Cancer subtyping using cNMF and literature markers"/><published>2025-12-17T00:00:00+00:00</published><updated>2025-12-17T00:00:00+00:00</updated><id>https://rafael-silva-oliveira.github.io/blog/2025/distill</id><content type="html" xml:base="https://rafael-silva-oliveira.github.io/blog/2025/distill/"><![CDATA[<h2 id="purpose-of-this-tutorial">Purpose of this tutorial</h2> <p>Cancer is a complex disease that arises from the accumulation of genetic mutations. These mutations are vast, and differ from one patient to another. This makes it so that cancer is generally seen as a heterogeneous disease. This heterogeneity is reflected in the different subtypes of cancer, which are defined by the mutations that are present in the tumor. These subtypes generally have different clinical features, such as the presence of different mutations, the size of the tumor, and the presence of certain genes (key transcription factors). Additionally, these subtypes can be associated with different responses to treatment. Thus, understanding the molecular biology of different cancer types is key to developing effective treatments and, ultimately, improving patient outcomes. Here, I want to show a brief example of how we can use methods such as cNMF to identify cancer subtypes, particularly in Small-cell lung cancer (SCLC).</p> <hr/> <h2 id="what-do-we-know-about-sclc">What do we know about SCLC?</h2> <p>While this isn’t intended to be a comprehensive overview of SCLC, it is important to understand what we already know about the disease, in order to subtype it.</p> <p>SCLC has long been recognized as one of the most aggressive and heterogeneous cancers. For decades, researchers tried to make sense of this complexity by dividing tumors into “classic” and “variant” forms. But as molecular profiling advanced, a more refined classification emerged: one that highlights the role of dominant transcription factors in shaping tumor identity and behavior.</p> <p>Thus, in this tutorial, we can define molecular subtypes as being biologically consistent groups of tumors characterized by three key features:</p> <ol> <li>a dominant transcriptional regulator or signaling pathway,</li> <li>a relatively stable molecular signature across different disease stages and experimental models,</li> <li>clear association with distinct biological behaviors or therapeutic responses observed in clinical settings</li> </ol> <p>Today, four major molecular subtypes are recognized:</p> <ul> <li>SCLC-A: Driven by ASCL1, accounting for about half of all cases.</li> <li>SCLC-N: Defined by NEUROD1, often linked to variant morphology and poorer prognosis.</li> <li>SCLC-P: Characterized by POU2F3, representing non-neuroendocrine tumors with tuft cell features.</li> <li>SCLC-I: The newest player, marked by an inflamed phenotype with immune-related activity.</li> </ul> <h3 id="what-about-sclc-y">What about SCLC-Y?</h3> <p>Before SCLC-I was proposed, some researchers suggested a fourth subtype called SCLC-Y, supposedly driven by YAP1. YAP1 is a transcriptional co-activator involved in proliferation, survival, and drug resistance. Early studies hinted that it might define a distinct group of tumors. However, subsequent work revealed that YAP1 expression was inconsistent and often low, failing to meet the criteria for a stable, subtype-defining regulator. In other words, YAP1 activity was biologically relevant, but it didn’t reliably carve out a separate molecular identity for SCLC tumors.</p> <h3 id="the-inflamed-alternative-sclc-i">The inflamed alternative: SCLC-I</h3> <p>In 2021, Gay et al. <d-cite key="Gay.2021"></d-cite> proposed the new SCLC-I (Inflamed) subtype. Unlike the neuroendocrine-driven groups, SCLC-I is distinguished by its immune-active microenvironment. These tumors show signatures of interferon signaling, antigen presentation, and T-cell infiltration, features that set them apart biologically and therapeutically. This inflamed phenotype is particularly exciting because it opens the door to immunotherapy strategies. While classic neuroendocrine SCLC tends to be “immune cold,” SCLC-I tumors may be more responsive to checkpoint inhibitors and other immune-targeted treatments.</p> <p>For this tutorial, we will attempt to replicate the subtyping done in Gay et al. using a dataset from George et al. (2015) which can be found <a href="https://www.cbioportal.org/study/summary?id=sclc_ucologne_2015">here</a>. This same dataset was used by Gay et al to perform their subtyping.</p> <p>Here is a summary of what we know about SCLC, from a slide I have created and use to present at conferences:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/sclc_info-480.webp 480w,/assets/img/subtyping/sclc_info-800.webp 800w,/assets/img/subtyping/sclc_info-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/subtyping/sclc_info.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="what-is-cnmf">What is cNMF?</h2> <p>cNMF is a non-negative matrix factorization (NMF) method that is particularly useful for identifying cancer subtypes. The “c” in cNMF stands for “consensus” which means that the algorithm will run the analysis multiple times and find the most stable, reliable patterns.</p> <p>cNMF can be used in a variety of settings, including single-cell RNA (scRNA) in order to look for groups of genes that work together, called gene expression programs. This can be extended to bulk RNA, this time looking for cancer subtypes (here we are talking about samples and not single cells).</p> <p>The strength of cNMF is in its ability to solve compositional problems. Imagine sitting in a concert hall, listening to an orchestra. If you focus carefully, you start to notice recurring harmonies from the different instruments. That’s exactly what cNMF does with gene expression data. It picks a part the recurring harmonies of genes, the programs that consistently play together. These GEPs (gene expression programs) reveal the functional states of cells or the molecular identity of tumors, turning noise into meaningful biological insight.</p> <p>In this tutorial, we will be using the python <a href="https://github.com/dylkot/cNMF">cNMF package</a> which although has been used for scRNA, can also be used for bulk RNA data.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/cnmf-480.webp 480w,/assets/img/subtyping/cnmf-800.webp 800w,/assets/img/subtyping/cnmf-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/subtyping/cnmf.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="reading-the-data">Reading the data</h2> <p>First, let’s import the necessary libraries.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://rafael-silva-oliveira.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://rafael-silva-oliveira.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-03-18T11:55:32+00:00</updated><id>https://rafael-silva-oliveira.github.io/feed.xml</id><title type="html">SciencePond | Rafael Oliveira’s CV and Blog</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell Spatial Transcriptomics (Visium HD)</title><link href="https://rafael-silva-oliveira.github.io/blog/2026/distill/" rel="alternate" type="text/html" title="Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell Spatial Transcriptomics (Visium HD)"/><published>2026-03-14T00:00:00+00:00</published><updated>2026-03-14T00:00:00+00:00</updated><id>https://rafael-silva-oliveira.github.io/blog/2026/distill</id><content type="html" xml:base="https://rafael-silva-oliveira.github.io/blog/2026/distill/"><![CDATA[<h2 id="purpose-of-this-tutorial">Purpose of this tutorial</h2> <p>TODO</p> <hr/> <h2 id="spatial-transcriptomics-a-primer">Spatial Transcriptomics: A primer</h2> <p>TODO</p> <p>Add image from my ppt with the fruit analogy</p> <h3 id="imaging-based-spatial-transcriptomics-ist-vs-sequencing-based-spatial-transcriptomics-sst">Imaging-based Spatial Transcriptomics (iST) vs Sequencing-based Spatial Transcriptomics (sST)</h3> <p>Spatial Transcriptomics (ST) technologies are generally classified into two primary categories: imaging-based and sequencing-based methods <d-cite key="Gay.2021"></d-cite></p> <p>Within the imaging-based category, technologies are further divided into in situ hybridization (ISH) and in situ sequencing (ISS)</p> <p>Conversely, the sequencing-based category is primarily represented by in situ capturing (ISC) techniques</p> <p>Imaging-based Spatial Transcriptomics (iST) identifies different mRNA species by targeting specific genes a priori using labeled complementary probes, which allows for the direct visualization of gene distribution within their native tissue context</p> <p>Because of this targeted approach, imaging methods are often highly sensitive and capable of achieving subcellular or even single-molecule resolution</p> <p>However, this reliance on specialized probes means that most imaging-based methods suffer from lower gene throughput and more limited gene panels than unbiased sequencing methods</p> <p>Furthermore, as these techniques often require prior knowledge of the target genes to design the necessary labels, the total number of genes that can be measured simultaneously is restricted compared to transcriptome-wide approaches</p> <p>Sequencing-based Spatial Transcriptomics (sST), primarily represented by in situ capturing (ISC), utilizes spatially barcoded arrays to capture polyadenylated RNA transcripts directly from tissue sections for analysis via next-generation sequencing (NGS)</p> <p>Unlike imaging-based methods, sST is unbiased and provides transcriptome-wide coverage, meaning no a priori knowledge of target genes is required; this makes it ideal for discovery-driven research and identifying novel biological mechanisms or rare transcripts</p> <p>While early iterations like the standard Visium platform are limited by a resolution of 55 µm diameter spots—which typically encompass a mixture of multiple cells—newer high-definition technologies such as Visium HD have significantly advanced this resolution</p> <p>Visium HD reduces the spot diameter to 2 µm and eliminates gaps between spots, enabling gap-free and bias-free profiling at single-cell scale resolution</p> <p>Other high-resolution sequencing methods include Stereo-seq, which achieves nanoscale resolution using 220 nm DNA nanoballs, and Slide-seq, which utilizes 10 µm barcoded beads</p> <p>Despite these advancements in resolution, ISC technologies generally encounter lower transcript capture efficiency compared to imaging-based methods, as they often rely on the vertical diffusion of transcripts onto a capture surface rather than direct in-tissue analysis</p> <h3 id="what-does-spatial-transcriptomics-unlock-compared-to-other-transcriptomics-techniques">What does Spatial Transcriptomics unlock compared to other transcriptomics techniques?</h3> <h3 id="shift-from-deconvolution-spot-based-to-cell-segmentation-bin-based">Shift from Deconvolution (spot based) to Cell Segmentation (bin based)</h3> <p>TODO Add image from my ppts</p> <hr/> <h2 id="exploring-a-visium-hd-dataset">Exploring a Visium HD Dataset</h2> <p>For this tuttorial we will use the Visium HD dataset from: https://www.10xgenomics.com/support/software/loupe-browser/latest/tutorials/assay-analysis/lb-hd-spatial-gene-expression https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-human-crc</p> <p>The structure of this project should be as follows once you have downloaded the necessary data from the 10x website:</p> <h3 id="data-structure">Data Structure</h3> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="code"><pre><span class="n">spatial</span><span class="o">/</span>
+<span class="err">├──</span> <span class="n">Microscopy</span><span class="o">/</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">Visium_HD_Human_Colon_Cancer_image</span><span class="p">.</span><span class="n">tif</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="n">Visium_HD_Human_Colon_Cancer_tissue_image</span><span class="p">.</span><span class="n">btf</span>
+<span class="err">│</span>
+<span class="err">└──</span> <span class="n">SpaceRanger</span><span class="o">/</span>
+    <span class="err">└──</span> <span class="n">Visium_HD_Human_Colon_Cancer</span><span class="o">/</span>
+        <span class="err">└──</span> <span class="n">outs</span><span class="o">/</span>
+            <span class="err">├──</span> <span class="n">binned_outputs</span><span class="o">/</span>
+            <span class="err">│</span>   <span class="err">├──</span> <span class="n">square_002um</span><span class="o">/</span>
+            <span class="err">│</span>   <span class="err">├──</span> <span class="n">square_008um</span><span class="o">/</span>
+            <span class="err">│</span>   <span class="err">└──</span> <span class="n">square_016um</span><span class="o">/</span>
+            <span class="err">│</span>
+            <span class="err">└──</span> <span class="n">spatial</span><span class="o">/</span>
+                <span class="err">├──</span> <span class="n">aligned_fiducials</span><span class="p">.</span><span class="n">jpg</span>
+                <span class="err">├──</span> <span class="n">aligned_tissue_image</span><span class="p">.</span><span class="n">jpg</span>
+                <span class="err">├──</span> <span class="n">cytassist_image</span><span class="p">.</span><span class="n">tiff</span>
+                <span class="err">├──</span> <span class="n">detected_tissue_image</span><span class="p">.</span><span class="n">jpg</span>
+                <span class="err">├──</span> <span class="n">tissue_hires_image</span><span class="p">.</span><span class="n">png</span>
+                <span class="err">├──</span> <span class="n">tissue_lowres_image</span><span class="p">.</span><span class="n">png</span>
+                <span class="err">├──</span> <span class="n">Visium_HD_Human_Colon_Cancer_cloupe_008um</span><span class="p">.</span><span class="n">cloupe</span>
+                <span class="err">├──</span> <span class="n">Visium_HD_Human_Colon_Cancer_feature_slice</span><span class="p">.</span><span class="n">h5</span>
+                <span class="err">├──</span> <span class="n">Visium_HD_Human_Colon_Cancer_metrics_summary</span><span class="p">.</span><span class="n">csv</span>
+                <span class="err">├──</span> <span class="n">Visium_HD_Human_Colon_Cancer_probe_set</span><span class="p">.</span><span class="n">csv</span>
+                <span class="err">└──</span> <span class="n">Visium_HD_Human_Colon_Cancer_slide_file</span><span class="p">.</span><span class="n">vtf</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>Check this <a href="https://github.com/Rafael-Silva-Oliveira/segmentation-and-annotation.git">repository link</a> to find all the full script and structure necessary to follow this tutorial .</p> <p>The imports look like this:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">warnings</span>
+<span class="kn">from</span> <span class="n">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="n">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="n">decoupler</span> <span class="k">as</span> <span class="n">dc</span>
+<span class="kn">import</span> <span class="n">enrichmap</span> <span class="k">as</span> <span class="n">em</span>
+<span class="kn">import</span> <span class="n">matplotlib</span> <span class="k">as</span> <span class="n">mpl</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="n">novae</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">scanpy</span> <span class="k">as</span> <span class="n">sc</span>
+<span class="kn">import</span> <span class="n">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="kn">import</span> <span class="n">sopa</span>
+<span class="kn">import</span> <span class="n">spatialdata</span> <span class="k">as</span> <span class="n">sd</span>
+<span class="kn">import</span> <span class="n">spatialdata_plot</span>
+<span class="kn">import</span> <span class="n">yaml</span>
+<span class="kn">import</span> <span class="n">zarr</span>
+<span class="kn">from</span> <span class="n">anndata</span> <span class="kn">import</span> <span class="n">AnnData</span>
+<span class="kn">from</span> <span class="n">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">import</span> <span class="n">spatialdata_plot</span>
+
+<span class="n">warnings</span><span class="p">.</span><span class="nf">filterwarnings</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">ignore</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">message</span><span class="o">=</span><span class="sh">"</span><span class="s">Use `squidpy.pl.spatial_scatter`</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Matplotlib defaults
+</span><span class="n">mpl</span><span class="p">.</span><span class="n">rcParams</span><span class="p">[</span><span class="sh">"</span><span class="s">figure.dpi</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="sh">"</span><span class="s">bmh</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">rcParams</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="sh">"</span><span class="s">figure.figsize</span><span class="sh">"</span><span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+        <span class="sh">"</span><span class="s">axes.facecolor</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">white</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">axes.edgecolor</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">black</span><span class="sh">"</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>The following code is used to set up the directories and logging. Note that we will also be using the <code class="language-plaintext highlighter-rouge">config_crc_tutorial.yaml</code> to store and load the configuration parameters.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre></td><td class="code"><pre><span class="n">PROJECT_DIR</span> <span class="o">=</span> <span class="nc">Path</span><span class="p">(</span>
+    <span class="sa">r</span><span class="sh">"</span><span class="s">C:\Users\rafae\Projects\segmentation-and-annotation</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">resolve</span><span class="p">()</span>
+<span class="n">CONFIG_PATH</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">PROJECT_DIR</span>
+    <span class="o">/</span> <span class="sh">"</span><span class="s">scripts</span><span class="sh">"</span>
+    <span class="o">/</span> <span class="sh">"</span><span class="s">config_crc_tutorial.yaml</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">CONFIG_PATH</span><span class="p">,</span> <span class="sh">"</span><span class="s">r</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">yaml</span><span class="p">.</span><span class="nf">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">sample_id</span> <span class="o">=</span> <span class="n">cfg</span><span class="p">[</span><span class="sh">"</span><span class="s">samples</span><span class="sh">"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">sample_name</span> <span class="o">=</span> <span class="n">cfg</span><span class="p">[</span><span class="sh">"</span><span class="s">samples</span><span class="sh">"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">cfg</span><span class="p">[</span><span class="sh">"</span><span class="s">params</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">marker_genes</span> <span class="o">=</span> <span class="n">cfg</span><span class="p">[</span><span class="sh">"</span><span class="s">marker_genes</span><span class="sh">"</span><span class="p">]</span>
+
+<span class="n">PROCESSED_DIR</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">PROJECT_DIR</span>
+    <span class="o">/</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span>
+    <span class="o">/</span> <span class="sh">"</span><span class="s">spatial</span><span class="sh">"</span>
+    <span class="o">/</span> <span class="sh">"</span><span class="s">processed</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">resolve</span><span class="p">()</span>
+<span class="n">FIGURES_DIR</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">PROJECT_DIR</span> <span class="o">/</span> <span class="sh">"</span><span class="s">figures</span><span class="sh">"</span>
+<span class="p">).</span><span class="nf">resolve</span><span class="p">()</span>
+
+<span class="n">run_name</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">crc_tutorial_</span><span class="si">{</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">().</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">'</span><span class="s">%d%m%Y_%H%M</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span>
+<span class="n">run_dir</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">PROCESSED_DIR</span> <span class="o">/</span> <span class="n">run_name</span>
+<span class="p">).</span><span class="nf">resolve</span><span class="p">()</span>
+<span class="n">run_dir</span><span class="p">.</span><span class="nf">mkdir</span><span class="p">(</span>
+    <span class="n">parents</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+<span class="p">(</span><span class="n">run_dir</span> <span class="o">/</span> <span class="sh">"</span><span class="s">figures</span><span class="sh">"</span><span class="p">).</span><span class="nf">mkdir</span><span class="p">(</span>
+    <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Run directory: </span><span class="si">{</span><span class="n">run_dir</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">Sample: </span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">sample_name</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure> <h3 id="reading-the-data">Reading the data</h3> <p>Once we have the downloaded files and in the project structure above, we can read the data using the <code class="language-plaintext highlighter-rouge">sopa</code> package <d-cite key="Blampey.2024"></d-cite> as follows:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="code"><pre><span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">=== STEP 1: Reading Visium HD data and running segmentation ===</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">sdata</span> <span class="o">=</span> <span class="n">sopa</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="nf">visium_hd</span><span class="p">(</span>
+    <span class="nf">str</span><span class="p">(</span>
+        <span class="n">PROJECT_DIR</span>
+        <span class="o">/</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span>
+        <span class="o">/</span> <span class="sh">"</span><span class="s">spatial</span><span class="sh">"</span>
+        <span class="o">/</span> <span class="sh">"</span><span class="s">SpaceRanger</span><span class="sh">"</span>
+        <span class="o">/</span> <span class="n">sample_id</span>
+        <span class="o">/</span> <span class="sh">"</span><span class="s">outs</span><span class="sh">"</span>
+    <span class="p">),</span>
+    <span class="n">dataset_id</span><span class="o">=</span><span class="n">sample_id</span><span class="p">,</span>
+    <span class="n">fullres_image_file</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span>
+        <span class="n">PROJECT_DIR</span>
+        <span class="o">/</span> <span class="sh">"</span><span class="s">data</span><span class="sh">"</span>
+        <span class="o">/</span> <span class="sh">"</span><span class="s">spatial</span><span class="sh">"</span>
+        <span class="o">/</span> <span class="sh">"</span><span class="s">Microscopy</span><span class="sh">"</span>
+        <span class="o">/</span> <span class="sh">"</span><span class="s">Visium_HD_Human_Colon_Cancer_tissue_image.btf</span><span class="sh">"</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>In order to speed things up, we will use a subset of the data. We can crop the dataset like this:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="n">sdata_sub</span> <span class="o">=</span> <span class="n">sd</span><span class="p">.</span><span class="nf">bounding_box_query</span><span class="p">(</span>
+    <span class="n">sdata</span><span class="p">,</span>
+    <span class="n">min_coordinate</span><span class="o">=</span><span class="p">[</span><span class="mi">51000</span><span class="p">,</span> <span class="mi">9000</span><span class="p">],</span>
+    <span class="n">max_coordinate</span><span class="o">=</span><span class="p">[</span><span class="mi">56000</span><span class="p">,</span> <span class="mi">14000</span><span class="p">],</span>
+    <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="sh">"</span><span class="s">x</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">target_coordinate_system</span><span class="o">=</span><span class="n">sample_id</span><span class="p">,</span>
+    <span class="n">filter_table</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Make the var_names unique, but not required for this tutorial
+</span><span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="nf">for </span><span class="p">(</span>
+    <span class="n">key</span><span class="p">,</span>
+    <span class="n">table</span><span class="p">,</span>
+<span class="p">)</span> <span class="ow">in</span> <span class="n">sdata_sub</span><span class="p">.</span><span class="n">tables</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="n">table</span><span class="p">.</span><span class="nf">var_names_make_unique</span><span class="p">()</span> <span class="o">--&gt;</span>
+
+<span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">sdata_sub</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">"</span><span class="s">sdata_subset.zarr</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># save it --&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>We can then plot the tissue image and the cropped image like this:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="n">sdata_sub</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">render_images</span><span class="p">(</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s">_full_image</span><span class="sh">"</span>
+<span class="p">).</span><span class="n">pl</span><span class="p">.</span><span class="nf">show</span><span class="p">(</span>
+    <span class="n">coordinate_systems</span><span class="o">=</span><span class="n">sample_id</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>Which would look something like this:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/Visium_HD_Human_Colon_Cancer_full_res_cropped_v3-480.webp 480w,/assets/img/segmentation_and_annotation/Visium_HD_Human_Colon_Cancer_full_res_cropped_v3-800.webp 800w,/assets/img/segmentation_and_annotation/Visium_HD_Human_Colon_Cancer_full_res_cropped_v3-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/Visium_HD_Human_Colon_Cancer_full_res_cropped_v3.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="cell-segmentation-in-singlecell-spatial-transcriptomics-using-sopa">Cell Segmentation in Single‑Cell Spatial Transcriptomics using SOPA</h2> <p>Now that we have the data loaded and cropped, we can start segmenting the cells. We will use the <code class="language-plaintext highlighter-rouge">sopa</code> package to do this. You can check it out in this <a href="https://github.com/gustaveroussy/sopa">link</a>.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="c1"># Patch-based cell segmentation
+</span><span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">Creating image patches...</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">sopa</span><span class="p">.</span><span class="nf">make_image_patches</span><span class="p">(</span><span class="n">sdata_sub</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure> <h3 id="stardist">StarDist</h3> <p>Talk about stardist <d-cite key="Schmidt.2018"></d-cite></p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">Running StarDist segmentation...</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="n">sopa</span><span class="p">.</span><span class="n">segmentation</span><span class="p">.</span><span class="nf">stardist</span><span class="p">(</span>
+    <span class="n">sdata_sub</span><span class="p">,</span> <span class="n">min_area</span><span class="o">=</span><span class="mi">20</span>
+<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure> <h3 id="proseg">Proseg</h3> <p>talk about proseg <d-cite key="Jones.2024b"></d-cite></p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">Running ProSeg refinement...</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="n">sopa</span><span class="p">.</span><span class="n">segmentation</span><span class="p">.</span><span class="nf">proseg</span><span class="p">(</span>
+    <span class="n">sdata_sub</span><span class="p">,</span>
+    <span class="n">prior_shapes_key</span><span class="o">=</span><span class="sh">"</span><span class="s">stardist_boundaries</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>Once we have the segmentation, we can aggregate the gene expression to the cells (As seen in the <code class="language-plaintext highlighter-rouge">sopa</code> tutorial, this is mandatory if you used stardist only, but optional if you ran proseg)</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">Aggregating gene expression to cells...</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="n">sopa</span><span class="p">.</span><span class="nf">aggregate</span><span class="p">(</span>
+    <span class="n">sdata_sub</span><span class="p">,</span>
+    <span class="n">aggregate_channels</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">expand_radius_ratio</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>TODO</p> <p>TODO</p> <p>TODO</p> <hr/> <h3 id="pre-processing">Pre-processing</h3> <p>TODO</p> <p>Add code to remove sparse regions using connectivities (template code with existing images)</p> <h2 id="spatial-clustering-and-domain-identification-with-novae">Spatial Clustering and Domain Identification with Novae</h2> <p>TODO</p> <hr/> <h2 id="cell-type-annotation-using-enrichmap-and-cell-type-gene-set-signatures">Cell Type Annotation using Enrichmap and Cell Type Gene Set Signatures</h2> <p>TODO</p> <h2 id="mention-gene-set-based-vs-reference-scrna-based-highlight-new-implementation-of-famous-rctd-in-python-httpsgithubcomp-gueguenrctd-py">Mention gene set based vs reference scRNA based (highlight new implementation of famous rctd in python!! https://github.com/p-gueguen/rctd-py)</h2> <h2 id="conclusion-and-next-steps">Conclusion and Next Steps</h2> <p>TODO</p>]]></content><author><name>Rafael Oliveira</name></author><category term="spatial-transcriptomics"/><summary type="html"><![CDATA[Example]]></summary></entry><entry><title type="html">Cancer subtyping using cNMF and literature markers</title><link href="https://rafael-silva-oliveira.github.io/blog/2025/distill/" rel="alternate" type="text/html" title="Cancer subtyping using cNMF and literature markers"/><published>2025-12-17T00:00:00+00:00</published><updated>2025-12-17T00:00:00+00:00</updated><id>https://rafael-silva-oliveira.github.io/blog/2025/distill</id><content type="html" xml:base="https://rafael-silva-oliveira.github.io/blog/2025/distill/"><![CDATA[<h2 id="purpose-of-this-tutorial">Purpose of this tutorial</h2> <p>Cancer is a complex disease that arises from the accumulation of genetic mutations. These mutations are vast, and differ from one patient to another. This makes it so that cancer is generally seen as a heterogeneous disease. This heterogeneity is reflected in the different subtypes of cancer, which are defined by the mutations that are present in the tumor. These subtypes generally have different clinical features, such as the presence of different mutations, the size of the tumor, and the presence of certain genes (key transcription factors). Additionally, these subtypes can be associated with different responses to treatment. Thus, understanding the molecular biology of different cancer types is key to developing effective treatments and, ultimately, improving patient outcomes. Here, I want to show a brief example of how we can use methods such as cNMF to identify cancer subtypes, particularly in Small-cell lung cancer (SCLC).</p> <hr/> <h2 id="what-do-we-know-about-sclc">What do we know about SCLC?</h2> <p>While this isn’t intended to be a comprehensive overview of SCLC, it is important to understand what we already know about the disease, in order to subtype it.</p> <p>SCLC has long been recognized as one of the most aggressive and heterogeneous cancers. For decades, researchers tried to make sense of this complexity by dividing tumors into “classic” and “variant” forms. But as molecular profiling advanced, a more refined classification emerged: one that highlights the role of dominant transcription factors in shaping tumor identity and behavior.</p> <p>Thus, in this tutorial, we can define molecular subtypes as being biologically consistent groups of tumors characterized by three key features:</p> <ol> <li>a dominant transcriptional regulator or signaling pathway,</li> <li>a relatively stable molecular signature across different disease stages and experimental models,</li> <li>clear association with distinct biological behaviors or therapeutic responses observed in clinical settings</li> </ol> <p>Today, four major molecular subtypes are recognized:</p> <ul> <li>SCLC-A: Driven by ASCL1, accounting for about half of all cases.</li> <li>SCLC-N: Defined by NEUROD1, often linked to variant morphology and poorer prognosis.</li> <li>SCLC-P: Characterized by POU2F3, representing non-neuroendocrine tumors with tuft cell features.</li> <li>SCLC-I: The newest player, marked by an inflamed phenotype with immune-related activity.</li> </ul> <h3 id="what-about-sclc-y">What about SCLC-Y?</h3> <p>Before SCLC-I was proposed, some researchers suggested a fourth subtype called SCLC-Y, supposedly driven by YAP1. YAP1 is a transcriptional co-activator involved in proliferation, survival, and drug resistance. Early studies hinted that it might define a distinct group of tumors. However, subsequent work revealed that YAP1 expression was inconsistent and often low, failing to meet the criteria for a stable, subtype-defining regulator. In other words, YAP1 activity was biologically relevant, but it didn’t reliably carve out a separate molecular identity for SCLC tumors.</p> <h3 id="the-inflamed-alternative-sclc-i">The inflamed alternative: SCLC-I</h3> <p>In 2021, Gay et al. <d-cite key="Gay.2021"></d-cite> proposed the new SCLC-I (Inflamed) subtype. Unlike the neuroendocrine-driven groups, SCLC-I is distinguished by its immune-active microenvironment. These tumors show signatures of interferon signaling, antigen presentation, and T-cell infiltration, features that set them apart biologically and therapeutically. This inflamed phenotype is particularly exciting because it opens the door to immunotherapy strategies. While classic neuroendocrine SCLC tends to be “immune cold,” SCLC-I tumors may be more responsive to checkpoint inhibitors and other immune-targeted treatments.</p> <p>For this tutorial, we will attempt to replicate the subtyping done in Gay et al. using a dataset from George et al. (2015) which can be found <a href="https://www.cbioportal.org/study/summary?id=sclc_ucologne_2015">here</a>. This same dataset was used by Gay et al to perform their subtyping.</p> <p>Here is a summary of what we know about SCLC, from a slide I have created and use to present at conferences:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/sclc_info-480.webp 480w,/assets/img/subtyping/sclc_info-800.webp 800w,/assets/img/subtyping/sclc_info-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/subtyping/sclc_info.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="what-is-cnmf">What is cNMF?</h2> <p>cNMF is a non-negative matrix factorization (NMF) method that is particularly useful for identifying cancer subtypes. The “c” in cNMF stands for “consensus” which means that the algorithm will run the analysis multiple times and find the most stable, reliable patterns.</p> <p>cNMF can be used in a variety of settings, including single-cell RNA (scRNA) in order to look for groups of genes that work together, called gene expression programs. This can be extended to bulk RNA, this time looking for cancer subtypes (here we are talking about samples and not single cells).</p> <p>The strength of cNMF is in its ability to solve compositional problems. Imagine sitting in a concert hall, listening to an orchestra. If you focus carefully, you start to notice recurring harmonies from the different instruments. That’s exactly what cNMF does with gene expression data. It picks a part the recurring harmonies of genes, the programs that consistently play together. These GEPs (gene expression programs) reveal the functional states of cells or the molecular identity of tumors, turning noise into meaningful biological insight.</p> <p>In this tutorial, we will be using the python <a href="https://github.com/dylkot/cNMF">cNMF package</a> which although has been used for scRNA, can also be used for bulk RNA data.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/cnmf-480.webp 480w,/assets/img/subtyping/cnmf-800.webp 800w,/assets/img/subtyping/cnmf-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/subtyping/cnmf.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="reading-the-data">Reading the data</h2> <p>First, let’s import the necessary libraries.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
