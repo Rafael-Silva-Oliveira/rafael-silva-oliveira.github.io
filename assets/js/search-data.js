@@ -41,7 +41,7 @@ ninja.data = [{
         
           title: "Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell...",
         
-        description: "Example",
+        description: "A hands-on tutorial covering cell segmentation with SOPA (StarDist + ProSeg), spatial domain identification with Novae (with batch correction on the fly), and cell type annotation with Enrichmap (also with built-in batch correction and spatial smoothing) on a Visium HD colorectal cancer dataset.",
         section: "Posts",
         handler: () => {
           
