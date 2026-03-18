@@ -45,7 +45,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2026/distill/";
+            window.location.href = "/blog/2026/segmentation-and-annotation/";
           
         },
       },{id: "post-cancer-subtyping-using-cnmf-and-literature-markers",
