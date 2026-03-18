@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-cancer-subtyping-using-cnmf-and-literature-markers",
+        },{id: "post-",
+        
+          title: "",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/2026-03-14-distill/";
+          
+        },
+      },{id: "post-cancer-subtyping-using-cnmf-and-literature-markers",
         
           title: "Cancer subtyping using cNMF and literature markers",
         
