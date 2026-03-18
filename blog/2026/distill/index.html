@@ -1550,20 +1550,6 @@
 65
 66
 67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
 </pre></td> <td class="code"><pre><span class="n">enrichmap_gap_annotations</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">elbow_data</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -1631,21 +1617,14 @@
     <span class="n">col</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s">_score</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">score_cols</span>
 <span class="p">]</span>
-<span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sh">"</span><span class="s">cell_type_enrichmap</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+</pre></td> </tr></tbody></table></code></pre></figure> <h1 id="lets-also-save-the-high-granularity-cell-type-assignments-to-the-adataobs-table-by-simply-takine-the-argmax-over-the-scores-for-each-cell-id">Lets also save the “high granularity” cell type assignments to the <code class="language-plaintext highlighter-rouge">adata.obs</code> table by simply takine the argmax over the scores for each cell ID.</h1> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+<td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td> <td class="code"><pre><span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sh">"</span><span class="s">cell_type_enrichmap</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">score_df</span><span class="p">.</span><span class="nf">idxmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">)</span>
-
-<span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
-    <span class="sa">f</span><span class="sh">"</span><span class="s">Cell type distribution:</span><span class="se">\n</span><span class="si">{</span><span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sh">'</span><span class="s">cell_type_domain</span><span class="sh">'</span><span class="p">].</span><span class="nf">value_counts</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span>
-<span class="p">)</span>
-
-<span class="n">Fibroblasts</span>                <span class="mi">6577</span>
-<span class="n">Goblet_cells</span>               <span class="mi">2442</span>
-<span class="n">Macrophages</span>                <span class="mi">1898</span>
-<span class="n">Tumor</span>                      <span class="mi">1069</span>
-<span class="n">Macrophages</span><span class="o">/</span><span class="n">Neutrophils</span>     <span class="mi">230</span>
-<span class="n">Unknown</span>                       <span class="mi">2</span>
-</pre></td> </tr></tbody></table></code></pre></figure> <p>Lets also save the “high granularity” cell type assignments to the <code class="language-plaintext highlighter-rouge">adata.obs</code> table by simply takine the argmax over the scores for each cell ID.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+</pre></td> </tr></tbody></table></code></pre></figure> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
 <td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -1656,22 +1635,16 @@
 8
 9
 10
-11
-12
-13
-</pre></td> <td class="code"><pre><span class="c1"># Per-cell high granularity: argmax over scores
-</span><span class="n">score_df</span> <span class="o">=</span> <span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="n">score_cols</span><span class="p">].</span><span class="nf">copy</span><span class="p">()</span>
-<span class="n">score_df</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">col</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s">_score</span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">score_cols</span>
-<span class="p">]</span>
-<span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sh">"</span><span class="s">cell_type_enrichmap</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">score_df</span><span class="p">.</span><span class="nf">idxmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
+</pre></td> <td class="code"><pre><span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
     <span class="sa">f</span><span class="sh">"</span><span class="s">Cell type distribution:</span><span class="se">\n</span><span class="si">{</span><span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sh">'</span><span class="s">cell_type_domain</span><span class="sh">'</span><span class="p">].</span><span class="nf">value_counts</span><span class="p">()</span><span class="si">}</span><span class="sh">"</span>
 <span class="p">)</span>
+
+<span class="n">Fibroblasts</span>                <span class="mi">6577</span>
+<span class="n">Goblet_cells</span>               <span class="mi">2442</span>
+<span class="n">Macrophages</span>                <span class="mi">1898</span>
+<span class="n">Tumor</span>                      <span class="mi">1069</span>
+<span class="n">Macrophages</span><span class="o">/</span><span class="n">Neutrophils</span>     <span class="mi">230</span>
+<span class="n">Unknown</span>                       <span class="mi">2</span>
 </pre></td> </tr></tbody></table></code></pre></figure> <p>Now lets plot the elbow plot using the meanchange from the ranking dataframe above:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
 <td class="gutter gl"><pre class="lineno">1
 2
