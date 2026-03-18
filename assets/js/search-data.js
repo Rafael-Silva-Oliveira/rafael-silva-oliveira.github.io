@@ -37,15 +37,15 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-",
+        },{id: "post-cell-segmentation-and-annotation-applied-to-visium-hd-data",
         
-          title: "",
+          title: "Cell segmentation and annotation applied to Visium HD data",
         
-        description: "",
+        description: "Example",
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2026/2026-03-14-distill/";
+            window.location.href = "/blog/2026/distill/";
           
         },
       },{id: "post-cancer-subtyping-using-cnmf-and-literature-markers",
