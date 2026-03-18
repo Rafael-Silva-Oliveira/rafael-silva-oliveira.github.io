@@ -160,7 +160,76 @@
         <span class="sh">"</span><span class="s">axes.edgecolor</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">black</span><span class="sh">"</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">)</span>
-</pre></td> </tr></tbody></table></code></pre></figure> <p>The following code is used to set up the directories and logging. Note that we will also be using the <code class="language-plaintext highlighter-rouge">config_crc_tutorial.yaml</code> to store and load the configuration parameters.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+</pre></td> </tr></tbody></table></code></pre></figure> <p>The following code is used to set up the directories and logging. Note that we will also be using the <code class="language-plaintext highlighter-rouge">config_crc_tutorial.yaml</code> to store and load the configuration parameters.</p> <p>The <code class="language-plaintext highlighter-rouge">yaml</code> file looks like this:</p> <figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><table class="rouge-table"><tbody><tr>
+<td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre></td> <td class="code"><pre><span class="c1"># Visium HD CRC Tutorial Configuration</span>
+<span class="c1"># 10x Genomics Human Colorectal Cancer (FFPE) dataset</span>
+
+<span class="c1"># Base paths</span>
+<span class="na">paths</span><span class="pi">:</span>
+  <span class="na">spaceranger_outs</span><span class="pi">:</span> <span class="s2">"</span><span class="s">../data/spatial/SpaceRanger"</span>
+  <span class="na">processed</span><span class="pi">:</span> <span class="s2">"</span><span class="s">../data/spatial/processed"</span>
+  <span class="na">figures</span><span class="pi">:</span> <span class="s2">"</span><span class="s">../figures"</span>
+
+<span class="c1"># Single sample for this tutorial</span>
+<span class="na">samples</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Visium_HD_Human_Colon_Cancer"</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">CRC_tutorial"</span>
+
+<span class="c1"># Analysis parameters</span>
+<span class="na">params</span><span class="pi">:</span>
+  <span class="na">filter_genes_counts</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">filter_cells_counts</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">radius</span><span class="pi">:</span> <span class="m">50</span>
+  <span class="na">percentile_pct_mito</span><span class="pi">:</span> <span class="kc">null</span>
+  <span class="na">pct_mito</span><span class="pi">:</span> <span class="m">10</span>
+  <span class="na">novae_max_epochs</span><span class="pi">:</span> <span class="m">50</span>
+  <span class="na">novae_model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">MICS-Lab/novae-human-0"</span>
+  <span class="na">domain_range</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">5</span><span class="pi">,</span> <span class="nv">15</span><span class="pi">]</span>
+  <span class="na">clustering_col</span><span class="pi">:</span> <span class="s2">"</span><span class="s">novae_domains_15"</span>
+
+<span class="c1"># Marker genes for CRC cell type annotation</span>
+<span class="c1"># Source: 10x Genomics Loupe Browser CRC tutorial CSVs (data/markers/*.csv)</span>
+<span class="na">marker_genes</span><span class="pi">:</span>
+  <span class="na">Tumor</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">REG1A"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">REG1B"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">CEACAM6"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">TGFBI"</span><span class="pi">]</span>
+  <span class="na">Fibroblasts</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">COL1A1"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">MMP2"</span><span class="pi">]</span>
+  <span class="na">Macrophages</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">LYZ"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">SPP1"</span><span class="pi">]</span>
+  <span class="na">Neutrophils</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">SAT1"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">CSF3R"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">FCGR3B"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">S100A8"</span><span class="pi">]</span>
+  <span class="na">Goblet_cells</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">FCGBP"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">MUC2"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">CLCA1"</span><span class="pi">]</span>
+</pre></td> </tr></tbody></table></code></pre></figure> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
 <td class="gutter gl"><pre class="lineno">1
 2
 3
