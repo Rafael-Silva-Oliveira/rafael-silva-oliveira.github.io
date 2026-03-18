@@ -975,16 +975,7 @@
 
         <span class="n">adatas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">adata</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">adatas</span></code></pre></figure> <p>This is an example of the output from the code above, where one identify and remove the “islands” of cells that are not connected to the main regions of cells. This image is not related to the Visium HD dataset for this tutorial, and is simply an example of how this can be used to remove isolated islands of cells that don’t meed certain criteria.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/sparse_regions_removal_example-480.webp 480w,/assets/img/segmentation_and_annotation/sparse_regions_removal_example-800.webp 800w,/assets/img/segmentation_and_annotation/sparse_regions_removal_example-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/segmentation_and_annotation/sparse_regions_removal_example.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> <h2 id="spatial-clustering-and-domain-identification-with-novae">Spatial Clustering and Domain Identification with Novae</h2> <p>Now we will use the <code class="language-plaintext highlighter-rouge">Novae</code> package to perform spatial clustering and domain identification.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
-<td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td> <td class="code"><pre><span class="c1"># Compute spatial neighbors
-</span><span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
-    <span class="sh">"</span><span class="s">Computing spatial neighbors.</span><span class="sh">"</span>
-<span class="p">)</span>
-</pre></td> </tr></tbody></table></code></pre></figure> <p>One of the main steps in <code class="language-plaintext highlighter-rouge">Novae</code> is to compute the spatial neighbors. This is done using the <code class="language-plaintext highlighter-rouge">spatial_neighbors</code> function. This function requires the <code class="language-plaintext highlighter-rouge">radius</code> parameter, which is the radius of the neighborhood to be considered. For this particular cropped region, we will use a radius of 50.</p> <p>Note also that connectivities need to be computed for each sample individually. If you have multiple samples in a single <code class="language-plaintext highlighter-rouge">AnnData</code> object, you can use the <code class="language-plaintext highlighter-rouge">slide_key</code> parameter to compute connectivities for each sample separately.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+    <span class="k">return</span> <span class="n">adatas</span></code></pre></figure> <p>This is an example of the output from the code above, where one identify and remove the “islands” of cells that are not connected to the main regions of cells. This image is not related to the Visium HD dataset for this tutorial, and is simply an example of how this can be used to remove isolated islands of cells that don’t meed certain criteria.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/sparse_regions_removal_example-480.webp 480w,/assets/img/segmentation_and_annotation/sparse_regions_removal_example-800.webp 800w,/assets/img/segmentation_and_annotation/sparse_regions_removal_example-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/segmentation_and_annotation/sparse_regions_removal_example.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> <h2 id="spatial-clustering-and-domain-identification-with-novae">Spatial Clustering and Domain Identification with Novae</h2> <p>Now we will use the <code class="language-plaintext highlighter-rouge">Novae</code> package to perform spatial clustering and domain identification.</p> <p>One of the main steps in <code class="language-plaintext highlighter-rouge">Novae</code> is to compute the spatial neighbors. This is done using the <code class="language-plaintext highlighter-rouge">spatial_neighbors</code> function. This function requires the <code class="language-plaintext highlighter-rouge">radius</code> parameter, which is the radius of the neighborhood to be considered. For this particular cropped region, we will use a radius of 50.</p> <p>Note also that connectivities need to be computed for each sample individually. If you have multiple samples in a single <code class="language-plaintext highlighter-rouge">AnnData</code> object, you can use the <code class="language-plaintext highlighter-rouge">slide_key</code> parameter to compute connectivities for each sample separately.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
 <td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -998,7 +989,13 @@
 11
 12
 13
-</pre></td> <td class="code"><pre><span class="n">novae</span><span class="p">.</span><span class="nf">spatial_neighbors</span><span class="p">(</span>
+14
+15
+16
+</pre></td> <td class="code"><pre><span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">Computing spatial neighbors.</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="n">novae</span><span class="p">.</span><span class="nf">spatial_neighbors</span><span class="p">(</span>
     <span class="p">[</span><span class="n">adata</span><span class="p">],</span>
     <span class="n">radius</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="sh">"</span><span class="s">radius</span><span class="sh">"</span><span class="p">],</span>
     <span class="n">coord_type</span><span class="o">=</span><span class="sh">"</span><span class="s">generic</span><span class="sh">"</span><span class="p">,</span>
