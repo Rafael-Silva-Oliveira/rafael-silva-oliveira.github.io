@@ -37,9 +37,9 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-cell-segmentation-and-annotation-applied-to-visium-hd-data",
+        },{id: "post-practical-guide-to-cell-segmentation-and-annotation-in-single-cell-spatial-transcriptomics-visium-hd",
         
-          title: "Cell segmentation and annotation applied to Visium HD data",
+          title: "Practical Guide to Cell Segmentation and Annotation in Single-Cell Spatial Transcriptomics (Visium HD)...",
         
         description: "Example",
         section: "Posts",
