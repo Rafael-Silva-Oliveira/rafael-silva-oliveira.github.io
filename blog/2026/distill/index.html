@@ -273,7 +273,7 @@
 41
 42
 </pre></td> <td class="code"><pre><span class="n">PROJECT_DIR</span> <span class="o">=</span> <span class="nc">Path</span><span class="p">(</span>
-    <span class="sa">r</span><span class="sh">"</span><span class="s">C:\Users\rafae\Projects\segmentation-and-annotation</span><span class="sh">"</span>
+    <span class="sa">r</span><span class="sh">"</span><span class="s">C:\Users\Projects\segmentation-and-annotation</span><span class="sh">"</span>
 <span class="p">).</span><span class="nf">resolve</span><span class="p">()</span>
 <span class="n">CONFIG_PATH</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">PROJECT_DIR</span>
@@ -1083,9 +1083,11 @@
 3
 4
 5
+6
 </pre></td> <td class="code"><pre><span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">Preprocessing with Novae</span><span class="sh">"</span><span class="p">)</span>
-<span class="n">novae</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="nf">prepare_adatas</span><span class="p">([</span><span class="n">adata</span><span class="p">])</span>
-<span class="n">adata</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="sh">"</span><span class="s">lognorm_counts</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">novae</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="nf">prepare_adatas</span><span class="p">([</span><span class="n">adata</span><span class="p">])</span> <span class="c1"># performs lognorm, highly variable genes, among others. 
+# Copy the lognorms computed from novae to adata layers.
+</span><span class="n">adata</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="sh">"</span><span class="s">lognorm_counts</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">adata</span><span class="p">.</span><span class="n">X</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
 <span class="p">)</span>
 </pre></td> </tr></tbody></table></code></pre></figure> <p>Lets also compute the PCA using the highly variable genes computed from <code class="language-plaintext highlighter-rouge">Novae</code> in the previous <code class="language-plaintext highlighter-rouge">prepare_adatas</code> step:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
