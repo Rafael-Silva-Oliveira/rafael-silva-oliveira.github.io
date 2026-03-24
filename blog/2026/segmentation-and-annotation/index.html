@@ -1267,14 +1267,16 @@
 14
 15
 16
+17
 </pre></td> <td class="code"><pre><span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
     <span class="sh">"</span><span class="s">Computing spatial neighbors.</span><span class="sh">"</span>
 <span class="p">)</span>
 <span class="n">novae</span><span class="p">.</span><span class="nf">spatial_neighbors</span><span class="p">(</span>
     <span class="p">[</span><span class="n">adata</span><span class="p">],</span>
     <span class="n">radius</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="sh">"</span><span class="s">radius</span><span class="sh">"</span><span class="p">],</span>
-    <span class="n">coord_type</span><span class="o">=</span><span class="sh">"</span><span class="s">generic</span><span class="sh">"</span><span class="p">,</span>
-<span class="p">)</span>
+    <span class="n">coord_type</span><span class="o">=</span><span class="sh">"</span><span class="s">generic</span><span class="sh">"</span><span class="p">,</span> <span class="c1"># "generic" for cell segmented data, "grid" when using the bins from VisiumHD. Useful if you want to perform cell type deconvolution on the VisiumHD bins. More info on such methods later in the tutorial.
+</span>    <span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">technology</span><span class="o">=</span><span class="sh">"</span><span class="s">visium_hd</span><span class="sh">"</span><span class="p">,</span> <span class="c1"># Only needed if using the "grid" coord_type. --&gt;
+</span><span class="p">)</span>
 
 <span class="n">novae</span><span class="p">.</span><span class="n">plot</span><span class="p">.</span><span class="nf">connectivities</span><span class="p">([</span><span class="n">adata</span><span class="p">])</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span>
