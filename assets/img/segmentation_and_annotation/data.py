@@ -127,7 +127,7 @@ sdata_sub = sd.bounding_box_query(
     filter_table=True,
 )
 
-sdata_sub.write("test.zarr")  # save it
+# sdata_sub.write("test.zarr")  # save it
 
 # %%
 # Plot the cropped region
@@ -879,7 +879,7 @@ plt.close()
 # %%
 
 adata = sc.read_h5ad(
-    r"C:\Users\rafae\Projects\segmentation-and-annotation\data\spatial\processed\crc_tutorial_17032026_1255\Visium_HD_Human_Colon_Cancer_annotated.h5ad"
+    r"C:\Users\rafae\Projects\segmentation-and-annotation\data\processed\crc_tutorial_17032026_1255\Visium_HD_Human_Colon_Cancer_annotated.h5ad"
 )
 sc.pl.spatial(
     adata,
@@ -1322,5 +1322,295 @@ map_and_plot_points(
     size=8,
     alpha=0.7,
 )
+
+# %%
+# =============================================================================
+# ADDITIONAL STEP: Annotation using reference scRNA dataset with RCTD-py and FlashDeconv
+# Reference: GSE200997 - Human CRC scRNA-seq (Lee et al.)
+# =============================================================================
+import urllib.request, os
+
+ref_url = "https://datasets.cellxgene.cziscience.com/0ca03016-58ec-4d4e-86d9-22dda860bc8c.h5ad"
+ref_path = "pelka_crc_all_cells.h5ad"
+
+if not os.path.exists(ref_path):
+    print(
+        "Downloading Pelka et al. CRC reference (~370k cells)..."
+    )
+    urllib.request.urlretrieve(
+        ref_url, ref_path
+    )
+
+adata_ref = sc.read_h5ad(ref_path)
+ct_col = "ClusterMidway"
+
+
+print(
+    adata_ref.obs[ct_col].value_counts()
+)
+
+
+# %%
+adata = sc.read_h5ad(
+    r"C:\Users\rafae\Projects\segmentation-and-annotation\data\processed\crc_tutorial_17032026_1255\Visium_HD_Human_Colon_Cancer_annotated.h5ad"
+)
+
+# Subset genes from our segmented cell dataset adata object and our ref, adata_ref
+# Load the 008 um data
+adata_st_subset = sdata_sub.tables[
+    "square_008um"
+].copy()
+
+# Re-index reference by gene symbols (CellxGene uses Ensembl IDs as var_names)
+adata_ref.var_names = adata_ref.var[
+    "feature_name"
+].astype(str)
+adata_ref.var_names_make_unique()
+
+# Intersect on shared gene symbols across ALL three objects
+common_genes = (
+    adata.var_names.intersection(
+        adata_st_subset.var_names
+    ).intersection(adata_ref.var_names)
+)
+print(
+    f"Common genes: {len(common_genes)} "
+    f"(adata: {adata.n_vars}, "
+    f"spatial: {adata_st_subset.n_vars}, "
+    f"ref: {adata_ref.n_vars})"
+)
+
+adata = adata[:, common_genes].copy()
+adata_st_subset = adata_st_subset[
+    :, common_genes
+].copy()
+adata_ref = adata_ref[
+    :, common_genes
+].copy()
+
+# %%
+
+# Filter by UMI (same range as rctd-py: 100–20M)
+umi = adata_st_subset.X.sum(axis=1).A1
+
+umi_mask = (umi >= 100) & (
+    umi <= 20_000_000
+)
+adata_st_filtered = adata_st_subset[
+    umi_mask
+].copy()
+print(
+    f"UMI filter: kept {umi_mask.sum()}/{len(umi_mask)} pixels"
+)
+# %%
+import flashdeconv as fd
+
+# Deconvolve -https://github.com/cafferychen777/flashdeconv
+fd.tl.deconvolve(
+    adata_st_filtered,
+    adata_ref,
+    cell_type_key=ct_col,
+)
+
+sc.pl.spatial(
+    adata_st_filtered,
+    color="flashdeconv_dominant",
+    spot_size=33,
+    show=False,
+)
+plt.savefig(
+    "flashdeconv_dominant.png",
+    dpi=2000,
+    bbox_inches="tight",
+)
+plt.close()
+# %%
+
+# Downsample to 60k cells, preserving cell type proportions
+n_target = 60_000
+if adata_ref.n_obs > n_target:
+    ct_counts = adata_ref.obs[
+        ct_col
+    ].value_counts()
+    ct_fracs = (
+        ct_counts / ct_counts.sum()
+    )
+    ct_n = (
+        (ct_fracs * n_target)
+        .round()
+        .astype(int)
+    )
+    # Ensure we don't exceed available cells per type
+    ct_n = ct_n.clip(upper=ct_counts)
+    idx = []
+    for ct, n in ct_n.items():
+        ct_idx = adata_ref.obs.index[
+            adata_ref.obs[ct_col] == ct
+        ]
+        idx.extend(
+            ct_idx.to_series()
+            .sample(
+                n=n, random_state=42
+            )
+            .tolist()
+        )
+    adata_ref_dw = adata_ref[idx].copy()
+    print(
+        f"Downsampled ref: {adata_ref_dw.n_obs} cells"
+    )
+
+# %%
+# https://github.com/p-gueguen/rctd-py
+# Disable torch.compile/inductor — requires MSVC (cl) which is not available on this system
+import torch._dynamo
+
+torch._dynamo.config.suppress_errors = (
+    True
+)
+torch._dynamo.disable()
+
+from rctd import Reference, run_rctd
+
+# Downsample the reference file to avoid memory errors:
+reference = Reference(
+    adata_ref_dw,
+    cell_type_col=ct_col,
+)
+
+# Run RCTD — handles normalization, sigma estimation, and deconvolution
+result = run_rctd(
+    adata_st_filtered,
+    reference,
+    mode="full",  # https://p-gueguen.github.io/rctd-py/tutorial.html # doublet or full
+)
+
+# %%
+
+# Store per-cell-type weights directly (results align 1:1 with adata_st_filtered)
+for i, ct in enumerate(
+    result.cell_type_names
+):
+    adata_st_filtered.obs[
+        f"rctd_{ct}"
+    ] = result.weights[:, i]
+
+# Dominant cell type per spot
+adata_st_filtered.obs[
+    "rctd_dominant"
+] = pd.Categorical(
+    [
+        result.cell_type_names[i]
+        for i in result.weights.argmax(
+            axis=1
+        )
+    ]
+)
+
+sc.pl.spatial(
+    adata_st_filtered,
+    color="rctd_dominant",
+    spot_size=33,
+    show=False,
+)
+plt.savefig(
+    "rctd_dominant.png",
+    dpi=2000,
+    bbox_inches="tight",
+)
+plt.close()
+
+# %%
+# Celltypist
+import celltypist
+
+adata.X = adata.layers["counts"].copy()
+sc.pp.normalize_total(
+    adata,
+    target_sum=1e4,
+)
+sc.pp.log1p(adata)
+
+adata.layers[
+    "lognorm_counts_celltypist"
+] = adata.X.copy()
+
+# Now do the same log-normalization for the adata_ref
+sc.pp.normalize_total(
+    adata_ref_dw,
+    target_sum=1e4,
+)
+sc.pp.log1p(adata_ref_dw)
+
+adata_ref_dw.layers[
+    "lognorm_counts_celltypist"
+] = adata_ref_dw.X.copy()
+
+
+model = celltypist.train(
+    adata_ref_dw,
+    labels=ct_col,
+    n_jobs=1,
+    feature_selection=True,
+)
+
+model_path = "celltypist_model.pkl"
+model.write(model_path)
+
+
+# %%
+
+# Load pre-built CellTypist model for Human Colorectal Cancer
+celltypist.models.download_models(
+    model="Human_Colorectal_Cancer.pkl",
+    force_update=False,
+)
+model = celltypist.models.Model.load(
+    model="Human_Colorectal_Cancer.pkl"
+)
+
+
+# %%
+
+col = adata.obs["novae_domains_8"]
+adata.obs["novae_domains_8"] = (
+    col.cat.add_categories("Unassigned")
+    .fillna("Unassigned")
+    .astype(str)
+)
+
+predictions = celltypist.annotate(
+    adata,
+    model=model,
+    majority_voting=True,
+    over_clustering="novae_domains_8",
+)
+preds_adata = predictions.to_adata()
+
+adata.obs[f"cell_type_celltypist"] = (
+    preds_adata.obs[
+        "majority_voting"
+    ].values
+)
+adata.obs[
+    f"cell_type_celltypist_per_cell"
+] = preds_adata.obs[
+    "predicted_labels"
+].values
+adata.obs[f"conf_score_celltypist"] = (
+    preds_adata.obs["conf_score"].values
+)
+
+sc.pl.spatial(
+    adata,
+    color="cell_type_celltypist",
+    spot_size=9,
+    show=False,
+)
+plt.savefig(
+    "cell_type_celltypist.png",
+    dpi=2000,
+    bbox_inches="tight",
+)
+plt.close()
 
 # %%

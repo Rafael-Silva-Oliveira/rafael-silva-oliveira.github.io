@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://rafael-silva-oliveira.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://rafael-silva-oliveira.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-03-24T18:43:32+00:00</updated><id>https://rafael-silva-oliveira.github.io/feed.xml</id><title type="html">SciencePond | Rafael Oliveira’s CV and Blog</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell Spatial Transcriptomics (Visium HD)</title><link href="https://rafael-silva-oliveira.github.io/blog/2026/segmentation-and-annotation/" rel="alternate" type="text/html" title="Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell Spatial Transcriptomics (Visium HD)"/><published>2026-03-18T00:00:00+00:00</published><updated>2026-03-18T00:00:00+00:00</updated><id>https://rafael-silva-oliveira.github.io/blog/2026/segmentation-and-annotation</id><content type="html" xml:base="https://rafael-silva-oliveira.github.io/blog/2026/segmentation-and-annotation/"><![CDATA[<h2 id="purpose-of-this-tutorial">Purpose of this tutorial</h2> <pre><code class="language-mermaid">flowchart LR
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://rafael-silva-oliveira.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://rafael-silva-oliveira.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-03-25T16:26:59+00:00</updated><id>https://rafael-silva-oliveira.github.io/feed.xml</id><title type="html">SciencePond | Rafael Oliveira’s CV and Blog</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell Spatial Transcriptomics (Visium HD)</title><link href="https://rafael-silva-oliveira.github.io/blog/2026/segmentation-and-annotation/" rel="alternate" type="text/html" title="Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell Spatial Transcriptomics (Visium HD)"/><published>2026-03-18T00:00:00+00:00</published><updated>2026-03-18T00:00:00+00:00</updated><id>https://rafael-silva-oliveira.github.io/blog/2026/segmentation-and-annotation</id><content type="html" xml:base="https://rafael-silva-oliveira.github.io/blog/2026/segmentation-and-annotation/"><![CDATA[<h2 id="purpose-of-this-tutorial">Purpose of this tutorial</h2> <pre><code class="language-mermaid">flowchart LR
     subgraph INPUT["&lt;b&gt;Input&lt;/b&gt;"]
         A["Visium HD\n+ H&amp;E Image"]
     end
@@ -27,7 +27,13 @@
         D1 --&gt; D2 --&gt; D3
     end
 
-    subgraph ANN["&lt;b&gt;4. Annotation (Enrichmap)&lt;/b&gt;"]
+    subgraph REF["&lt;b&gt;4a. Reference-based Annotation&lt;/b&gt;"]
+        direction TB
+        R1["Deconvolution\n&lt;i&gt;RCTD-py &amp; FlashDeconv\non 8 µm bins&lt;/i&gt;"]
+        R2["CellTypist\n&lt;i&gt;Custom model trained\non scRNA reference&lt;/i&gt;"]
+    end
+
+    subgraph ANN["&lt;b&gt;4b. Signature-based Annotation (Enrichmap)&lt;/b&gt;"]
         direction TB
         E1["Gene set\nenrichment scoring"]
         E2["Rank by group\n(Wilcoxon 1-vs-rest)"]
@@ -39,15 +45,18 @@
         F["Annotated\nSpatial Dataset"]
     end
 
-    A --&gt; SEG --&gt; PRE --&gt; DOM --&gt; ANN --&gt; F
+    A --&gt; SEG --&gt; PRE --&gt; DOM
+    DOM --&gt; REF --&gt; F
+    DOM --&gt; ANN --&gt; F
 
     style INPUT fill:#f0f0f0,stroke:#333
     style SEG fill:#e8f4e8,stroke:#2d7d2d
     style PRE fill:#e8ecf4,stroke:#2d4d7d
     style DOM fill:#f4e8f4,stroke:#7d2d7d
+    style REF fill:#f4e8e8,stroke:#7d2d2d
     style ANN fill:#f4ece8,stroke:#7d4d2d
     style OUT fill:#f0f0f0,stroke:#333
-</code></pre> <p>Working with high-resolution spatial transcriptomics platforms like Visium HD involves quite a few moving parts: segmenting cells, finding spatial domains, and annotating cell types. This tutorial walks through the full pipeline in Python, covering:</p> <ol> <li><strong>Cell segmentation</strong> with <a href="https://github.com/gustaveroussy/sopa">SOPA</a> (v2.2.1) <d-cite key="Blampey.2024"></d-cite>, using StarDist <d-cite key="Schmidt.2018"></d-cite> for nuclear detection and ProSeg <d-cite key="Jones.2024b"></d-cite> for transcript-based boundary refinement.</li> <li><strong>Spatial domain identification</strong> with <a href="https://github.com/MICS-Lab/novae">Novae</a> (v1.0.3) <d-cite key="Blampey.2024b"></d-cite>, a graph-based foundation model with built-in batch correction.</li> <li><strong>Cell type annotation</strong> with <a href="https://github.com/secrierlab/EnrichMap">Enrichmap</a> (v0.1.29) <d-cite key="Celik.2025"></d-cite>, which computes spatially-aware enrichment scores (also with batch correction on the fly) using gene set signatures.</li> </ol> <p>We use the publicly available Human Colorectal Cancer (CRC) FFPE dataset from <a href="https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-human-crc">10x Genomics</a> and reproduce the main findings from their Loupe Browser tutorial, but entirely in Python and at single-cell resolution via cell segmentation. Check the supporting github repo <a href="https://github.com/Rafael-Silva-Oliveira/segmentation-and-annotation.git">here</a> for the full script, dependencies (requirements.txt) and structure necessary to follow this tutorial.</p> <hr/> <h2 id="spatial-transcriptomics-a-primer">Spatial Transcriptomics: A primer</h2> <p>To really understand what’s going on in a tissue, we need to know not just <em>which</em> genes a cell expresses, but also <em>where</em> that cell is relative to its neighbors. Spatial transcriptomics (ST) is a family of technologies that give you exactly that: spatially resolved gene expression <d-cite key="Moses.2022"></d-cite> <d-cite key="Cheng.2023"></d-cite>.</p> <p>The field has moved fast, going from a handful of measurable genes to transcriptome-wide profiling at near-single-cell resolution <d-cite key="Yue.2023"></d-cite>, with applications across cancer biology <d-cite key="Chen.2024j"></d-cite> <d-cite key="Park.2023"></d-cite>, neuroscience, developmental biology, and drug discovery <d-cite key="Cao.2024b"></d-cite>. Below is a brief primer on the two main ST technology families and what they bring to the table compared to earlier approaches.</p> <h3 id="imaging-based-spatial-transcriptomics-ist-vs-sequencing-based-spatial-transcriptomics-sst">Imaging-based Spatial Transcriptomics (iST) vs Sequencing-based Spatial Transcriptomics (sST)</h3> <p>ST technologies generally fall into two camps: <strong>imaging-based</strong> and <strong>sequencing-based</strong> <d-cite key="Williams.2022"></d-cite> <d-cite key="Cheng.2023"></d-cite>. Imaging-based methods can be further split into in situ hybridization (ISH) and in situ sequencing (ISS), while sequencing-based methods mostly rely on in situ capturing (ISC).</p> <p><strong>Imaging-based ST (iST)</strong> uses labeled probes that target specific genes, letting you visualize mRNA directly in tissue <d-cite key="Moses.2022"></d-cite>. This targeted approach gives high sensitivity and can reach subcellular or single-molecule resolution. Commercial platforms include MERFISH (Vizgen’s MERSCOPE), Xenium (10x Genomics), and CosMx (NanoString). The downside is that you need to know which genes to target upfront, and the number of genes you can profile at once is limited compared to transcriptome-wide methods <d-cite key="Yue.2023"></d-cite>.</p> <p><strong>Sequencing-based ST (sST)</strong> uses spatially barcoded arrays to capture RNA from tissue sections, which then gets sequenced via NGS <d-cite key="Williams.2022"></d-cite>. Because it’s unbiased and transcriptome-wide, no prior knowledge of target genes is needed, making it great for discovery-driven research.</p> <p>The original Visium platform had 55 µm spots that typically captured a mixture of multiple cells. Visium HD brought this down to 2 µm bins with no gaps, enabling single-cell scale profiling. The tradeoff is that sequencing-based methods generally have lower transcript capture efficiency than imaging-based ones, since they rely on transcripts diffusing onto a capture surface rather than being detected directly in tissue <d-cite key="Cheng.2023"></d-cite>.</p> <h3 id="what-does-spatial-transcriptomics-unlock-compared-to-other-transcriptomics-techniques">What does Spatial Transcriptomics unlock compared to other transcriptomics techniques?</h3> <p><strong>1. Going beyond bulk RNA-seq.</strong> Bulk RNA-seq averages gene expression across thousands of cells <d-cite key="Cao.2024b"></d-cite>, hiding cellular heterogeneity and discarding any spatial information. ST preserves both, letting you spot rare cell populations that would otherwise be invisible in the bulk signal.</p> <p><strong>2. Adding context to scRNA-seq.</strong> scRNA-seq gives you single-cell resolution, a step up from bulk-RNA, but still requires dissociating the tissue first, which destroys the spatial layout of cells <d-cite key="Chen.2024j"></d-cite>. It can also lose fragile cell types or introduce dissociation-induced stress artifacts <d-cite key="Williams.2022"></d-cite>. Cells with complex morphologies (e.g., neurons, glial cells) are particularly hard to recover intact <d-cite key="Park.2023"></d-cite>. ST profiles gene expression <em>in situ</em>, keeping cells in their original context without the need for dissociation.</p> <p><strong>3. Enabling spatial analyses.</strong> Because ST preserves coordinates, it opens up analyses that are simply not feasible with dissociated data:</p> <ul> <li>Cell-cell interactions and ligand-receptor signaling based on physical proximity <d-cite key="Chen.2024j"></d-cite>, which is key for understanding tumor microenvironments.</li> <li>Tissue niches and neighborhoods defined by both expression patterns and spatial location (e.g., tumor-stroma interfaces, tertiary lymphoid structures).</li> <li>Subcellular mRNA localization with imaging-based methods <d-cite key="Cheng.2023"></d-cite>, revealing how transcript positioning relates to function.</li> </ul> <p><strong>4. Building spatial atlases.</strong> ST enables 3D tissue reconstruction by aligning consecutive 2D sections <d-cite key="Khan.2025"></d-cite>, and spatiotemporal tracking of development at cellular resolution.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135707-480.webp 480w,/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135707-800.webp 800w,/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135707-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135707.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <h3 id="shift-from-deconvolution-spot-based-to-cell-segmentation-bin-based">Shift from Deconvolution (spot based) to Cell Segmentation (bin based)</h3> <p>With the original Visium (55 µm spots, each covering multiple cells), you needed <strong>deconvolution</strong> methods like RCTD <d-cite key="cable2022robust"></d-cite> to infer cell type mixtures within each spot using a scRNA-seq reference.</p> <p>Visium HD changed this. With 2 µm bins, you can now do <strong>cell segmentation</strong> directly on the histology image and assign transcripts to individual cells using computational methods. This gives you a per-cell expression matrix (like scRNA-seq) but with spatial coordinates preserved. Each observation is a single segmented cell rather than a statistical mixture.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135813-480.webp 480w,/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135813-800.webp 800w,/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135813-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135813.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <p>This shift from deconvolution to segmentation is a key motivation for this tutorial: we get single-cell spatial transcriptomics without the assumptions that come with deconvolution.</p> <hr/> <h2 id="exploring-a-visium-hd-dataset">Exploring a Visium HD Dataset</h2> <p>For this tutorial we will use the Visium HD Human Colorectal Cancer (FFPE) dataset from 10x Genomics:</p> <ul> <li><a href="https://www.10xgenomics.com/support/software/loupe-browser/latest/tutorials/assay-analysis/lb-hd-spatial-gene-expression">Loupe Browser HD tutorial</a></li> <li><a href="https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-human-crc">Dataset download page</a></li> </ul> <p>Once you’ve downloaded the data, your project structure should look like this:</p> <h3 id="data-structure">Data Structure</h3> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</code></pre> <p>Working with high-resolution spatial transcriptomics platforms like Visium HD involves quite a few moving parts: segmenting cells, finding spatial domains, and annotating cell types. This tutorial walks through the full pipeline in Python, covering:</p> <ol> <li><strong>Cell segmentation</strong> with <a href="https://github.com/gustaveroussy/sopa">SOPA</a> (v2.2.1) <d-cite key="Blampey.2024"></d-cite>, using StarDist <d-cite key="Schmidt.2018"></d-cite> for nuclear detection and ProSeg <d-cite key="Jones.2024b"></d-cite> for transcript-based boundary refinement.</li> <li><strong>Spatial domain identification</strong> with <a href="https://github.com/MICS-Lab/novae">Novae</a> (v1.0.3) <d-cite key="Blampey.2024b"></d-cite>, a graph-based foundation model with built-in batch correction.</li> <li><strong>Cell type annotation</strong> via two complementary approaches: <ul> <li><strong>Reference-based:</strong> deconvolution on 8 µm bins with <a href="https://github.com/p-gueguen/rctd-py">RCTD-py</a> (v0.2.2) <d-cite key="cable2022robust"></d-cite> and <a href="https://github.com/cafferychen777/flashdeconv">FlashDeconv</a> (v0.1.6) <d-cite key="Yang.2025"></d-cite>, plus <a href="https://www.celltypist.org/">CellTypist</a> (v1.7.1) on segmented cells using a scRNA-seq reference dataset.</li> <li><strong>Signature-based (reference-free):</strong> <a href="https://github.com/secrierlab/EnrichMap">Enrichmap</a> (v0.1.29) <d-cite key="Celik.2025"></d-cite>, which computes spatially-aware enrichment scores (with batch correction on the fly) using gene set signatures.</li> </ul> </li> </ol> <p>We use the publicly available Human Colorectal Cancer (CRC) FFPE dataset from <a href="https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-human-crc">10x Genomics</a> and reproduce the main findings from their Loupe Browser tutorial, but entirely in Python (v3.11) and at single-cell resolution via cell segmentation. Check the supporting github repo <a href="https://github.com/Rafael-Silva-Oliveira/segmentation-and-annotation.git">here</a> for the full script, dependencies (requirements.txt) and structure necessary to follow this tutorial.</p> <hr/> <h2 id="spatial-transcriptomics-a-primer">Spatial Transcriptomics: A primer</h2> <p>To really understand what’s going on in a tissue, we need to know not just <em>which</em> genes a cell expresses, but also <em>where</em> that cell is relative to its neighbors. Spatial transcriptomics (ST) is a family of technologies that give you exactly that: spatially resolved gene expression <d-cite key="Moses.2022"></d-cite> <d-cite key="Cheng.2023"></d-cite>.</p> <p>The field has moved fast, going from a handful of measurable genes to transcriptome-wide profiling at near-single-cell resolution <d-cite key="Yue.2023"></d-cite>, with applications across cancer biology <d-cite key="Chen.2024j"></d-cite> <d-cite key="Park.2023"></d-cite>, neuroscience, developmental biology, and drug discovery <d-cite key="Cao.2024b"></d-cite>. Below is a brief primer on the two main ST technology families and what they bring to the table compared to earlier approaches.</p> <h3 id="imaging-based-spatial-transcriptomics-ist-vs-sequencing-based-spatial-transcriptomics-sst">Imaging-based Spatial Transcriptomics (iST) vs Sequencing-based Spatial Transcriptomics (sST)</h3> <p>ST technologies generally fall into two camps: <strong>imaging-based</strong> and <strong>sequencing-based</strong> <d-cite key="Williams.2022"></d-cite> <d-cite key="Cheng.2023"></d-cite>. Imaging-based methods can be further split into in situ hybridization (ISH) and in situ sequencing (ISS), while sequencing-based methods mostly rely on in situ capturing (ISC).</p> <p><strong>Imaging-based ST (iST)</strong> uses labeled probes that target specific genes, letting you visualize mRNA directly in tissue <d-cite key="Moses.2022"></d-cite>. This targeted approach gives high sensitivity and can reach subcellular or single-molecule resolution. Commercial platforms include MERFISH (Vizgen’s MERSCOPE), Xenium (10x Genomics), and CosMx (NanoString). The downside is that you need to know which genes to target upfront, and the number of genes you can profile at once is limited compared to transcriptome-wide methods <d-cite key="Yue.2023"></d-cite>.</p> <p><strong>Sequencing-based ST (sST)</strong> uses spatially barcoded arrays to capture RNA from tissue sections, which then gets sequenced via NGS <d-cite key="Williams.2022"></d-cite>. Because it’s unbiased and transcriptome-wide, no prior knowledge of target genes is needed, making it great for discovery-driven research.</p> <p>The original Visium platform had 55 µm spots that typically captured a mixture of multiple cells. Visium HD brought this down to 2 µm bins with no gaps, enabling single-cell scale profiling. The tradeoff is that sequencing-based methods generally have lower transcript capture efficiency than imaging-based ones, since they rely on transcripts diffusing onto a capture surface rather than being detected directly in tissue <d-cite key="Cheng.2023"></d-cite>.</p> <h3 id="what-does-spatial-transcriptomics-unlock-compared-to-other-transcriptomics-techniques">What does Spatial Transcriptomics unlock compared to other transcriptomics techniques?</h3> <p><strong>1. Going beyond bulk RNA-seq.</strong> Bulk RNA-seq averages gene expression across thousands of cells <d-cite key="Cao.2024b"></d-cite>, hiding cellular heterogeneity and discarding any spatial information. ST preserves both, letting you spot rare cell populations that would otherwise be invisible in the bulk signal.</p> <p><strong>2. Adding context to scRNA-seq.</strong> scRNA-seq gives you single-cell resolution, a step up from bulk-RNA, but still requires dissociating the tissue first, which destroys the spatial layout of cells <d-cite key="Chen.2024j"></d-cite>. It can also lose fragile cell types or introduce dissociation-induced stress artifacts <d-cite key="Williams.2022"></d-cite>. Cells with complex morphologies (e.g., neurons, glial cells) are particularly hard to recover intact <d-cite key="Park.2023"></d-cite>. ST profiles gene expression <em>in situ</em>, keeping cells in their original context without the need for dissociation.</p> <p><strong>3. Enabling spatial analyses.</strong> Because ST preserves coordinates, it opens up analyses that are simply not feasible with dissociated data:</p> <ul> <li>Cell-cell interactions and ligand-receptor signaling based on physical proximity <d-cite key="Chen.2024j"></d-cite>, which is key for understanding tumor microenvironments.</li> <li>Tissue niches and neighborhoods defined by both expression patterns and spatial location (e.g., tumor-stroma interfaces, tertiary lymphoid structures).</li> <li>Subcellular mRNA localization with imaging-based methods <d-cite key="Cheng.2023"></d-cite>, revealing how transcript positioning relates to function.</li> </ul> <p><strong>4. Building spatial atlases.</strong> ST enables 3D tissue reconstruction by aligning consecutive 2D sections <d-cite key="Khan.2025"></d-cite>, and spatiotemporal tracking of development at cellular resolution.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135707-480.webp 480w,/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135707-800.webp 800w,/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135707-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135707.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <h3 id="shift-from-deconvolution-spot-based-to-cell-segmentation-bin-based">Shift from Deconvolution (spot based) to Cell Segmentation (bin based)</h3> <p>With the original Visium (55 µm spots, each covering multiple cells), you needed <strong>deconvolution</strong> methods like RCTD <d-cite key="cable2022robust"></d-cite> to infer cell type mixtures within each spot using a scRNA-seq reference.</p> <p>Visium HD changed this. With 2 µm bins, you can now do <strong>cell segmentation</strong> directly on the histology image and assign transcripts to individual cells using computational methods. This gives you a per-cell expression matrix (like scRNA-seq) but with spatial coordinates preserved. Each observation is a single segmented cell rather than a statistical mixture. That said, deconvolution methods are still useful. The 8 µm bins aggregate enough UMIs for robust inference, and reference-based approaches like RCTD and FlashDeconv can leverage scRNA-seq atlases to assign cell type proportions at the bin level. Later in this tutorial, I show both deconvolution on 8 µm bins and CellTypist annotation on segmented cells using a scRNA-seq reference, alongside signature-based annotation with Enrichmap.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135813-480.webp 480w,/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135813-800.webp 800w,/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135813-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/Screenshot%202026-03-18%20135813.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <p>This shift from deconvolution to segmentation is a key motivation for this tutorial: we get single-cell spatial transcriptomics without the assumptions that come with deconvolution.</p> <hr/> <h2 id="exploring-a-visium-hd-dataset">Exploring a Visium HD Dataset</h2> <p>For this tutorial we will use the Visium HD Human Colorectal Cancer (FFPE) dataset from 10x Genomics:</p> <ul> <li><a href="https://www.10xgenomics.com/support/software/loupe-browser/latest/tutorials/assay-analysis/lb-hd-spatial-gene-expression">Loupe Browser HD tutorial</a></li> <li><a href="https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-human-crc">Dataset download page</a></li> </ul> <p>Once you’ve downloaded the data, your project structure should look like this:</p> <h3 id="data-structure">Data Structure</h3> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -1409,7 +1418,563 @@
 <span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span>
     <span class="sa">f</span><span class="sh">"</span><span class="s">Saved clustered AnnData: </span><span class="si">{</span><span class="n">adata</span><span class="p">.</span><span class="n">shape</span><span class="si">}</span><span class="sh">"</span>
 <span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></figure> <hr/> <h2 id="cell-type-annotation-using-enrichmap-and-cell-type-gene-set-signatures">Cell Type Annotation using Enrichmap and Cell Type Gene Set Signatures</h2> <p>For cell type annotation on spatial datasets, there are several routes one can choose from.</p> <ul> <li><strong>Using a scRNA reference dataset:</strong> <ul> <li><strong>Deconvolution:</strong> If you want to perform the typical cell type deconvolution on the Visium HD bins (usually the 8 micron bins for memory management), one can use reference-based methods like RCTD <d-cite key="cable2022robust"></d-cite> (see the Python implementation <a href="https://github.com/p-gueguen/rctd-py">here</a>) or <a href="https://github.com/cafferychen777/flashdeconv">FlashDeconv</a>.</li> <li><strong>Cell type annotation:</strong> Alternatively, if you wish to perform cell type annotation using the segmented cells from StarDist/ProSeg (or another cell segmentation method of your choice) AND you have a scRNA-seq reference dataset, you could train your own custom model using this scRNA reference dataset using something like <a href="https://www.celltypist.org/">CellTypist</a> and then use this custom model to predict the cell types on your Visium HD cell segmented cells.</li> </ul> </li> </ul> <blockquote> <p>For common cancer types, finding a scRNA-seq reference is usually straightforward (e.g. using databases such as <a href="https://cellxgene.cziscience.com/">CellxGene</a>, <a href="https://www.cancer.gov/ccg/research/genome-sequencing/tcga">TCGA</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/">GEO</a>, <a href="https://singlecell.broadinstitute.org/single_cell">Single Cell Portal</a>, etc), but for rarer cancers, good references may not exist. In those cases, gene signature-based scoring is the way to go.</p> </blockquote> <ul> <li><strong>Without a scRNA reference dataset:</strong> <ul> <li><strong>Gene sets:</strong> One can use gene set signatures from databases like <a href="https://panglaodb.se/">PanglaoDB</a>, <a href="http://bio-bigdata.hrbmu.edu.cn/CellMarker/">CellMarker 2.0</a>, and markers extracted from models from <a href="https://www.celltypist.org/">CellTypist</a>. We’ll use a gene set method called <a href="https://github.com/secrierlab/EnrichMap">Enrichmap</a> <d-cite key="Celik.2025"></d-cite> which is specifically design to work on spatial data.</li> </ul> </li> </ul> <p>Compared to standard enrichment methods like <code class="language-plaintext highlighter-rouge">scanpy.tl.score_genes</code>, <code class="language-plaintext highlighter-rouge">decoupler.mt.ulm</code> or <code class="language-plaintext highlighter-rouge">gseapy</code>, Enrichmap adds three things that matter for spatial data:</p> <ul> <li><strong>Batch correction</strong> on the fly, so multi-sample analyses don’t need a separate correction step.</li> <li><strong>Spatial smoothing</strong> that produces more spatially coherent scores.</li> <li><strong>Spatial confounder adjustment</strong> to reduce biases in the enrichment scores.</li> </ul> <p>It has been benchmarked against other scoring methods using Moran’s I and shows better spatial coherence. It also works across Visium, Xenium, MERFISH, and imaging mass cytometry.</p> <p>It is important to highlight three additional considerations for achieving high‑quality cell type annotation using gene set signatures:</p> <ul> <li><strong>Use both positive and negative markers whenever possible.</strong> Relying solely on positive markers is often insufficient. Ideally, robust annotation requires marker sets that include both markers that should be expressed and markers that should not be expressed, although this can be challenging in rare diseases or poorly characterized cancer types with limited literature.</li> <li><strong>Ensure low correlation between cell type gene signatures.</strong> Gene sets used for signature‑based annotation should exhibit low pairwise correlation (&lt; 0.95) to avoid ambiguity in distinguishing cell types (e.g., <code class="language-plaintext highlighter-rouge">np.corrcoef(signatures)</code>). Tools such as Enrichmap provide <code class="language-plaintext highlighter-rouge">em.pl.signature_correlation_heatmap</code>, which helps visually detect problematic correlations across signature scores. The solution for this can either be to find better markers that are highly specific to a given cell type of interest or potentially merge related cell types into a single signature.</li> <li><strong>Verify marker expression consistency within each annotated population.</strong> Ideally, more than 80% of cells in a putative cell type should express its core markers (e.g., (<code class="language-plaintext highlighter-rouge">adata[mask, marker].X &gt; 0).mean()</code>). This helps confirm that the assigned label reflects a coherent biological population rather than noise or misannotation.</li> </ul> <blockquote> <p>All in all, the more specific and uncorrelated gene sets you use, the better your annotation will be. Quality of the cell type gene set signatures is a key factor in the success of cell type annotation.</p> </blockquote> <p>We start by filtering our marker genes to those present in the dataset, then run <code class="language-plaintext highlighter-rouge">em.tl.score</code> to generate per-cell enrichment scores for each cell type signature.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></figure> <hr/> <h2 id="cell-type-annotation-using-enrichmap-and-cell-type-gene-set-signatures">Cell Type Annotation using Enrichmap and Cell Type Gene Set Signatures</h2> <p>For cell type annotation on spatial datasets, there are several routes one can choose from.</p> <h3 id="using-a-scrna-reference-dataset-deconvolution-with-rctd-py-and-flashdeconv-and-cell-type-annotation-with-celltypist-on-segmented-cells"><strong>Using a scRNA reference dataset (deconvolution with RCTD-py and FlashDeconv, and cell type annotation with CellTypist on segmented cells)</strong></h3> <ul> <li><strong>Deconvolution:</strong> If you want to perform the typical cell type deconvolution on the Visium HD bins (usually the 8 micron bins for memory management), one can use reference-based methods like RCTD <d-cite key="cable2022robust"></d-cite> (see the Python implementation <a href="https://github.com/p-gueguen/rctd-py">here</a>) or <a href="https://github.com/cafferychen777/flashdeconv">FlashDeconv</a>.</li> <li><strong>Cell type annotation:</strong> Alternatively, if you wish to perform cell type annotation using the segmented cells from StarDist/ProSeg (or another cell segmentation method of your choice) AND you have a scRNA-seq reference dataset, you could train your own custom model using this scRNA reference dataset using something like <a href="https://www.celltypist.org/">CellTypist</a> and then use this custom model to predict the cell types on your Visium HD cell segmented cells.</li> </ul> <p>While the main focus of this tutorial is to use cell type signatures to annotate cell types, I will show an optional step to perform cell type annotations using <strong>1)</strong> deconvolution methods with the 8 micron bins using both <code class="language-plaintext highlighter-rouge">RCTD-py</code> (0.2.2) and <code class="language-plaintext highlighter-rouge">FlashDeconv</code> (v0.1.6) and <strong>2)</strong> a custom model trained on a scRNA-seq reference dataset using <code class="language-plaintext highlighter-rouge">CellTypist</code> (v1.7.1) on the segmented cells from <code class="language-plaintext highlighter-rouge">sopa</code> (our <code class="language-plaintext highlighter-rouge">adata</code> object above).</p> <p>We can download a CRC scRNA reference dataset using <code class="language-plaintext highlighter-rouge">cellxgene_census</code>, but as of this date, python 3.11 is not yet supported, so lets download a reference dataset instead like this:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">urllib.request</span><span class="p">,</span> <span class="n">os</span>
+
+<span class="n">ref_url</span> <span class="o">=</span> <span class="sh">"</span><span class="s">https://datasets.cellxgene.cziscience.com/0ca03016-58ec-4d4e-86d9-22dda860bc8c.h5ad</span><span class="sh">"</span>
+<span class="n">ref_path</span> <span class="o">=</span> <span class="sh">"</span><span class="s">pelka_crc_all_cells.h5ad</span><span class="sh">"</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">exists</span><span class="p">(</span><span class="n">ref_path</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Downloading Pelka et al. CRC reference (~370k cells)...</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlretrieve</span><span class="p">(</span><span class="n">ref_url</span><span class="p">,</span> <span class="n">ref_path</span><span class="p">)</span>
+
+<span class="n">adata_ref</span> <span class="o">=</span> <span class="n">sc</span><span class="p">.</span><span class="nf">read_h5ad</span><span class="p">(</span><span class="n">ref_path</span><span class="p">)</span>
+<span class="n">ct_col</span> <span class="o">=</span> <span class="sh">"</span><span class="s">ClusterMidway</span><span class="sh">"</span> <span class="c1"># cell type column we will be using
+</span><span class="nf">print</span><span class="p">(</span><span class="n">adata_ref</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="n">ct_col</span><span class="p">].</span><span class="nf">value_counts</span><span class="p">())</span>
+
+<span class="n">EpiT</span>            <span class="mi">108131</span>
+<span class="n">Epi</span>              <span class="mi">60164</span>
+<span class="n">Plasma</span>           <span class="mi">37809</span>
+<span class="n">TCD4</span>             <span class="mi">34598</span>
+<span class="n">B</span>                <span class="mi">25660</span>
+<span class="n">TCD8</span>             <span class="mi">23486</span>
+<span class="n">Macro</span>            <span class="mi">20280</span>
+<span class="n">Mono</span>             <span class="mi">14242</span>
+<span class="n">Tgd</span>               <span class="mi">9383</span>
+<span class="n">Endo</span>              <span class="mi">7520</span>
+<span class="n">DC</span>                <span class="mi">5549</span>
+<span class="n">Fibro</span>             <span class="mi">5231</span>
+<span class="n">TZBTB16</span>           <span class="mi">4742</span>
+<span class="n">NK</span>                <span class="mi">3924</span>
+<span class="n">Mast</span>              <span class="mi">3834</span>
+<span class="n">Granulo</span>           <span class="mi">2043</span>
+<span class="n">Peri</span>              <span class="mi">1525</span>
+<span class="n">SmoothMuscle</span>       <span class="mi">881</span>
+<span class="n">ILC</span>                <span class="mi">832</span>
+<span class="n">Schwann</span>            <span class="mi">281</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>This reference file looks something like:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="n">AnnData</span> <span class="nb">object</span> <span class="k">with</span> <span class="n">n_obs</span> <span class="err">×</span> <span class="n">n_vars</span> <span class="o">=</span> <span class="mi">370115</span> <span class="err">×</span> <span class="mi">38361</span>
+    <span class="n">obs</span><span class="p">:</span> <span class="sh">'</span><span class="s">biosample_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">donor_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TissueSource</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ProcessingMethod</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">PatientTypeID</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">sex_ontology_term_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Site</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Grade</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">TumorStage</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">LymphNodeStatus</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">MMRStatusTumor</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">MMRMLH1Tumor</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_geneCount</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_logMappedReads</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_meanReadsPerUmi</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_totalReads</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_logUmiCount</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_bcSwapFraction</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_geneSatFraction</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_seqDupEst</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_umiSatFraction</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_emptyDropPval</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">qc_mitoFraction</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">disease_ontology_term_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">assay_ontology_term_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">suspension_type</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">self_reported_ethnicity_ontology_term_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">development_stage_ontology_term_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">tissue_ontology_term_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ClusterFull</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ClusterMidway</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ClusterTop</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">cell_type_ontology_term_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">is_primary_data</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">tissue_type</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">cell_type</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">assay</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">disease</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">sex</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">tissue</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">self_reported_ethnicity</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">development_stage</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">observation_joinid</span><span class="sh">'</span>
+    <span class="n">var</span><span class="p">:</span> <span class="sh">'</span><span class="s">feature_is_filtered</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">feature_name</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">feature_reference</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">feature_biotype</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">feature_length</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">feature_type</span><span class="sh">'</span>
+    <span class="n">uns</span><span class="p">:</span> <span class="sh">'</span><span class="s">citation</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">default_embedding</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">organism</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">organism_ontology_term_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">schema_reference</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">schema_version</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">title</span><span class="sh">'</span>
+    <span class="n">obsm</span><span class="p">:</span> <span class="sh">'</span><span class="s">X_tsne</span><span class="sh">'</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>… and the .X matrix has raw counts. For cell typist, we will 1e4 log normalize the raw counts since that is what <code class="language-plaintext highlighter-rouge">CellTypist</code> expects. More on this later.</p> <p>Now that we have the scRNA reference dataset loaded, let’s fetch the 8 micron table from our <code class="language-plaintext highlighter-rouge">sdata-sub</code> object to perform deconvolution. The reason why we use 8 or even 16 micron bins for deconvolution is due to the fact that 2μm Visium HD data is extremely sparse (typically 1-10 UMIs per bin) and this sparsity will limit statistical power, as it is not enough information fo infer cell types.</p> <p>To remove aditional noise, we will also filter the bins by UMI to fall in the range of 100-20M. <code class="language-plaintext highlighter-rouge">RCTD-py</code> does this filtering automatically, but lets also do it prior to running <code class="language-plaintext highlighter-rouge">FlashDeconv</code> so that the results are more visually comparable. This will remove bins that don’t have a high expression and outliers which would add more noise than being helpful to the downstream steps.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+</pre></td><td class="code"><pre><span class="c1"># Subset genes from our segmented cell dataset adata object and our ref, adata_ref
+# Load the 008 um data
+</span><span class="n">adata_st_subset</span> <span class="o">=</span> <span class="n">sdata_sub</span><span class="p">.</span><span class="n">tables</span><span class="p">[</span>
+    <span class="sh">"</span><span class="s">square_008um</span><span class="sh">"</span>
+<span class="p">].</span><span class="nf">copy</span><span class="p">()</span>
+
+<span class="c1"># Re-index reference by gene symbols (CellxGene uses Ensembl IDs as var_names)
+</span><span class="n">adata_ref</span><span class="p">.</span><span class="n">var_names</span> <span class="o">=</span> <span class="n">adata_ref</span><span class="p">.</span><span class="n">var</span><span class="p">[</span>
+    <span class="sh">"</span><span class="s">feature_name</span><span class="sh">"</span>
+<span class="p">].</span><span class="nf">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">adata_ref</span><span class="p">.</span><span class="nf">var_names_make_unique</span><span class="p">()</span>
+
+<span class="c1"># Intersect on shared gene symbols across ALL three objects
+</span><span class="n">common_genes</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">adata</span><span class="p">.</span><span class="n">var_names</span><span class="p">.</span><span class="nf">intersection</span><span class="p">(</span>
+        <span class="n">adata_st_subset</span><span class="p">.</span><span class="n">var_names</span>
+    <span class="p">).</span><span class="nf">intersection</span><span class="p">(</span><span class="n">adata_ref</span><span class="p">.</span><span class="n">var_names</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">Common genes: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">common_genes</span><span class="p">)</span><span class="si">}</span><span class="s"> </span><span class="sh">"</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">(adata: </span><span class="si">{</span><span class="n">adata</span><span class="p">.</span><span class="n">n_vars</span><span class="si">}</span><span class="s">, </span><span class="sh">"</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">008um: </span><span class="si">{</span><span class="n">adata_st_subset</span><span class="p">.</span><span class="n">n_vars</span><span class="si">}</span><span class="s">, </span><span class="sh">"</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">ref: </span><span class="si">{</span><span class="n">adata_ref</span><span class="p">.</span><span class="n">n_vars</span><span class="si">}</span><span class="s">)</span><span class="sh">"</span>
+<span class="p">)</span>
+
+<span class="n">adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[:,</span> <span class="n">common_genes</span><span class="p">].</span><span class="nf">copy</span><span class="p">()</span>
+<span class="n">adata_st_subset</span> <span class="o">=</span> <span class="n">adata_st_subset</span><span class="p">[</span>
+    <span class="p">:,</span> <span class="n">common_genes</span>
+<span class="p">].</span><span class="nf">copy</span><span class="p">()</span>
+<span class="n">adata_ref</span> <span class="o">=</span> <span class="n">adata_ref</span><span class="p">[:,</span> <span class="n">common_genes</span><span class="p">].</span><span class="nf">copy</span><span class="p">()</span>
+
+<span class="n">Common</span> <span class="n">genes</span><span class="p">:</span> <span class="mi">17259</span> <span class="p">(</span><span class="n">adata</span><span class="p">:</span> <span class="mi">17731</span><span class="p">,</span> <span class="mi">008</span><span class="n">um</span><span class="p">:</span> <span class="mi">18085</span><span class="p">,</span> <span class="n">ref</span><span class="p">:</span> <span class="mi">38361</span><span class="p">)</span>
+
+<span class="c1"># Filter by UMI (same range as rctd-py: 100–20M)
+</span><span class="n">umi</span> <span class="o">=</span> <span class="n">adata_st_subset</span><span class="p">.</span><span class="n">X</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">A1</span>
+
+<span class="n">umi_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">umi</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>
+    <span class="n">umi</span> <span class="o">&lt;=</span> <span class="mi">20_000_000</span>
+<span class="p">)</span>
+<span class="n">adata_st_filtered</span> <span class="o">=</span> <span class="n">adata_st_subset</span><span class="p">[</span>
+    <span class="n">umi_mask</span>
+<span class="p">].</span><span class="nf">copy</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">UMI filter: kept </span><span class="si">{</span><span class="n">umi_mask</span><span class="p">.</span><span class="nf">sum</span><span class="p">()</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">umi_mask</span><span class="p">)</span><span class="si">}</span><span class="s"> pixels</span><span class="sh">"</span>
+<span class="p">)</span>
+<span class="n">UMI</span> <span class="nb">filter</span><span class="p">:</span> <span class="n">kept</span> <span class="mi">25709</span><span class="o">/</span><span class="mi">29659</span> <span class="n">pixels</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>Now that we have the filtered table, we can run FlashDeconv and RCTD-py on the subset of the 8 micron bins:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">flashdeconv</span> <span class="k">as</span> <span class="n">fd</span>
+
+<span class="c1"># Deconvolve -https://github.com/cafferychen777/flashdeconv
+</span><span class="n">fd</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="nf">deconvolve</span><span class="p">(</span>
+    <span class="n">adata_st_filtered</span><span class="p">,</span>
+    <span class="n">adata_ref</span><span class="p">,</span>
+    <span class="n">cell_type_key</span><span class="o">=</span><span class="n">ct_col</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">spatial</span><span class="p">(</span>
+    <span class="n">adata_st_filtered</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="sh">"</span><span class="s">flashdeconv_dominant</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">spot_size</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">flashdeconv_dominant.png</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="n">bbox_inches</span><span class="o">=</span><span class="sh">"</span><span class="s">tight</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>And we get the following result:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/flashdeconv_dominant-480.webp 480w,/assets/img/segmentation_and_annotation/flashdeconv_dominant-800.webp 800w,/assets/img/segmentation_and_annotation/flashdeconv_dominant-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/flashdeconv_dominant.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <p>And the deconvolution results are added to the adata_st_filtered as such:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="n">AnnData</span> <span class="nb">object</span> <span class="k">with</span> <span class="n">n_obs</span> <span class="err">×</span> <span class="n">n_vars</span> <span class="o">=</span> <span class="mi">25709</span> <span class="err">×</span> <span class="mi">17259</span>
+    <span class="n">obs</span><span class="p">:</span> <span class="sh">'</span><span class="s">in_tissue</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">array_row</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">array_col</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">location_id</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">region</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_B</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_DC</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Endo</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Epi</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_EpiT</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Fibro</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Granulo</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_ILC</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Macro</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Mast</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Mono</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_NK</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Peri</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Plasma</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Schwann</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_SmoothMuscle</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_TCD4</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_TCD8</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_TZBTB16</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_Tgd</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_dominant</span><span class="sh">'</span>
+    <span class="n">var</span><span class="p">:</span> <span class="sh">'</span><span class="s">gene_ids</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">feature_types</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">genome</span><span class="sh">'</span>
+    <span class="n">uns</span><span class="p">:</span> <span class="sh">'</span><span class="s">spatialdata_attrs</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_params</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv_dominant_colors</span><span class="sh">'</span>
+    <span class="n">obsm</span><span class="p">:</span> <span class="sh">'</span><span class="s">spatial</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">flashdeconv</span><span class="sh">'</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>Now lets run using <code class="language-plaintext highlighter-rouge">RCTD-py</code>. It may not be as memory efficient as <code class="language-plaintext highlighter-rouge">FlashDeconv</code>, so loading the 370k reference file might throw a memory error as such:</p> <p><code class="language-plaintext highlighter-rouge">MemoryError: Unable to allocate X GiB for an array with shape (370115, 17259) and data type float32</code></p> <p>So, lets downsample the adata_ref a bit while keeping the same proportion of cells. Lets call it <code class="language-plaintext highlighter-rouge">adata_ref_dw</code>. This downsampled file will also be used for <code class="language-plaintext highlighter-rouge">CellTypist</code> annotation later on.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="code"><pre><span class="c1"># Downsample to 60k cells, preserving cell type proportions
+</span><span class="n">n_target</span> <span class="o">=</span> <span class="mi">60_000</span>
+<span class="k">if</span> <span class="n">adata_ref</span><span class="p">.</span><span class="n">n_obs</span> <span class="o">&gt;</span> <span class="n">n_target</span><span class="p">:</span>
+    <span class="n">ct_counts</span> <span class="o">=</span> <span class="n">adata_ref</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="n">ct_col</span><span class="p">].</span><span class="nf">value_counts</span><span class="p">()</span>
+    <span class="n">ct_fracs</span> <span class="o">=</span> <span class="n">ct_counts</span> <span class="o">/</span> <span class="n">ct_counts</span><span class="p">.</span><span class="nf">sum</span><span class="p">()</span>
+    <span class="n">ct_n</span> <span class="o">=</span> <span class="p">(</span><span class="n">ct_fracs</span> <span class="o">*</span> <span class="n">n_target</span><span class="p">).</span><span class="nf">round</span><span class="p">().</span><span class="nf">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="c1"># Ensure we don't exceed available cells per type
+</span>    <span class="n">ct_n</span> <span class="o">=</span> <span class="n">ct_n</span><span class="p">.</span><span class="nf">clip</span><span class="p">(</span><span class="n">upper</span><span class="o">=</span><span class="n">ct_counts</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ct</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ct_n</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+        <span class="n">ct_idx</span> <span class="o">=</span> <span class="n">adata_ref</span><span class="p">.</span><span class="n">obs</span><span class="p">.</span><span class="n">index</span><span class="p">[</span>
+            <span class="n">adata_ref</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="n">ct_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">ct</span>
+        <span class="p">]</span>
+        <span class="n">idx</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span>
+            <span class="n">ct_idx</span><span class="p">.</span><span class="nf">to_series</span><span class="p">()</span>
+            <span class="p">.</span><span class="nf">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">tolist</span><span class="p">()</span>
+        <span class="p">)</span>
+    <span class="n">adata_ref_dw</span> <span class="o">=</span> <span class="n">adata_ref</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="nf">copy</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="s">Downsampled ref: </span><span class="si">{</span><span class="n">adata_ref_dw</span><span class="p">.</span><span class="n">n_obs</span><span class="si">}</span><span class="s"> cells</span><span class="sh">"</span>
+    <span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>Now lets run RCTD:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="code"><pre><span class="c1"># https://github.com/p-gueguen/rctd-py
+# Disable torch.compile/inductor — requires MSVC (cl) which may not be available if u dont have it installed
+</span><span class="kn">import</span> <span class="n">torch._dynamo</span>
+
+<span class="n">torch</span><span class="p">.</span><span class="n">_dynamo</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">suppress_errors</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="bp">True</span>
+<span class="p">)</span>
+<span class="n">torch</span><span class="p">.</span><span class="n">_dynamo</span><span class="p">.</span><span class="nf">disable</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="n">rctd</span> <span class="kn">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">run_rctd</span>
+
+<span class="n">reference</span> <span class="o">=</span> <span class="nc">Reference</span><span class="p">(</span>
+    <span class="n">adata_ref</span><span class="p">,</span>
+    <span class="n">cell_type_col</span><span class="o">=</span><span class="n">ct_col</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Run RCTD — handles normalization, sigma estimation, and deconvolution
+</span><span class="n">result</span> <span class="o">=</span> <span class="nf">run_rctd</span><span class="p">(</span>
+    <span class="n">adata_st_filtered</span><span class="p">,</span>
+    <span class="n">reference</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="sh">"</span><span class="s">full</span><span class="sh">"</span><span class="p">,</span>  <span class="c1"># https://p-gueguen.github.io/rctd-py/tutorial.html # doublet or full
+</span><span class="p">)</span>
+
+<span class="n">Gene</span> <span class="n">lists</span><span class="p">:</span> <span class="n">bulk</span><span class="o">=</span><span class="mi">5262</span><span class="p">,</span> <span class="n">reg</span><span class="o">=</span><span class="mi">2866</span> <span class="p">(</span><span class="k">from</span> <span class="mi">17259</span> <span class="n">common</span><span class="p">)</span>
+<span class="n">Fitting</span> <span class="n">bulk</span> <span class="n">platform</span> <span class="n">effects</span><span class="bp">...</span>
+<span class="n">Using</span> <span class="mi">2866</span> <span class="n">DE</span> <span class="n">genes</span> <span class="k">for</span> <span class="n">pixel</span><span class="o">-</span><span class="n">level</span> <span class="n">fitting</span>
+<span class="n">Estimating</span> <span class="n">sigma</span><span class="bp">...</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p><code class="language-plaintext highlighter-rouge">FlashDeconv</code> already adds the deconvolution results to the .obs of our <code class="language-plaintext highlighter-rouge">adata_st_filtered</code> object, but <code class="language-plaintext highlighter-rouge">RCTD-py</code> does not. We can add the results to the .obs table like this:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="code"><pre><span class="c1"># Store per-cell-type weights directly (results align 1:1 with adata_st_filtered)
+</span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ct</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">cell_type_names</span>
+<span class="p">):</span>
+    <span class="n">adata_st_filtered</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span>
+        <span class="sa">f</span><span class="sh">"</span><span class="s">rctd_</span><span class="si">{</span><span class="n">ct</span><span class="si">}</span><span class="sh">"</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="n">weights</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+
+<span class="c1"># Dominant cell type per spot
+</span><span class="n">adata_st_filtered</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span>
+    <span class="sh">"</span><span class="s">rctd_dominant</span><span class="sh">"</span>
+<span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Categorical</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">result</span><span class="p">.</span><span class="n">cell_type_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">.</span><span class="n">weights</span><span class="p">.</span><span class="nf">argmax</span><span class="p">(</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">spatial</span><span class="p">(</span>
+    <span class="n">adata_st_filtered</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="sh">"</span><span class="s">rctd_dominant</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">spot_size</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">rctd_dominant.png</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="n">bbox_inches</span><span class="o">=</span><span class="sh">"</span><span class="s">tight</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>Which gives the following results:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/rctd_dominant-480.webp 480w,/assets/img/segmentation_and_annotation/rctd_dominant-800.webp 800w,/assets/img/segmentation_and_annotation/rctd_dominant-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/rctd_dominant.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <p>Finally, let’s run <code class="language-plaintext highlighter-rouge">CellTypist</code> using this same reference scRNA dataset (downsized version to 30k cells), but this time using the segmented cells in our <code class="language-plaintext highlighter-rouge">adata</code> object (the table from <code class="language-plaintext highlighter-rouge">sdata_sub.tables["table"]</code>) which contains the proseg segmented results.</p> <p>One thing we need to do first is to 1e4 log normalize the raw counts since that is what <code class="language-plaintext highlighter-rouge">CellTypist</code> expects. We will also subset the genes so that the genes in the reference dataset are also present in our <code class="language-plaintext highlighter-rouge">adata</code> object when it comes to prediction time.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">celltypist</span>
+
+<span class="n">adata</span><span class="p">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">adata</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span><span class="sh">"</span><span class="s">counts</span><span class="sh">"</span><span class="p">].</span><span class="nf">copy</span><span class="p">()</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pp</span><span class="p">.</span><span class="nf">normalize_total</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">target_sum</span><span class="o">=</span><span class="mf">1e4</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pp</span><span class="p">.</span><span class="nf">log1p</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+
+<span class="n">adata</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span>
+    <span class="sh">"</span><span class="s">lognorm_counts_celltypist</span><span class="sh">"</span>
+<span class="p">]</span> <span class="o">=</span> <span class="n">adata</span><span class="p">.</span><span class="n">X</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+
+<span class="c1"># Now do the same log-normalization for the adata_ref
+</span><span class="n">sc</span><span class="p">.</span><span class="n">pp</span><span class="p">.</span><span class="nf">normalize_total</span><span class="p">(</span>
+    <span class="n">adata_ref_dw</span><span class="p">,</span>
+    <span class="n">target_sum</span><span class="o">=</span><span class="mf">1e4</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pp</span><span class="p">.</span><span class="nf">log1p</span><span class="p">(</span><span class="n">adata_ref_dw</span><span class="p">)</span>
+
+<span class="n">adata_ref_dw</span><span class="p">.</span><span class="n">layers</span><span class="p">[</span>
+    <span class="sh">"</span><span class="s">lognorm_counts_celltypist</span><span class="sh">"</span>
+<span class="p">]</span> <span class="o">=</span> <span class="n">adata_ref_dw</span><span class="p">.</span><span class="n">X</span><span class="p">.</span><span class="nf">copy</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>Now lets train our custom CellTypist model using this reference dataset:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="n">model</span> <span class="o">=</span> <span class="n">celltypist</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span>
+    <span class="n">adata_ref_dw</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">ct_col</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">feature_selection</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">model_path</span> <span class="o">=</span> <span class="p">(</span><span class="sh">"</span><span class="s">celltypist_model.pkl</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">model</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+
+<span class="mi">2026</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">25</span> <span class="mi">16</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">34</span> <span class="o">|</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="err">🍳</span> <span class="n">Preparing</span> <span class="n">data</span> <span class="n">before</span> <span class="n">training</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">25</span> <span class="mi">16</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">35</span> <span class="o">|</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="err">✂️</span> <span class="mi">681</span> <span class="n">non</span><span class="o">-</span><span class="n">expressed</span> <span class="n">genes</span> <span class="n">are</span> <span class="n">filtered</span> <span class="n">out</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">25</span> <span class="mi">16</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">35</span> <span class="o">|</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="err">🔬</span> <span class="n">Input</span> <span class="n">data</span> <span class="n">has</span> <span class="mi">60001</span> <span class="n">cells</span> <span class="ow">and</span> <span class="mi">16578</span> <span class="n">genes</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">25</span> <span class="mi">16</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">35</span> <span class="o">|</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="err">⚖️</span> <span class="n">Scaling</span> <span class="nb">input</span> <span class="n">data</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">25</span> <span class="mi">17</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">11</span> <span class="o">|</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="err">🏋️</span> <span class="n">Training</span> <span class="n">data</span> <span class="n">using</span> <span class="n">SGD</span> <span class="n">logistic</span> <span class="n">regression</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>This is how we can train our custom model. For the sake of time (training might take a while), we will use the already existing <code class="language-plaintext highlighter-rouge">CellTipist</code> model called <code class="language-plaintext highlighter-rouge">Human_Colorectal_Cancer</code> (https://doi.org/10.1038/s41588-020-0636-z).</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="n">celltypist</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="nf">download_models</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">Human_Colorectal_Cancer.pkl</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">force_update</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">celltypist</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="sh">"</span><span class="s">Human_Colorectal_Cancer.pkl</span><span class="sh">"</span>
+<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure> <p>And finally the annotations/predictions in our <code class="language-plaintext highlighter-rouge">adata</code> object. Let’s also use the already computed <code class="language-plaintext highlighter-rouge">novae_domains_8</code> domain assignments from <code class="language-plaintext highlighter-rouge">adata.obs</code> for this tutorial to perform over-clustering.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre></td><td class="code"><pre><span class="n">col</span> <span class="o">=</span> <span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sh">"</span><span class="s">novae_domains_8</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sh">"</span><span class="s">novae_domains_8</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">col</span><span class="p">.</span><span class="n">cat</span><span class="p">.</span><span class="nf">add_categories</span><span class="p">(</span><span class="sh">"</span><span class="s">Unassigned</span><span class="sh">"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">fillna</span><span class="p">(</span><span class="sh">"</span><span class="s">Unassigned</span><span class="sh">"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="p">)</span> <span class="c1"># nan from novae domains might throw error on celltypist, so lets put those as unassigned instead and set category. 
+</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">celltypist</span><span class="p">.</span><span class="nf">annotate</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">majority_voting</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">over_clustering</span><span class="o">=</span><span class="sh">"</span><span class="s">novae_domains_8</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">preds_adata</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">.</span><span class="nf">to_adata</span><span class="p">()</span>
+
+<span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sa">f</span><span class="sh">"</span><span class="s">cell_type_celltypist</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">preds_adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span>
+        <span class="sh">"</span><span class="s">majority_voting</span><span class="sh">"</span>
+    <span class="p">].</span><span class="n">values</span>
+<span class="p">)</span>
+<span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">cell_type_celltypist_per_cell</span><span class="sh">"</span>
+<span class="p">]</span> <span class="o">=</span> <span class="n">preds_adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span>
+    <span class="sh">"</span><span class="s">predicted_labels</span><span class="sh">"</span>
+<span class="p">].</span><span class="n">values</span>
+<span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sa">f</span><span class="sh">"</span><span class="s">conf_score_celltypist</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">preds_adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sh">"</span><span class="s">conf_score</span><span class="sh">"</span><span class="p">].</span><span class="n">values</span>
+<span class="p">)</span>
+
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">spatial</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="sh">"</span><span class="s">cell_type_celltypist</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">spot_size</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">cell_type_celltypist.png</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="n">bbox_inches</span><span class="o">=</span><span class="sh">"</span><span class="s">tight</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></figure> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/cell_type_celltypist-480.webp 480w,/assets/img/segmentation_and_annotation/cell_type_celltypist-800.webp 800w,/assets/img/segmentation_and_annotation/cell_type_celltypist-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/cell_type_celltypist.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <p>And the annotated segmented cell object using CellTypist looks like:</p> <blockquote> <p>For common cancer types, finding a scRNA-seq reference is usually straightforward (e.g. using databases such as <a href="https://cellxgene.cziscience.com/">CellxGene</a>, <a href="https://www.cancer.gov/ccg/research/genome-sequencing/tcga">TCGA</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/">GEO</a>, <a href="https://singlecell.broadinstitute.org/single_cell">Single Cell Portal</a>, etc), but for rarer cancers, good references may not exist. In those cases, gene signature-based scoring is the way to go.</p> </blockquote> <h3 id="without-a-scrna-reference-dataset-enrichmap-using-cell-type-gene-set-signatures"><strong>Without a scRNA reference dataset (Enrichmap using cell type gene set signatures)</strong></h3> <ul> <li><strong>Gene sets:</strong> One can use gene set signatures from databases like <a href="https://panglaodb.se/">PanglaoDB</a>, <a href="http://bio-bigdata.hrbmu.edu.cn/CellMarker/">CellMarker 2.0</a>, and markers extracted from models from <a href="https://www.celltypist.org/">CellTypist</a>. We’ll use a gene set method called <a href="https://github.com/secrierlab/EnrichMap">Enrichmap</a> <d-cite key="Celik.2025"></d-cite> which is specifically design to work on spatial data.</li> </ul> <p>Compared to standard enrichment methods like <code class="language-plaintext highlighter-rouge">scanpy.tl.score_genes</code>, <code class="language-plaintext highlighter-rouge">decoupler.mt.ulm</code> or <code class="language-plaintext highlighter-rouge">gseapy</code>, Enrichmap adds three things that matter for spatial data:</p> <ul> <li><strong>Batch correction</strong> on the fly, so multi-sample analyses don’t need a separate correction step.</li> <li><strong>Spatial smoothing</strong> that produces more spatially coherent scores.</li> <li><strong>Spatial confounder adjustment</strong> to reduce biases in the enrichment scores.</li> </ul> <p>It has been benchmarked against other scoring methods using Moran’s I and shows better spatial coherence. It also works across Visium, Xenium, MERFISH, and imaging mass cytometry.</p> <p>It is important to highlight three additional considerations for achieving high‑quality cell type annotation using gene set signatures:</p> <ul> <li><strong>Use both positive and negative markers whenever possible.</strong> Relying solely on positive markers is often insufficient. Ideally, robust annotation requires marker sets that include both markers that should be expressed and markers that should not be expressed, although this can be challenging in rare diseases or poorly characterized cancer types with limited literature.</li> <li><strong>Ensure low correlation between cell type gene signatures.</strong> Gene sets used for signature‑based annotation should exhibit low pairwise correlation (&lt; 0.95) to avoid ambiguity in distinguishing cell types (e.g., <code class="language-plaintext highlighter-rouge">np.corrcoef(signatures)</code>). Tools such as Enrichmap provide <code class="language-plaintext highlighter-rouge">em.pl.signature_correlation_heatmap</code>, which helps visually detect problematic correlations across signature scores. The solution for this can either be to find better markers that are highly specific to a given cell type of interest or potentially merge related cell types into a single signature.</li> <li><strong>Verify marker expression consistency within each annotated population.</strong> Ideally, more than 80% of cells in a putative cell type should express its core markers (e.g., (<code class="language-plaintext highlighter-rouge">adata[mask, marker].X &gt; 0).mean()</code>). This helps confirm that the assigned label reflects a coherent biological population rather than noise or misannotation.</li> </ul> <blockquote> <p>All in all, the more specific and uncorrelated gene sets you use, the better your annotation will be. Quality of the cell type gene set signatures is a key factor in the success of cell type annotation.</p> </blockquote> <p>We start by filtering our marker genes to those present in the dataset, then run <code class="language-plaintext highlighter-rouge">em.tl.score</code> to generate per-cell enrichment scores for each cell type signature.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -2161,7 +2726,7 @@
     <span class="n">bbox_inches</span><span class="o">=</span><span class="sh">"</span><span class="s">tight</span><span class="sh">"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
-</pre></td></tr></tbody></table></code></pre></figure> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/cell_types_spatial-480.webp 480w,/assets/img/segmentation_and_annotation/cell_types_spatial-800.webp 800w,/assets/img/segmentation_and_annotation/cell_types_spatial-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/cell_types_spatial.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <p>Domains overlapped with the HE image:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/domain_8_HE_overlap-480.webp 480w,/assets/img/segmentation_and_annotation/domain_8_HE_overlap-800.webp 800w,/assets/img/segmentation_and_annotation/domain_8_HE_overlap-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/domain_8_HE_overlap.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <p>Cell Type assignments overlapped with the HE image:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/cell_type_HE_overlap-480.webp 480w,/assets/img/segmentation_and_annotation/cell_type_HE_overlap-800.webp 800w,/assets/img/segmentation_and_annotation/cell_type_HE_overlap-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/cell_type_HE_overlap.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="conclusion-and-next-steps">Conclusion and Next Steps</h2> <p>We went from raw outputs to a (cropped) annotated spatial dataset:</p> <ol> <li><strong>Segmented cells</strong> with StarDist + ProSeg via SOPA <d-cite key="Blampey.2024"></d-cite>.</li> <li><strong>Identified spatial domains</strong> with Novae <d-cite key="Blampey.2024b"></d-cite>.</li> <li><strong>Annotated cell types</strong> with Enrichmap <d-cite key="Celik.2025"></d-cite> scores and an argmax and elbow-gap assignment method.</li> </ol> <p>We reproduced the main findings from the 10x Loupe Browser CRC tutorial, but in Python and at single-cell resolution. This plugs directly into the scverse ecosystem (Scanpy, SpatialData, AnnData) for whatever comes next. Other visualizations can include matrixplots and dotplots as well to visualize domain scores per cell type to further explore domain/niche assignemnts. Example of how it could look like (using <code class="language-plaintext highlighter-rouge">sc.pl.matrixplot</code> with domain assignments from Novae and cell type scores from <code class="language-plaintext highlighter-rouge">Enrichmap</code>):</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/matrixplot-480.webp 480w,/assets/img/segmentation_and_annotation/matrixplot-800.webp 800w,/assets/img/segmentation_and_annotation/matrixplot-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/matrixplot.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <h3 id="next-steps">Next Steps</h3> <p>With a segmented and annotated dataset, there are several interesting directions:</p> <ul> <li> <p><strong>Cell-cell communication.</strong> <a href="https://liana-py.readthedocs.io/en/latest/">LIANA+</a> can infer ligand-receptor interactions using the spatial proximity information we now have.</p> </li> <li> <p><strong>Pathway and TF activity.</strong> <a href="https://github.com/scverse/decoupler">decoupler</a> estimates pathway activities and transcription factor regulon scores, going beyond individual markers.</p> </li> <li> <p><strong>Spatially variable genes.</strong> Tools like SpatialDE, Squidpy, or Novae itself can identify genes with significant spatial expression patterns.</p> </li> <li> <p><strong>Multi-sample integration and 3D reconstruction.</strong> For studies with multiple sections, spatial alignment methods <d-cite key="Khan.2025"></d-cite> can build multi-slide or 3D tissue reconstructions.</p> </li> <li> <p><strong>Niche characterization.</strong> You can dig into the cellular composition and functional state of specific niches (tumor-stroma interface, immune regions) to understand how the microenvironment affects disease progression.</p> </li> </ul> <p><code class="language-plaintext highlighter-rouge">sopa</code>, <code class="language-plaintext highlighter-rouge">Novae</code>, and <code class="language-plaintext highlighter-rouge">Enrichmap</code> are all under active development, so check their docs for the latest features.</p>]]></content><author><name>Rafael Oliveira</name></author><category term="spatial-transcriptomics"/><summary type="html"><![CDATA[A hands-on tutorial covering cell segmentation with SOPA (StarDist + ProSeg), spatial domain identification with Novae (with batch correction on the fly), and cell type annotation with Enrichmap (also with built-in batch correction and spatial smoothing) on a Visium HD colorectal cancer dataset.]]></summary></entry><entry><title type="html">Cancer subtyping using cNMF and literature markers</title><link href="https://rafael-silva-oliveira.github.io/blog/2025/distill/" rel="alternate" type="text/html" title="Cancer subtyping using cNMF and literature markers"/><published>2025-12-17T00:00:00+00:00</published><updated>2025-12-17T00:00:00+00:00</updated><id>https://rafael-silva-oliveira.github.io/blog/2025/distill</id><content type="html" xml:base="https://rafael-silva-oliveira.github.io/blog/2025/distill/"><![CDATA[<h2 id="purpose-of-this-tutorial">Purpose of this tutorial</h2> <p>Cancer is a complex disease that arises from the accumulation of genetic mutations. These mutations are vast, and differ from one patient to another. This makes it so that cancer is generally seen as a heterogeneous disease. This heterogeneity is reflected in the different subtypes of cancer, which are defined by the mutations that are present in the tumor. These subtypes generally have different clinical features, such as the presence of different mutations, the size of the tumor, and the presence of certain genes (key transcription factors). Additionally, these subtypes can be associated with different responses to treatment. Thus, understanding the molecular biology of different cancer types is key to developing effective treatments and, ultimately, improving patient outcomes. Here, I want to show a brief example of how we can use methods such as cNMF to identify cancer subtypes, particularly in Small-cell lung cancer (SCLC).</p> <hr/> <h2 id="what-do-we-know-about-sclc">What do we know about SCLC?</h2> <p>While this isn’t intended to be a comprehensive overview of SCLC, it is important to understand what we already know about the disease, in order to subtype it.</p> <p>SCLC has long been recognized as one of the most aggressive and heterogeneous cancers. For decades, researchers tried to make sense of this complexity by dividing tumors into “classic” and “variant” forms. But as molecular profiling advanced, a more refined classification emerged: one that highlights the role of dominant transcription factors in shaping tumor identity and behavior.</p> <p>Thus, in this tutorial, we can define molecular subtypes as being biologically consistent groups of tumors characterized by three key features:</p> <ol> <li>a dominant transcriptional regulator or signaling pathway,</li> <li>a relatively stable molecular signature across different disease stages and experimental models,</li> <li>clear association with distinct biological behaviors or therapeutic responses observed in clinical settings</li> </ol> <p>Today, four major molecular subtypes are recognized:</p> <ul> <li>SCLC-A: Driven by ASCL1, accounting for about half of all cases.</li> <li>SCLC-N: Defined by NEUROD1, often linked to variant morphology and poorer prognosis.</li> <li>SCLC-P: Characterized by POU2F3, representing non-neuroendocrine tumors with tuft cell features.</li> <li>SCLC-I: The newest player, marked by an inflamed phenotype with immune-related activity.</li> </ul> <h3 id="what-about-sclc-y">What about SCLC-Y?</h3> <p>Before SCLC-I was proposed, some researchers suggested a fourth subtype called SCLC-Y, supposedly driven by YAP1. YAP1 is a transcriptional co-activator involved in proliferation, survival, and drug resistance. Early studies hinted that it might define a distinct group of tumors. However, subsequent work revealed that YAP1 expression was inconsistent and often low, failing to meet the criteria for a stable, subtype-defining regulator. In other words, YAP1 activity was biologically relevant, but it didn’t reliably carve out a separate molecular identity for SCLC tumors.</p> <h3 id="the-inflamed-alternative-sclc-i">The inflamed alternative: SCLC-I</h3> <p>In 2021, Gay et al. <d-cite key="Gay.2021"></d-cite> proposed the new SCLC-I (Inflamed) subtype. Unlike the neuroendocrine-driven groups, SCLC-I is distinguished by its immune-active microenvironment. These tumors show signatures of interferon signaling, antigen presentation, and T-cell infiltration, features that set them apart biologically and therapeutically. This inflamed phenotype is particularly exciting because it opens the door to immunotherapy strategies. While classic neuroendocrine SCLC tends to be “immune cold,” SCLC-I tumors may be more responsive to checkpoint inhibitors and other immune-targeted treatments.</p> <p>For this tutorial, we will attempt to replicate the subtyping done in Gay et al. using a dataset from George et al. (2015) which can be found <a href="https://www.cbioportal.org/study/summary?id=sclc_ucologne_2015">here</a>. This same dataset was used by Gay et al to perform their subtyping.</p> <p>Here is a summary of what we know about SCLC, from a slide I have created and use to present at conferences:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/sclc_info-480.webp 480w,/assets/img/subtyping/sclc_info-800.webp 800w,/assets/img/subtyping/sclc_info-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/subtyping/sclc_info.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="what-is-cnmf">What is cNMF?</h2> <p>cNMF is a non-negative matrix factorization (NMF) method that is particularly useful for identifying cancer subtypes. The “c” in cNMF stands for “consensus” which means that the algorithm will run the analysis multiple times and find the most stable, reliable patterns.</p> <p>cNMF can be used in a variety of settings, including single-cell RNA (scRNA) in order to look for groups of genes that work together, called gene expression programs. This can be extended to bulk RNA, this time looking for cancer subtypes (here we are talking about samples and not single cells).</p> <p>The strength of cNMF is in its ability to solve compositional problems. Imagine sitting in a concert hall, listening to an orchestra. If you focus carefully, you start to notice recurring harmonies from the different instruments. That’s exactly what cNMF does with gene expression data. It picks a part the recurring harmonies of genes, the programs that consistently play together. These GEPs (gene expression programs) reveal the functional states of cells or the molecular identity of tumors, turning noise into meaningful biological insight.</p> <p>In this tutorial, we will be using the python <a href="https://github.com/dylkot/cNMF">cNMF package</a> which although has been used for scRNA, can also be used for bulk RNA data.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/cnmf-480.webp 480w,/assets/img/subtyping/cnmf-800.webp 800w,/assets/img/subtyping/cnmf-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/subtyping/cnmf.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="reading-the-data">Reading the data</h2> <p>First, let’s import the necessary libraries.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></figure> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/cell_types_spatial-480.webp 480w,/assets/img/segmentation_and_annotation/cell_types_spatial-800.webp 800w,/assets/img/segmentation_and_annotation/cell_types_spatial-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/cell_types_spatial.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <p>Domains overlapped with the HE image:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/domain_8_HE_overlap-480.webp 480w,/assets/img/segmentation_and_annotation/domain_8_HE_overlap-800.webp 800w,/assets/img/segmentation_and_annotation/domain_8_HE_overlap-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/domain_8_HE_overlap.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <p>Cell Type assignments overlapped with the HE image:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/cell_type_HE_overlap-480.webp 480w,/assets/img/segmentation_and_annotation/cell_type_HE_overlap-800.webp 800w,/assets/img/segmentation_and_annotation/cell_type_HE_overlap-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/cell_type_HE_overlap.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="conclusion-and-next-steps">Conclusion and Next Steps</h2> <p>We went from raw outputs to a (cropped) annotated spatial dataset:</p> <ol> <li><strong>Segmented cells</strong> with StarDist + ProSeg via SOPA <d-cite key="Blampey.2024"></d-cite>.</li> <li><strong>Identified spatial domains</strong> with Novae <d-cite key="Blampey.2024b"></d-cite>.</li> <li><strong>Annotated cell types</strong> using reference-based methods (deconvolution with RCTD-py and FlashDeconv on 8 µm bins, CellTypist on segmented cells with a scRNA-seq reference) and signature-based annotation with Enrichmap <d-cite key="Celik.2025"></d-cite> scores and an argmax and elbow-gap assignment method.</li> </ol> <p>We reproduced the main findings from the 10x Loupe Browser CRC tutorial, but in Python and at single-cell resolution. This plugs directly into the scverse ecosystem (Scanpy, SpatialData, AnnData) for whatever comes next. Other visualizations can include matrixplots and dotplots as well to visualize domain scores per cell type to further explore domain/niche assignemnts. Example of how it could look like (using <code class="language-plaintext highlighter-rouge">sc.pl.matrixplot</code> with domain assignments from Novae and cell type scores from <code class="language-plaintext highlighter-rouge">Enrichmap</code>):</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/matrixplot-480.webp 480w,/assets/img/segmentation_and_annotation/matrixplot-800.webp 800w,/assets/img/segmentation_and_annotation/matrixplot-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/segmentation_and_annotation/matrixplot.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <h3 id="next-steps">Next Steps</h3> <p>With a segmented and annotated dataset, there are several interesting directions:</p> <ul> <li> <p><strong>Cell-cell communication.</strong> <a href="https://liana-py.readthedocs.io/en/latest/">LIANA+</a> can infer ligand-receptor interactions using the spatial proximity information we now have.</p> </li> <li> <p><strong>Pathway and TF activity.</strong> <a href="https://github.com/scverse/decoupler">decoupler</a> estimates pathway activities and transcription factor regulon scores, going beyond individual markers.</p> </li> <li> <p><strong>Spatially variable genes.</strong> Tools like SpatialDE, Squidpy, or Novae itself can identify genes with significant spatial expression patterns.</p> </li> <li> <p><strong>Multi-sample integration and 3D reconstruction.</strong> For studies with multiple sections, spatial alignment methods <d-cite key="Khan.2025"></d-cite> can build multi-slide or 3D tissue reconstructions.</p> </li> <li> <p><strong>Niche characterization.</strong> You can dig into the cellular composition and functional state of specific niches (tumor-stroma interface, immune regions) to understand how the microenvironment affects disease progression.</p> </li> </ul> <p><code class="language-plaintext highlighter-rouge">sopa</code>, <code class="language-plaintext highlighter-rouge">Novae</code>, and <code class="language-plaintext highlighter-rouge">Enrichmap</code> are all under active development, so check their docs for the latest features.</p>]]></content><author><name>Rafael Oliveira</name></author><category term="spatial-transcriptomics"/><summary type="html"><![CDATA[A hands-on tutorial covering cell segmentation with SOPA (StarDist + ProSeg), spatial domain identification with Novae (with batch correction on the fly), and cell type annotation using 1) reference-based methods — deconvolution on 8 µm bins with RCTD-py and FlashDeconv, plus CellTypist on segmented cells using a scRNA-seq reference — and 2) reference-free annotation with Enrichmap gene set signatures (with built-in batch correction and spatial smoothing), on a Visium HD colorectal cancer dataset.]]></summary></entry><entry><title type="html">Cancer subtyping using cNMF and literature markers</title><link href="https://rafael-silva-oliveira.github.io/blog/2025/distill/" rel="alternate" type="text/html" title="Cancer subtyping using cNMF and literature markers"/><published>2025-12-17T00:00:00+00:00</published><updated>2025-12-17T00:00:00+00:00</updated><id>https://rafael-silva-oliveira.github.io/blog/2025/distill</id><content type="html" xml:base="https://rafael-silva-oliveira.github.io/blog/2025/distill/"><![CDATA[<h2 id="purpose-of-this-tutorial">Purpose of this tutorial</h2> <p>Cancer is a complex disease that arises from the accumulation of genetic mutations. These mutations are vast, and differ from one patient to another. This makes it so that cancer is generally seen as a heterogeneous disease. This heterogeneity is reflected in the different subtypes of cancer, which are defined by the mutations that are present in the tumor. These subtypes generally have different clinical features, such as the presence of different mutations, the size of the tumor, and the presence of certain genes (key transcription factors). Additionally, these subtypes can be associated with different responses to treatment. Thus, understanding the molecular biology of different cancer types is key to developing effective treatments and, ultimately, improving patient outcomes. Here, I want to show a brief example of how we can use methods such as cNMF to identify cancer subtypes, particularly in Small-cell lung cancer (SCLC).</p> <hr/> <h2 id="what-do-we-know-about-sclc">What do we know about SCLC?</h2> <p>While this isn’t intended to be a comprehensive overview of SCLC, it is important to understand what we already know about the disease, in order to subtype it.</p> <p>SCLC has long been recognized as one of the most aggressive and heterogeneous cancers. For decades, researchers tried to make sense of this complexity by dividing tumors into “classic” and “variant” forms. But as molecular profiling advanced, a more refined classification emerged: one that highlights the role of dominant transcription factors in shaping tumor identity and behavior.</p> <p>Thus, in this tutorial, we can define molecular subtypes as being biologically consistent groups of tumors characterized by three key features:</p> <ol> <li>a dominant transcriptional regulator or signaling pathway,</li> <li>a relatively stable molecular signature across different disease stages and experimental models,</li> <li>clear association with distinct biological behaviors or therapeutic responses observed in clinical settings</li> </ol> <p>Today, four major molecular subtypes are recognized:</p> <ul> <li>SCLC-A: Driven by ASCL1, accounting for about half of all cases.</li> <li>SCLC-N: Defined by NEUROD1, often linked to variant morphology and poorer prognosis.</li> <li>SCLC-P: Characterized by POU2F3, representing non-neuroendocrine tumors with tuft cell features.</li> <li>SCLC-I: The newest player, marked by an inflamed phenotype with immune-related activity.</li> </ul> <h3 id="what-about-sclc-y">What about SCLC-Y?</h3> <p>Before SCLC-I was proposed, some researchers suggested a fourth subtype called SCLC-Y, supposedly driven by YAP1. YAP1 is a transcriptional co-activator involved in proliferation, survival, and drug resistance. Early studies hinted that it might define a distinct group of tumors. However, subsequent work revealed that YAP1 expression was inconsistent and often low, failing to meet the criteria for a stable, subtype-defining regulator. In other words, YAP1 activity was biologically relevant, but it didn’t reliably carve out a separate molecular identity for SCLC tumors.</p> <h3 id="the-inflamed-alternative-sclc-i">The inflamed alternative: SCLC-I</h3> <p>In 2021, Gay et al. <d-cite key="Gay.2021"></d-cite> proposed the new SCLC-I (Inflamed) subtype. Unlike the neuroendocrine-driven groups, SCLC-I is distinguished by its immune-active microenvironment. These tumors show signatures of interferon signaling, antigen presentation, and T-cell infiltration, features that set them apart biologically and therapeutically. This inflamed phenotype is particularly exciting because it opens the door to immunotherapy strategies. While classic neuroendocrine SCLC tends to be “immune cold,” SCLC-I tumors may be more responsive to checkpoint inhibitors and other immune-targeted treatments.</p> <p>For this tutorial, we will attempt to replicate the subtyping done in Gay et al. using a dataset from George et al. (2015) which can be found <a href="https://www.cbioportal.org/study/summary?id=sclc_ucologne_2015">here</a>. This same dataset was used by Gay et al to perform their subtyping.</p> <p>Here is a summary of what we know about SCLC, from a slide I have created and use to present at conferences:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/sclc_info-480.webp 480w,/assets/img/subtyping/sclc_info-800.webp 800w,/assets/img/subtyping/sclc_info-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/subtyping/sclc_info.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="what-is-cnmf">What is cNMF?</h2> <p>cNMF is a non-negative matrix factorization (NMF) method that is particularly useful for identifying cancer subtypes. The “c” in cNMF stands for “consensus” which means that the algorithm will run the analysis multiple times and find the most stable, reliable patterns.</p> <p>cNMF can be used in a variety of settings, including single-cell RNA (scRNA) in order to look for groups of genes that work together, called gene expression programs. This can be extended to bulk RNA, this time looking for cancer subtypes (here we are talking about samples and not single cells).</p> <p>The strength of cNMF is in its ability to solve compositional problems. Imagine sitting in a concert hall, listening to an orchestra. If you focus carefully, you start to notice recurring harmonies from the different instruments. That’s exactly what cNMF does with gene expression data. It picks a part the recurring harmonies of genes, the programs that consistently play together. These GEPs (gene expression programs) reveal the functional states of cells or the molecular identity of tumors, turning noise into meaningful biological insight.</p> <p>In this tutorial, we will be using the python <a href="https://github.com/dylkot/cNMF">cNMF package</a> which although has been used for scRNA, can also be used for bulk RNA data.</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/subtyping/cnmf-480.webp 480w,/assets/img/subtyping/cnmf-800.webp 800w,/assets/img/subtyping/cnmf-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/subtyping/cnmf.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <hr/> <h2 id="reading-the-data">Reading the data</h2> <p>First, let’s import the necessary libraries.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
