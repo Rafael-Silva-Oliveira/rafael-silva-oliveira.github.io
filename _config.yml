@@ -223,6 +223,25 @@ defaults:
     values:
       sitemap: false
 
+  - scope:
+      path: "_posts"
+    values:
+      sitemap: true
+
+  - scope:
+      path: "_pages"
+    values:
+      sitemap: true
+
+  - scope:
+      path: "_news"
+    values:
+      sitemap: true
+
+  - scope:
+      path: "_projects"
+    values:
+      sitemap: true
 sass:
   style: compressed
 
