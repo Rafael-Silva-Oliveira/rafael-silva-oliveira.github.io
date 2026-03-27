@@ -119,7 +119,16 @@
  doi = {10.1038/s41467-024-48981-z}
 }
 
-
+@article{Pachitariu.2025,
+ abstract = {Modern algorithms for biological segmentation can match inter-human agreement in annotation quality. This however is not a performance bound: a hypothetical human-consensus segmentation could reduce error rates in half. To obtain a model that generalizes better we adapted the pretrained transformer backbone of a foundation model (SAM) to the Cellpose framework. The resulting Cellpose-SAM model substantially outperforms inter-human agreement and approaches the human-consensus bound. We increase generalization performance further by making the model robust to channel shuffling, cell size, shot noise, downsampling, isotropic and anisotropic blur. The new model can be readily adopted into the Cellpose ecosystem which includes finetuning, human-in-the-loop training, image restoration and 3D segmentation approaches. These properties establish Cellpose-SAM as a foundation model for biological segmentation.{\#}{\#}{\#} Competing Interest StatementThe authors have declared no competing interest.Howard Hughes Medical InstituteHoward Hughes Medical Institute, https://ror.org/006w34k90,},
+ author = {Pachitariu, Marius and Rariden, Michael and Stringer, Carsen},
+ year = {2025},
+ title = {Cellpose-SAM: superhuman generalization for cellular segmentation},
+ url = {https://www.biorxiv.org/content/10.1101/2025.04.28.651001v1},
+ pages = {2025.04.28.651001},
+ journal = {bioRxiv},
+ doi = {10.1101/2025.04.28.651001},
+}
 @article{Yang.2025,
  abstract = {Atlas-scale spatial transcriptomics requires deconvolution methods that preserve rare biological signals without prohibitive computational costs. Here, we introduce FlashDeconv, a framework built on structure-preserving randomized sketching. Unlike variance-based methods that conflate biological information with population abundance, FlashDeconv employs leverage-score importance sampling to prioritize transcriptomically distinct markers - preserving rare cell type signals that standard feature selection discards. Benchmarking demonstrates accuracy comparable to top-tier Bayesian methods while accelerating inference by orders of magnitude. Applied to human ovarian cancer cohorts, FlashDeconv reproduces clinical response signatures in seconds, enabling rapid patient stratification. This throughput also enables systematic scale-space exploration: we define a {\textquotedbl}resolution horizon{\textquotedbl} (8-16 microns) beyond which cellular co-localization signals undergo sign inversion due to geometric mixing. Operating below this horizon, FlashDeconv uncovers cryptic Tuft cell niches enriched for intestinal stem cells - biological architecture obscured by both variance-based feature selection and coarse spatial binning. FlashDeconv provides a scalable, mathematically grounded framework for atlas-scale spatial discovery.{\#}{\#}{\#} Competing Interest StatementThe authors have declared no competing interest.National Institutes of Health, R01GM144351National Science Foundation, DMS1830392, DMS2113359, DMS1811747, DMS2113360Mayo Clinic Center for Individualized Medicine},
  author = {Yang, Chen and Chen, Jun and Zhang, Xianyang},
