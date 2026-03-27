@@ -19,9 +19,9 @@ function determineGiscusTheme() {
   let giscusAttributes = {
     src: "https://giscus.app/client.js",
     "data-repo": "Rafael-Silva-Oliveira/rafael-silva-oliveira.github.io",
-    "data-repo-id": "",
-    "data-category": "Comments",
-    "data-category-id": "",
+    "data-repo-id": "R_kgDOQng3ZQ",
+    "data-category": "Announcements",
+    "data-category-id": "DIC_kwDOQng3Zc4C5ZBW",
     "data-mapping": "title",
     "data-strict": "1",
     "data-reactions-enabled": "1",
