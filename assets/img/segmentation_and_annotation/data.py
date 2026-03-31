@@ -1459,6 +1459,8 @@ if adata_ref.n_obs > n_target:
         f"Downsampled ref: {adata_ref_dw.n_obs} cells"
     )
 
+
+# Re-add component with new deconvolution
 # %%
 # https://github.com/p-gueguen/rctd-py
 # Disable torch.compile/inductor — requires MSVC (cl) which is not available on this system
