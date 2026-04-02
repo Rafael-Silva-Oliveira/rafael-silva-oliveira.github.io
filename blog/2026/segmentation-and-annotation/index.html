@@ -1800,6 +1800,8 @@
 28
 29
 30
+31
+32
 </pre></td> <td class="code"><pre><span class="c1"># https://github.com/p-gueguen/rctd-py
 # Disable torch.compile/inductor — requires MSVC (cl) which may not be available if u dont have it installed
 </span><span class="kn">import</span> <span class="n">torch._dynamo</span>
@@ -1809,11 +1811,12 @@
 <span class="p">)</span>
 <span class="n">torch</span><span class="p">.</span><span class="n">_dynamo</span><span class="p">.</span><span class="nf">disable</span><span class="p">()</span>
 
-<span class="kn">from</span> <span class="n">rctd</span> <span class="kn">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">run_rctd</span><span class="p">,</span> <span class="n">RCTDConfig</span>
+<span class="kn">from</span> <span class="n">rctd</span> <span class="kn">import</span> <span class="n">run_rctd</span><span class="p">,</span> <span class="n">RCTDConfig</span>
 
 
 <span class="c1"># Use RCTDConfig to change parameters like UMI filtering range, etc
-</span>
+</span><span class="n">config</span> <span class="o">=</span> <span class="nc">RCTDConfig</span><span class="p">(</span><span class="n">UMI_min</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
 <span class="n">reference</span> <span class="o">=</span> <span class="nc">Reference</span><span class="p">(</span>
     <span class="n">adata_ref_dw</span><span class="p">,</span>
     <span class="n">cell_type_col</span><span class="o">=</span><span class="n">ct_col</span><span class="p">,</span>
@@ -1824,13 +1827,14 @@
     <span class="n">adata_st_filtered</span><span class="p">,</span>
     <span class="n">reference</span><span class="p">,</span>
     <span class="n">mode</span><span class="o">=</span><span class="sh">"</span><span class="s">full</span><span class="sh">"</span><span class="p">,</span>  <span class="c1"># https://p-gueguen.github.io/rctd-py/tutorial.html # doublet or full
-</span><span class="p">)</span>
+</span>    <span class="n">config</span><span class="o">=</span><span class="n">config</span>
+<span class="p">)</span>
 
 <span class="n">Gene</span> <span class="n">lists</span><span class="p">:</span> <span class="n">bulk</span><span class="o">=</span><span class="mi">5262</span><span class="p">,</span> <span class="n">reg</span><span class="o">=</span><span class="mi">2866</span> <span class="p">(</span><span class="k">from</span> <span class="mi">17259</span> <span class="n">common</span><span class="p">)</span>
 <span class="n">Fitting</span> <span class="n">bulk</span> <span class="n">platform</span> <span class="n">effects</span><span class="bp">...</span>
 <span class="n">Using</span> <span class="mi">2866</span> <span class="n">DE</span> <span class="n">genes</span> <span class="k">for</span> <span class="n">pixel</span><span class="o">-</span><span class="n">level</span> <span class="n">fitting</span>
 <span class="n">Estimating</span> <span class="n">sigma</span><span class="bp">...</span>
-</pre></td> </tr></tbody></table></code></pre></figure> <p><code class="language-plaintext highlighter-rouge">FlashDeconv</code> already adds the deconvolution results to the .obs of our <code class="language-plaintext highlighter-rouge">adata_st_filtered</code> object, but <code class="language-plaintext highlighter-rouge">RCTD-py</code> does not. We can add the results to the .obs table like this:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+</pre></td> </tr></tbody></table></code></pre></figure> <p><code class="language-plaintext highlighter-rouge">FlashDeconv</code> already adds the deconvolution results to the .obs of our <code class="language-plaintext highlighter-rouge">adata_st_filtered</code> object, but <code class="language-plaintext highlighter-rouge">RCTD-py</code> does not.</p> <blockquote> <p>Edit 2nd April, 2026: This has since changed with the latest version of <code class="language-plaintext highlighter-rouge">rctd-py</code> v0.3.0 - Check this link to see how one can store the results correctly: <a href="https://github.com/p-gueguen/rctd-py/issues/9" rel="external nofollow noopener" target="_blank">link</a>. Let’s use this updated approach to save the cell types and plot them in their respective spatial coordinates:</p> </blockquote> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
 <td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -1857,45 +1861,33 @@
 24
 25
 26
-27
-28
-29
-30
-31
-32
-</pre></td> <td class="code"><pre><span class="c1"># Store per-cell-type weights directly (results align 1:1 with adata_st_filtered)
-</span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ct</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span>
-    <span class="n">result</span><span class="p">.</span><span class="n">cell_type_names</span>
-<span class="p">):</span>
-    <span class="n">adata_st_filtered</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span>
-        <span class="sa">f</span><span class="sh">"</span><span class="s">rctd_</span><span class="si">{</span><span class="n">ct</span><span class="si">}</span><span class="sh">"</span>
-    <span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="n">weights</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+</pre></td> <td class="code"><pre><span class="c1"># 1. Create an array of NaNs for the full dataset and fill in the valid pixels
+</span><span class="n">full_weights</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">full</span><span class="p">((</span><span class="n">adata_st_filtered</span><span class="p">.</span><span class="n">n_obs</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">cell_type_names</span><span class="p">)),</span> <span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="n">full_weights</span><span class="p">[</span><span class="n">result</span><span class="p">.</span><span class="n">pixel_mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="n">weights</span>
+<span class="n">adata_st_filtered</span><span class="p">.</span><span class="n">obsm</span><span class="p">[</span><span class="sh">"</span><span class="s">rctd_weights</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_weights</span>
 
-<span class="c1"># Dominant cell type per spot
-</span><span class="n">adata_st_filtered</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span>
-    <span class="sh">"</span><span class="s">rctd_dominant</span><span class="sh">"</span>
-<span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nc">Categorical</span><span class="p">(</span>
-    <span class="p">[</span>
-        <span class="n">result</span><span class="p">.</span><span class="n">cell_type_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result</span><span class="p">.</span><span class="n">weights</span><span class="p">.</span><span class="nf">argmax</span><span class="p">(</span>
-            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
-        <span class="p">)</span>
-    <span class="p">]</span>
-<span class="p">)</span>
+<span class="c1"># 2. Store the dominant cell type
+</span><span class="n">adata_st_filtered</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sh">"</span><span class="s">rctd_dominant</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">filtered</span><span class="sh">"</span>
+<span class="n">dominant_idx</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="n">weights</span><span class="p">.</span><span class="nf">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">adata_st_filtered</span><span class="p">.</span><span class="n">obs</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adata_st_filtered</span><span class="p">.</span><span class="n">obs_names</span><span class="p">[</span><span class="n">result</span><span class="p">.</span><span class="n">pixel_mask</span><span class="p">],</span> <span class="sh">"</span><span class="s">rctd_dominant</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">cell_type_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dominant_idx</span>
+<span class="p">]</span>
 
-<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">spatial</span><span class="p">(</span>
-    <span class="n">adata_st_filtered</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="sh">"</span><span class="s">rctd_dominant</span><span class="sh">"</span><span class="p">,</span>
-    <span class="n">spot_size</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span>
-    <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span>
-    <span class="sh">"</span><span class="s">rctd_dominant.png</span><span class="sh">"</span><span class="p">,</span>
-    <span class="n">dpi</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
-    <span class="n">bbox_inches</span><span class="o">=</span><span class="sh">"</span><span class="s">tight</span><span class="sh">"</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
-</pre></td> </tr></tbody></table></code></pre></figure> <p>Which gives the following results:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/rctd_dominant-480.webp 480w,/assets/img/segmentation_and_annotation/rctd_dominant-800.webp 800w,/assets/img/segmentation_and_annotation/rctd_dominant-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/segmentation_and_annotation/rctd_dominant.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> <p>Finally, let’s run <code class="language-plaintext highlighter-rouge">CellTypist</code> using this same reference scRNA dataset (downsized version to 30k cells), but this time using the segmented cells in our <code class="language-plaintext highlighter-rouge">adata</code> object (the table from <code class="language-plaintext highlighter-rouge">sdata_sub.tables["table"]</code>) which contains the proseg segmented results.</p> <p>One thing we need to do first is to 1e4 log normalize the raw counts since that is what <code class="language-plaintext highlighter-rouge">CellTypist</code> expects.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+<span class="c1"># 3. Store individual cell type proportions in .obs for easy Scanpy plotting
+</span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cell_type</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">cell_type_names</span><span class="p">):</span>
+    <span class="c1"># Optional: ensure valid column names if your cell types have spaces
+</span>    <span class="n">col_name</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">prop_</span><span class="si">{</span><span class="n">cell_type</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">_</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span>
+    <span class="n">adata_st_filtered</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_weights</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+
+<span class="c1"># --- Plotting ---
+</span>
+<span class="c1"># Plot the dominant types (categorical)
+</span><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">spatial</span><span class="p">(</span><span class="n">adata_st_filtered</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">"</span><span class="s">rctd_dominant</span><span class="sh">"</span><span class="p">,</span> <span class="n">spot_size</span><span class="o">=</span><span class="mi">33</span><span class="p">)</span>
+
+<span class="c1"># Plot the distribution/score for an individual cell type (continuous)
+# Just replace 'prop_Macrophage' with your actual cell type column name
+</span><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">spatial</span><span class="p">(</span><span class="n">adata_st_filtered</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">"</span><span class="s">prop_Macrophage</span><span class="sh">"</span><span class="p">,</span> <span class="n">spot_size</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="sh">"</span><span class="s">viridis</span><span class="sh">"</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+</pre></td> </tr></tbody></table></code></pre></figure> <p>Which gives the following results for the rctd_dominant .obs column:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/segmentation_and_annotation/rctd_dominant-480.webp 480w,/assets/img/segmentation_and_annotation/rctd_dominant-800.webp 800w,/assets/img/segmentation_and_annotation/rctd_dominant-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/segmentation_and_annotation/rctd_dominant.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> <p>Finally, let’s run <code class="language-plaintext highlighter-rouge">CellTypist</code> using this same reference scRNA dataset (downsized version to 30k cells), but this time using the segmented cells in our <code class="language-plaintext highlighter-rouge">adata</code> object (the table from <code class="language-plaintext highlighter-rouge">sdata_sub.tables["table"]</code>) which contains the proseg segmented results.</p> <p>One thing we need to do first is to 1e4 log normalize the raw counts since that is what <code class="language-plaintext highlighter-rouge">CellTypist</code> expects.</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
 <td class="gutter gl"><pre class="lineno">1
 2
 3
