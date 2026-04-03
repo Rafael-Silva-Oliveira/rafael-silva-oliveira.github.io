@@ -82,7 +82,7 @@
 			"location": "Aveiro, Portugal",
 			"url": "https://www.ua.pt/en/curso/476/",
 			"area": "Applied Statistics to Health Sciences (Medical Statistics)",
-			"studyType": "Postgraduate Diploma (60 ECTS)",
+			"studyType": "Postgraduate Diploma (PgD, 24 ECTS)",
 			"startDate": "2022-09",
 			"endDate": "2023-06",
 			"courses": [
@@ -95,7 +95,7 @@
 			"location": "Aveiro, Portugal",
 			"url": "https://www.ua.pt/pt/curso/127/",
 			"area": "Molecular Biomedicine (Health Sciences)",
-			"studyType": "Postgraduate Diploma (60 ECTS)",
+			"studyType": "Postgraduate Diploma (PgD, 60 ECTS)",
 			"startDate": "2020-09",
 			"endDate": "2021-06",
 			"courses": [
@@ -185,7 +185,8 @@
 			"icon": "fa-solid fa-hashtag",
 			"keywords": [
 				"Python",
-				"R"
+				"R",
+				"Bash"
 			]
 		},
 		{
@@ -243,7 +244,15 @@
 				"CrewAI",
 				"LangGraph"
 			]
-		}
+		},
+		{
+			"name": "Workflow Management System (WfMS)",
+			"level": "Beginner",
+			"icon": "fa-solid fa-hashtag",
+			"keywords": [
+				"Nextflow"
+			]
+		},
 	],
 	"languages": [
 		{
@@ -267,20 +276,7 @@
 			"icon": ""
 		}
 	],
-	// "interests": [
-	//   {
-	//     "name": "Physics",
-	//     "icon": "fa-solid fa-tag",
-	//     "keywords": [
-	//       "Quantum Mechanics",
-	//       "Quantum Computing",
-	//       "Quantum Information",
-	//       "Quantum Cryptography",
-	//       "Quantum Communication",
-	//       "Quantum Teleportation"
-	//     ]
-	//   }
-	// ],
+
 	"references": [
 		{
 			"name": "Adrian Zety, Chief Project Officer & Bioinformatician at Artificial Intelligence Expert",
@@ -292,6 +288,30 @@
 			"icon": "fa-solid fa-laptop",
 			"reference": "I had the opportunity to work alongside Rafael while developing a cutting-edge bioinformatics-machine learning MVP, and his expertise in bioinformatics and machine learning is exceptional. His proficiency in data analysis, algorithm development, machine learning and software development significantly contributed to our project's success. He is a collaborative team member, always willing to assist others and share his insights. His commitment to excellence is evident in his willingness to explore solutions to challenging problems, even outside regular work hours. Rafael’s dedication and expertise make him an invaluable asset to any team!"
 		}
+	],
+	"interests": [
+	  {
+	    "name": "Investing",
+	    "icon": "fa-solid fa-tag",
+	    "keywords": [
+	      "ETFs"
+	    ]
+	},
+	{
+	    "name": "Workout",
+	    "icon": "fa-solid fa-tag",
+	    "keywords": [
+			"Weightlifting"
+	    ]
+	  },
+	{
+		"name": "Reading",
+	    "icon": "fa-solid fa-tag",
+	    "keywords": [
+			"Psychology",
+			"Finance"
+	    ]
+	}
 	]
 	// "projects": [
 	//   {
