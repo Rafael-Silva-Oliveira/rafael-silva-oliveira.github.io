@@ -290,28 +290,28 @@
 		}
 	],
 	"interests": [
-	  {
-	    "name": "Investing",
-	    "icon": "fa-solid fa-tag",
-	    "keywords": [
-	      "ETFs"
-	    ]
-	},
-	{
-	    "name": "Workout",
-	    "icon": "fa-solid fa-tag",
-	    "keywords": [
-			"Weightlifting"
-	    ]
-	  },
-	{
-		"name": "Reading",
-	    "icon": "fa-solid fa-tag",
-	    "keywords": [
-			"Psychology",
-			"Finance"
-	    ]
-	}
+		{
+			"name": "Investing",
+			"icon": "fa-solid fa-tag",
+			"keywords": [
+			"ETFs"
+			]
+		},
+		{
+			"name": "Workout",
+			"icon": "fa-solid fa-tag",
+			"keywords": [
+				"Weightlifting"
+			]
+		},
+		{
+			"name": "Reading",
+			"icon": "fa-solid fa-tag",
+			"keywords": [
+				"Psychology",
+				"Finance"
+			]
+		}
 	]
 	// "projects": [
 	//   {
