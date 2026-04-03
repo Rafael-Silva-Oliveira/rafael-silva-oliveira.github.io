@@ -11,13 +11,6 @@
 			"countryCode": "NO",
 			"region": "Norway"
 		}
-		// "profiles": [
-		//   {
-		//     // "network": "Twitter",
-		//     // "username": "AlbertEinstein",
-		//     // "url": "https://twitter.com/AlbertEinstein"
-		//   }
-		// ]
 	},
 	"work": [
 		{
@@ -153,15 +146,6 @@
 			"courses": ["lecture"]
 		}
 	],
-	// "awards": [
-	//   {
-	//     "title": "Nobel Prize in Physics",
-	//     "date": "1921-11-01",
-	//     "awarder": "Royal Swedish Academy of Sciences",
-	//     "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
-	//     "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
-	//   }
-	// ],
 	"certificates": [
 		{
 			"name": "Several - Check my Google Drive folder with all my certificates (or LinkedIn profile)",
@@ -252,7 +236,7 @@
 			"keywords": [
 				"Nextflow"
 			]
-		},
+		}
 	],
 	"languages": [
 		{
@@ -289,16 +273,6 @@
 			"reference": "I had the opportunity to work alongside Rafael while developing a cutting-edge bioinformatics-machine learning MVP, and his expertise in bioinformatics and machine learning is exceptional. His proficiency in data analysis, algorithm development, machine learning and software development significantly contributed to our project's success. He is a collaborative team member, always willing to assist others and share his insights. His commitment to excellence is evident in his willingness to explore solutions to challenging problems, even outside regular work hours. Rafael’s dedication and expertise make him an invaluable asset to any team!"
 		}
 	],
-	// "projects": [
-	//   {
-	//     "name": "Quantum Computing",
-	//     "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
-	//     "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
-	//     "startDate": "2018-01-01",
-	//     "endDate": "2018-01-01",
-	//     "url": "https://example.com"
-	//   }
-	// ],
 	"interests": [
 		{
 			"name": "Investing",
