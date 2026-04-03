@@ -6,4 +6,9 @@ My main goal is to apply my academic knowledge and industry experience to work i
 
 𝙀𝙭𝙥𝙚𝙧𝙞𝙚𝙣𝙘𝙚: With over 2 years of combined experience as a Data Scientist and as a Bioinformatician in the industry, I’ve worked as a FullStack trainee for the development of landing pages for investment courses and automated stock web-scrappers. Additionally, I worked as a Data Scientist while finishing my MSc thesis in Radiomics applied to papillary thyroid cancer. During my PhD, I’ve also joined a part-time temporary position at a startup as a Bioinformatician. 
 
-𝙃𝙤𝙗𝙗𝙞𝙚𝙨: I am a big advocate that in order to succeed we need to take care of our mental and physical well-being so during my free time I like to exercise and read. Currently, my reading interests are "Emotional Intelligence" by Daniel Goleman, "7 Habits of Highly Effective People" by Stephen Covey, and "Learned Optimism" by Martin Seligman. I also use the flexibility that e-Learning platforms offer to study daily by enrolling in several month-long specializations in the fields of Bioinformatics, Statistics, Machine Learning, and Deep Learning to broaden my knowledge and apply it to Oncology.
+𝙃𝙤𝙗𝙗𝙞𝙚𝙨: I am a big advocate that in order to succeed we need to take care of our mental and physical well-being so during my free time I like to exercise and read. Currently, my reading interests are "Emotional Intelligence" by Daniel G., "7 Habits of Highly Effective People" by Stephen C., and "Learned Optimism" by Martin S.
+
+I also like to use the flexibility that e-Learning platforms offer to enroll in several month-long specializations in the fields of Bioinformatics, Statistics, Machine Learning, and Deep Learning to broaden my knowledge and apply it to Oncology.
+
+Additionally, I have a blog called SciencePond where I post bioinformatics related tutorials - Check it out! 
+
