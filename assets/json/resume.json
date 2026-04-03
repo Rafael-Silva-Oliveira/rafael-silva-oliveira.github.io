@@ -289,6 +289,16 @@
 			"reference": "I had the opportunity to work alongside Rafael while developing a cutting-edge bioinformatics-machine learning MVP, and his expertise in bioinformatics and machine learning is exceptional. His proficiency in data analysis, algorithm development, machine learning and software development significantly contributed to our project's success. He is a collaborative team member, always willing to assist others and share his insights. His commitment to excellence is evident in his willingness to explore solutions to challenging problems, even outside regular work hours. Rafael’s dedication and expertise make him an invaluable asset to any team!"
 		}
 	],
+	// "projects": [
+	//   {
+	//     "name": "Quantum Computing",
+	//     "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
+	//     "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
+	//     "startDate": "2018-01-01",
+	//     "endDate": "2018-01-01",
+	//     "url": "https://example.com"
+	//   }
+	// ],
 	"interests": [
 		{
 			"name": "Investing",
