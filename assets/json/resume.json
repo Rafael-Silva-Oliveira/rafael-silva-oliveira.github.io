@@ -276,21 +276,21 @@
 	"interests": [
 		{
 			"name": "Investing",
-			"icon": "fa-solid fa-tag",
+			"icon": "fa-solid fa-chart-line",
 			"keywords": [
 			"ETFs"
 			]
 		},
 		{
 			"name": "Workout",
-			"icon": "fa-solid fa-tag",
+			"icon": "fa-solid fa-bicep",
 			"keywords": [
 				"Weightlifting"
 			]
 		},
 		{
 			"name": "Reading",
-			"icon": "fa-solid fa-tag",
+			"icon": "fa-solid fa-book",
 			"keywords": [
 				"Psychology",
 				"Finance"
