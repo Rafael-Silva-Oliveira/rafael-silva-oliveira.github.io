@@ -283,7 +283,7 @@
 		},
 		{
 			"name": "Workout",
-			"icon": "fa-solid fa-bicep",
+			"icon": "fa-solid fa-heartbeat",
 			"keywords": [
 				"Weightlifting"
 			]
