@@ -74,7 +74,7 @@ ninja.data = [{
           title: 'NZBridge',
           description: "A browser extension and Zotero plugin for bidirectional sync between Zotero and Google NotebookLM. Push your research library into NotebookLM for AI-powered analysis, then pull generated notes back into Zotero.",
           section: "Projects",handler: () => {
-              window.location.href = "/projects/1_project/";
+              window.location.href = "/projects/1_nzbridge/";
             },},{
         id: 'social-cv',
         title: 'CV',
