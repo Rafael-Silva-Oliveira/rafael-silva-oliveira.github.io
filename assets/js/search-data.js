@@ -70,9 +70,9 @@ ninja.data = [{
           section: "News",},{id: "news-started-this-blog-and-moved-from-a-notion-digital-cv-to-a-github-website",
           title: 'Started this blog and moved from a Notion digital CV to a GitHub...',
           description: "",
-          section: "News",},{id: "projects-to-be-added",
-          title: 'To be added!',
-          description: "To be added",
+          section: "News",},{id: "projects-nzbridge",
+          title: 'NZBridge',
+          description: "A browser extension and Zotero plugin for bidirectional sync between Zotero and Google NotebookLM. Push your research library into NotebookLM for AI-powered analysis, then pull generated notes back into Zotero.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
             },},{
