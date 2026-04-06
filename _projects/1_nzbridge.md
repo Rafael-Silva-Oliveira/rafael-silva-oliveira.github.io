@@ -6,6 +6,7 @@ img: assets/img/nzbridge/social-preview.png
 importance: 1
 category: work
 github: https://github.com/Rafael-Silva-Oliveira/NZBridge
+slug: nzbridge
 ---
 
 ## What problem am I addressing?
