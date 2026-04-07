@@ -73,7 +73,15 @@ ninja.data = [{
           section: "News",},{id: "news-published-a-first-release-of-nzbridge-a-browser-extension-and-zotero-plugin-for-bidirectional-sync-between-zotero-and-google-notebooklm-push-your-research-library-into-notebooklm-for-ai-powered-analysis-then-pull-generated-notes-back-into-zotero",
           title: 'Published a first release of NZBridge, a browser extension and Zotero plugin for...',
           description: "",
-          section: "News",},{id: "projects-nzbridge",
+          section: "News",},{id: "news-released-numify-a-zotero-plugin-that-automatically-adds-hierarchical-numeric-prefixes-to-your-collection-names-create-rename-delete-or-reorder-collections-the-numbering-stays-in-sync-across-all-your-devices",
+          title: 'Released Numify, a Zotero plugin that automatically adds hierarchical numeric prefixes to your...',
+          description: "",
+          section: "News",},{id: "projects-numify",
+          title: 'Numify',
+          description: "A Zotero plugin that automatically adds hierarchical numeric prefixes to your collection names. Create, rename, delete, or reorder collections — the numbering stays in sync.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/numify/";
+            },},{id: "projects-nzbridge",
           title: 'NZBridge',
           description: "A browser extension and Zotero plugin for bidirectional sync between Zotero and Google NotebookLM. Push your research library into NotebookLM for AI-powered analysis, then pull generated notes back into Zotero.",
           section: "Projects",handler: () => {
