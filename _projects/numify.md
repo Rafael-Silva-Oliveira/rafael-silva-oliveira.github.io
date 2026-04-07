@@ -15,6 +15,8 @@ If you use **Zotero** to manage a growing research library, you've probably noti
 
 **Numify** solves this by automatically assigning hierarchical numeric prefixes to every collection in your library. When you create, rename, delete, or move a collection, the numbering updates itself — no manual renumbering needed. Since the prefixes are stored in the collection name itself, they sync natively across all your devices via Zotero Sync.
 
+Another name for this plugin could have been **Numero** (Number + Zotero), but decided to go with **Numify** instead!
+
 - **1 Physics**
   - 1.1 Quantum Mechanics
     - 1.1.1 Entanglement
