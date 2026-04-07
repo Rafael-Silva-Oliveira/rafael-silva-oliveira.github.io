@@ -93,6 +93,13 @@ ninja.data = [{
           window.open("mailto:%72%61%66%61%65%6C.%73%6C%6F@%6F%75%74%6C%6F%6F%6B.%63%6F%6D", "_blank");
         },
       },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Rafael-Silva-Oliveira", "_blank");
+        },
+      },{
         id: 'social-custom_social',
         title: 'Custom_social',
         section: 'Socials',
