@@ -15,18 +15,15 @@ If you use **Zotero** to manage a growing research library, you've probably noti
 
 **Numify** solves this by automatically assigning hierarchical numeric prefixes to every collection in your library. When you create, rename, delete, or move a collection, the numbering updates itself — no manual renumbering needed. Since the prefixes are stored in the collection name itself, they sync natively across all your devices via Zotero Sync.
 
-```
-Library
-├── 1 Physics
-│   ├── 1.1 Quantum Mechanics
-│   │   ├── 1.1.1 Entanglement
-│   │   └── 1.1.2 Superposition
-│   └── 1.2 Classical Mechanics
-├── 2 Mathematics
-│   ├── 2.1 Algebra
-│   └── 2.2 Calculus
-└── 3 Chemistry
-```
+- **1 Physics**
+  - 1.1 Quantum Mechanics
+    - 1.1.1 Entanglement
+    - 1.1.2 Superposition
+  - 1.2 Classical Mechanics
+- **2 Mathematics**
+  - 2.1 Algebra
+  - 2.2 Calculus
+- **3 Chemistry**
 
 ---
 
