@@ -468,7 +468,7 @@
 <span class="p">)</span> <span class="ow">in</span> <span class="n">sdata_sub</span><span class="p">.</span><span class="n">tables</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
     <span class="n">table</span><span class="p">.</span><span class="nf">var_names_make_unique</span><span class="p">()</span> <span class="o">--&gt;</span>
 
-<span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">sdata_sub</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">"</span><span class="s">sdata_subset.zarr</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># save it --&gt;</span>
+<span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">sdata_sub</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">"</span><span class="s">sdata_subset.zarr</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># save it - might have to downgrade the package ome-zarr to 0.13.0 to save the sdata objects. Thanks to @vtriantafyl for pointing this out! --&gt; </span>
 </pre></td> </tr></tbody></table></code></pre></figure> <p>Which gives the following SpatialData object (to find out more about SpatialData check this <a href="https://github.com/scverse/spatialdata" rel="external nofollow noopener" target="_blank">repository link</a>):</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
 <td class="gutter gl"><pre class="lineno">1
 2
