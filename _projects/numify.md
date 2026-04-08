@@ -87,10 +87,43 @@ Since Zotero doesn't support drag-and-drop reordering, Numify lets you **reorder
 
 ---
 
+## Update: v0.2.0
+
+Version 0.2.0 introduces a dedicated **Settings pane** accessible via **Edit → Settings → Numify** (or **Zotero → Settings → Numify** on macOS), giving you fine-grained control over how prefixes are applied across your library.
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/numify/06-settings.png" class="img-fluid rounded z-depth-1" alt="Numify settings pane showing Max depth and Separator options" caption="Numify settings pane" %}
+    </div>
+</div>
+
+### Max depth (1–20)
+
+Controls how many levels deep the numeric prefix goes. Collections beyond the configured depth keep only their base name with no prefix. Changing this setting immediately renumbers all collections in your library.
+
+| Max depth | Example result |
+|-----------|---------------|
+| 1 | `1 Physics`, `2 Math` — sub-collections have no prefix |
+| 2 | `1 Physics`, `1.1 Quantum` — deeper levels have no prefix |
+| 6 | `1.2.3.4.5.6 Deep` — default, covers most use cases |
+
+### Separator
+
+The character placed between the numeric prefix and the collection name. Changing the separator immediately renames all collections in your library to use the new format.
+
+| Option | Example |
+|--------|---------|
+| Space (default) | `1.2.3 My Collection` |
+| Dash | `1.2.3 - My Collection` |
+
+---
+
 ## Key Features
 
 - **Auto-prefix on creation** — New collections and sub-collections are instantly numbered
 - **Deep nesting** — Supports unlimited depth (`1.2.3.4.5...`)
+- **Configurable depth** — Set how many levels deep the prefix goes (1–20)
+- **Custom separator** — Choose between space or dash
 - **Reorder by renaming** — Change a prefix to move a collection to a new position
 - **Gap-free numbering** — Deleting a collection renumbers remaining siblings automatically
 - **Rename-safe** — Change the base name and your prefix is preserved
