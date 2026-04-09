@@ -117,7 +117,6 @@ The character placed between the numeric prefix and the collection name. Changin
 | Dash | `1.2.3 - My Collection` |
 
 ---
-
 ## Key Features
 
 - **Auto-prefix on creation** — New collections and sub-collections are instantly numbered
