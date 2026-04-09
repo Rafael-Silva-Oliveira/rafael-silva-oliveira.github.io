@@ -108,6 +108,13 @@ ninja.data = [{
           window.open("https://github.com/Rafael-Silva-Oliveira", "_blank");
         },
       },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/rafael-slo", "_blank");
+        },
+      },{
         id: 'social-custom_social',
         title: 'Custom_social',
         section: 'Socials',
