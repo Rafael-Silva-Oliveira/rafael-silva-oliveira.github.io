@@ -52,7 +52,7 @@ linkedin_username: rafael-slo # your LinkedIn user name
 # x_username: # your X handle
 # youtube_id: # your youtube channel id (youtube.com/@<youtube_id>)
 # zotero_username: # your zotero username
-custom_social: # can be any name here other than the ones already defined above
-  logo: https://www.pngfind.com/pngs/m/53-533322_linked-in-logo-linkedin-logo-png-images-free.png # can be png, svg, jpg
-  title: LinkedIn
-  url: https://www.linkedin.com/in/rafael-slo/
+# custom_social: # can be any name here other than the ones already defined above
+#   logo: https://www.pngfind.com/pngs/m/53-533322_linked-in-logo-linkedin-logo-png-images-free.png # can be png, svg, jpg
+#   title: LinkedIn
+#   url: https://www.linkedin.com/in/rafael-slo/
