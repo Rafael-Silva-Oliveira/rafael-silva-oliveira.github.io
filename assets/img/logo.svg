@@ -1,0 +1,205 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" width="240" height="280">
+  <defs>
+    <radialGradient id="pondGrad" cx="48%" cy="45%" r="60%">
+      <stop offset="0%"   stop-color="#22a7d0"/>
+      <stop offset="35%"  stop-color="#0e7aab"/>
+      <stop offset="70%"  stop-color="#095678"/>
+      <stop offset="100%" stop-color="#052e42"/>
+    </radialGradient>
+    <linearGradient id="shimmer" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="50%"  stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+    </linearGradient>
+    <radialGradient id="grassGrad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%"   stop-color="#4e8c5a"/>
+      <stop offset="100%" stop-color="#2a5235"/>
+    </radialGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softglow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- clip DNA to above pond bank -->
+    <clipPath id="dnaClip">
+      <rect x="0" y="0" width="240" height="175"/>
+    </clipPath>
+  </defs>
+
+  <!-- ─── BACKGROUND ─── -->
+  <circle cx="120" cy="140" r="118" fill="#071824"/>
+  <circle cx="120" cy="140" r="118" fill="none" stroke="#1a7fa8" stroke-width="2" stroke-opacity="0.45"/>
+
+  <!-- ─── POND / LAKE ─── -->
+  <ellipse cx="120" cy="202" rx="92" ry="53" fill="#1a3520" opacity="0.7"/>
+  <ellipse cx="120" cy="199" rx="87" ry="50" fill="url(#grassGrad)"/>
+  <ellipse cx="120" cy="197" rx="78" ry="43" fill="#1e3a28" opacity="0.5"/>
+  <ellipse cx="120" cy="194" rx="74" ry="41" fill="url(#pondGrad)"/>
+  <ellipse cx="120" cy="194" rx="74" ry="41" fill="url(#shimmer)"/>
+
+  <!-- Lily pads -->
+  <ellipse cx="78"  cy="188" rx="9" ry="5.5" fill="#2d6e3e" opacity="0.85" transform="rotate(-15 78 188)"/>
+  <line x1="78" y1="182" x2="78" y2="188" stroke="#1e4a29" stroke-width="0.9" opacity="0.7" transform="rotate(-15 78 188)"/>
+  <ellipse cx="158" cy="198" rx="7" ry="4.5" fill="#2d6e3e" opacity="0.75" transform="rotate(10 158 198)"/>
+  <line x1="158" y1="193" x2="158" y2="198" stroke="#1e4a29" stroke-width="0.9" opacity="0.7"/>
+  <ellipse cx="142" cy="183" rx="5.5" ry="3.5" fill="#3a8050" opacity="0.7" transform="rotate(-5 142 183)"/>
+
+  <!-- Ripple rings around splash -->
+  <ellipse cx="120" cy="194" rx="58" ry="23" fill="none" stroke="#5bc8f5" stroke-width="1.2" stroke-opacity="0.22"/>
+  <ellipse cx="120" cy="194" rx="42" ry="17" fill="none" stroke="#5bc8f5" stroke-width="1.2" stroke-opacity="0.32"/>
+  <ellipse cx="120" cy="194" rx="27" ry="11" fill="none" stroke="#7dd8f7" stroke-width="1.2" stroke-opacity="0.44"/>
+  <ellipse cx="120" cy="194" rx="14" ry="5.5" fill="none" stroke="#9de8ff" stroke-width="1.3" stroke-opacity="0.6"/>
+
+  <!-- Water reflection streak -->
+  <path d="M 88 204 Q 120 199 152 205" stroke="#ffffff" stroke-width="1.2" fill="none" opacity="0.09"/>
+
+  <!-- ─── DATA STREAM ─── -->
+  <!-- Outer glow tube -->
+  <path d="M 120 118 L 120 192"
+        stroke="#00d4ff" stroke-width="5" fill="none"
+        stroke-linecap="round" filter="url(#glow)" stroke-opacity="0.8"/>
+  <!-- Inner bright core -->
+  <path d="M 120 118 L 120 192"
+        stroke="#aaf4ff" stroke-width="1.8" fill="none"
+        stroke-linecap="round" opacity="0.55"/>
+
+  <!-- Particles -->
+  <circle cx="120" cy="126" r="3.6" fill="#00ffcc" filter="url(#glow)"/>
+  <circle cx="120" cy="140" r="3.1" fill="#00d4ff" filter="url(#glow)" opacity="0.9"/>
+  <circle cx="120" cy="154" r="3.3" fill="#00ffcc" filter="url(#glow)" opacity="0.85"/>
+  <circle cx="120" cy="168" r="2.9" fill="#00d4ff" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="120" cy="181" r="2.6" fill="#aaf4ff" filter="url(#glow)" opacity="0.75"/>
+
+  <!-- Binary LEFT -->
+  <text x="97"  y="133" font-family="'Courier New',monospace" font-size="10" font-weight="bold" fill="#00ffcc" opacity="0.8"  filter="url(#glow)">1</text>
+  <text x="95"  y="148" font-family="'Courier New',monospace" font-size="10" font-weight="bold" fill="#00d4ff" opacity="0.75" filter="url(#glow)">0</text>
+  <text x="97"  y="163" font-family="'Courier New',monospace" font-size="10" font-weight="bold" fill="#00ffcc" opacity="0.70" filter="url(#glow)">1</text>
+  <text x="95"  y="178" font-family="'Courier New',monospace" font-size="10" font-weight="bold" fill="#00d4ff" opacity="0.65" filter="url(#glow)">0</text>
+
+  <!-- Binary RIGHT -->
+  <text x="130" y="138" font-family="'Courier New',monospace" font-size="10" font-weight="bold" fill="#00d4ff" opacity="0.75" filter="url(#glow)">0</text>
+  <text x="131" y="153" font-family="'Courier New',monospace" font-size="10" font-weight="bold" fill="#00ffcc" opacity="0.70" filter="url(#glow)">1</text>
+  <text x="130" y="168" font-family="'Courier New',monospace" font-size="10" font-weight="bold" fill="#00d4ff" opacity="0.65" filter="url(#glow)">1</text>
+  <text x="131" y="183" font-family="'Courier New',monospace" font-size="10" font-weight="bold" fill="#00ffcc" opacity="0.60" filter="url(#glow)">0</text>
+
+  <!-- Splash -->
+  <ellipse cx="120" cy="193" rx="15" ry="5.5" fill="#5bc8f5" opacity="0.5" filter="url(#softglow)"/>
+  <ellipse cx="120" cy="193" rx="7"  ry="2.5" fill="#aaeeff" opacity="0.65"/>
+
+  <!-- ─── DNA DOUBLE HELIX ─── -->
+  <!--
+    Centred at x=120. Helix runs y=22 → y=116 (94px tall, ~4 half-periods).
+    Strand A: sine wave  +amplitude left on even half-periods
+    Strand B: 180° phase-shifted (mirror of A)
+    Amplitude = 22px from centre, so strands reach x=98 and x=142.
+
+    Key y positions (period = 23.5px per half-wave):
+      y=22  — both strands at centre (start, spread apart)
+      y=34  — A peaks LEFT  (x=98),  B peaks RIGHT (x=142)
+      y=46  — crossing at centre
+      y=58  — A peaks RIGHT (x=142), B peaks LEFT  (x=98)
+      y=70  — crossing at centre
+      y=82  — A peaks LEFT,  B peaks RIGHT
+      y=94  — crossing at centre
+      y=106 — A peaks RIGHT, B peaks LEFT
+      y=116 — meet at centre (bottom, feed into stream)
+
+    Rungs drawn at the PEAK y-values (where strands are widest apart).
+    Black outline drawn first, then coloured strands on top.
+  -->
+
+  <!-- == BLACK OUTLINES first == -->
+
+  <!-- Rung outlines at each peak -->
+  <line x1="95"  y1="34"  x2="145" y2="34"  stroke="#000" stroke-width="5.5" stroke-linecap="round"/>
+  <line x1="95"  y1="58"  x2="145" y2="58"  stroke="#000" stroke-width="5.5" stroke-linecap="round"/>
+  <line x1="95"  y1="82"  x2="145" y2="82"  stroke="#000" stroke-width="5.5" stroke-linecap="round"/>
+  <line x1="95"  y1="106" x2="145" y2="106" stroke="#000" stroke-width="5.5" stroke-linecap="round"/>
+
+  <!-- Strand A outline (purple) -->
+  <path d="
+    M 120 22
+    C 108 22, 95 28, 95 34
+    C 95 40, 108 44, 120 46
+    C 132 48, 145 52, 145 58
+    C 145 64, 132 68, 120 70
+    C 108 72, 95 76, 95 82
+    C 95 88, 108 92, 120 94
+    C 132 96, 145 100, 145 106
+    C 145 112, 132 116, 120 118"
+    stroke="#000" stroke-width="7.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Strand B outline (pink) -->
+  <path d="
+    M 120 22
+    C 132 22, 145 28, 145 34
+    C 145 40, 132 44, 120 46
+    C 108 48, 95 52, 95 58
+    C 95 64, 108 68, 120 70
+    C 132 72, 145 76, 145 82
+    C 145 88, 132 92, 120 94
+    C 108 96, 95 100, 95 106
+    C 95 112, 108 116, 120 118"
+    stroke="#000" stroke-width="7.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- == COLOURED RUNGS == -->
+  <line x1="95"  y1="34"  x2="145" y2="34"  stroke="#e879f9" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="95"  y1="58"  x2="145" y2="58"  stroke="#e879f9" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="95"  y1="82"  x2="145" y2="82"  stroke="#e879f9" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="95"  y1="106" x2="145" y2="106" stroke="#e879f9" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- == COLOURED STRANDS on top == -->
+
+  <!-- Strand A (purple) -->
+  <path d="
+    M 120 22
+    C 108 22, 95 28, 95 34
+    C 95 40, 108 44, 120 46
+    C 132 48, 145 52, 145 58
+    C 145 64, 132 68, 120 70
+    C 108 72, 95 76, 95 82
+    C 95 88, 108 92, 120 94
+    C 132 96, 145 100, 145 106
+    C 145 112, 132 116, 120 118"
+    stroke="#c084fc" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Strand B (pink) -->
+  <path d="
+    M 120 22
+    C 132 22, 145 28, 145 34
+    C 145 40, 132 44, 120 46
+    C 108 48, 95 52, 95 58
+    C 95 64, 108 68, 120 70
+    C 132 72, 145 76, 145 82
+    C 145 88, 132 92, 120 94
+    C 108 96, 95 100, 95 106
+    C 95 112, 108 116, 120 118"
+    stroke="#f472b6" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Top cap -->
+  <circle cx="120" cy="22" r="6"   fill="#000"/>
+  <circle cx="120" cy="22" r="4.5" fill="#e879f9"/>
+
+  <!-- ─── WORDMARK ─── -->
+  <text x="122" y="252"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="23" font-weight="bold"
+        fill="#000000" fill-opacity="0.45"
+        text-anchor="middle" letter-spacing="2">SciencePond</text>
+  <text x="120" y="250"
+        font-family="Georgia,'Times New Roman',serif"
+        font-size="23" font-weight="bold"
+        fill="#e0f6ff"
+        text-anchor="middle" letter-spacing="2">SciencePond</text>
+  <line x1="48" y1="256" x2="192" y2="256" stroke="#1a7fa8" stroke-width="1" stroke-opacity="0.55"/>
+
+</svg>
