@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>PhD(c) in Medical Technology, NTNU</a> 
+subtitle: <a href='https://www.linkedin.com/in/rafael-slo'>PhD(c) in Medical Technology, NTNU</a> 
 
 profile:
   align: right
