@@ -37,15 +37,15 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-",
+        },{id: "post-practical-guide-to-cell-segmentation-domain-identification-and-cell-type-annotation-in-single-cell-spatial-transcriptomics-visium-hd",
         
-          title: "",
+          title: "Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell...",
         
-        description: "",
+        description: "A hands-on tutorial covering cell segmentation with SOPA (StarDist + ProSeg), spatial domain identification with Novae (with batch correction on the fly), and cell type annotation using 1) reference-based methods, deconvolution on 8 µm bins with RCTD-py and FlashDeconv, plus CellTypist on segmented cells using a scRNA-seq reference, and 2) reference-free annotation with Enrichmap gene set signatures (with built-in batch correction and spatial smoothing), on a Visium HD colorectal cancer dataset.",
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2026/2026-03-14-distill/";
+            window.location.href = "/blog/2026/segmentation-and-annotation/";
           
         },
       },{id: "post-cancer-subtyping-using-cnmf-and-literature-markers",
