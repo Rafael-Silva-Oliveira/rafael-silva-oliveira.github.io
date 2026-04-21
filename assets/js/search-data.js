@@ -122,6 +122,13 @@ ninja.data = [{
           window.open("https://www.researchgate.net/profile/Rafael-Oliveira-179/", "_blank");
         },
       },{
+        id: 'social-youtube',
+        title: 'YouTube',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://youtube.com/@SciencePond", "_blank");
+        },
+      },{
       id: 'light-theme',
       title: 'Change theme to light',
       description: 'Change the theme of the site to Light',
