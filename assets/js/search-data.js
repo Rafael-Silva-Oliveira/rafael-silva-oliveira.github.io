@@ -115,6 +115,13 @@ ninja.data = [{
           window.open("https://www.linkedin.com/in/rafael-slo", "_blank");
         },
       },{
+        id: 'social-researchgate',
+        title: 'ResearchGate',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.researchgate.net/profile/Rafael-Oliveira-179/", "_blank");
+        },
+      },{
       id: 'light-theme',
       title: 'Change theme to light',
       description: 'Change the theme of the site to Light',
