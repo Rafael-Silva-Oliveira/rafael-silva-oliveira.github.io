@@ -129,6 +129,13 @@ ninja.data = [{
           window.open("https://youtube.com/@SciencePond", "_blank");
         },
       },{
+        id: 'social-custom_social',
+        title: 'Custom_social',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://rafael-silva-oliveira.github.io/blog/", "_blank");
+        },
+      },{
       id: 'light-theme',
       title: 'Change theme to light',
       description: 'Change the theme of the site to Light',
