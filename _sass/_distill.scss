@@ -50,6 +50,72 @@ d-article {
   }
   blockquote {
     border-left: 2px solid var(--global-theme-color) !important;
+
+    &.block-tip {
+      border-left-color: var(--global-tip-block) !important;
+      background-color: var(--global-tip-block-bg) !important;
+
+      em,
+      li,
+      p,
+      strong {
+        color: var(--global-tip-block-text) !important;
+      }
+
+      a,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: var(--global-tip-block-title) !important;
+      }
+    }
+
+    &.block-warning {
+      border-left-color: var(--global-warning-block) !important;
+      background-color: var(--global-warning-block-bg) !important;
+
+      em,
+      li,
+      p,
+      strong {
+        color: var(--global-warning-block-text) !important;
+      }
+
+      a,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: var(--global-warning-block-title) !important;
+      }
+    }
+
+    &.block-danger {
+      border-left-color: var(--global-danger-block) !important;
+      background-color: var(--global-danger-block-bg) !important;
+
+      em,
+      li,
+      p,
+      strong {
+        color: var(--global-danger-block-text) !important;
+      }
+
+      a,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: var(--global-danger-block-title) !important;
+      }
+    }
   }
 
   // Style taken from code blocks
