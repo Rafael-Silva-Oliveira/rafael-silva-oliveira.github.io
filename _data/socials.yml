@@ -51,8 +51,11 @@ research_gate_profile: Rafael-Oliveira-179
 # work_url: # work page URL
 # x_username: # your X handle
 youtube_id: SciencePond # your youtube channel id (youtube.com/@<youtube_id>)
-# zotero_username: # your zotero username
+zotero_username: rafaelsilvaoliveira
 custom_social:
-  logo: /assets/img/logo.svg
-  title: Blog
-  url: https://rafael-silva-oliveira.github.io/blog/
+  - logo: /assets/img/logo.svg
+    title: Blog
+    url: https://rafael-silva-oliveira.github.io/blog/
+  - logo: /assets/img/buymeacoffee.svg
+    title: Buy Me a Coffee
+    url: https://buymeacoffee.com/rafaeloliveira
