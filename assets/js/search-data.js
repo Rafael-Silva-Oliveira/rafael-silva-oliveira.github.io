@@ -129,11 +129,18 @@ ninja.data = [{
           window.open("https://youtube.com/@SciencePond", "_blank");
         },
       },{
+        id: 'social-zotero',
+        title: 'Zotero',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.zotero.org/rafaelsilvaoliveira", "_blank");
+        },
+      },{
         id: 'social-custom_social',
         title: 'Custom_social',
         section: 'Socials',
         handler: () => {
-          window.open("https://rafael-silva-oliveira.github.io/blog/", "_blank");
+          window.open("", "_blank");
         },
       },{
       id: 'light-theme',
