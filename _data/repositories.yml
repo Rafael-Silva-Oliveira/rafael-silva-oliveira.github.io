@@ -1,7 +1,14 @@
 github_users:
-  - rafael-silva-oliveira
+  - Rafael-Silva-Oliveira
 
 repo_description_lines_max: 2
 
+# Featured repositories shown on /repositories/
+# Add or remove `owner/repo` entries to curate the grid. Order here = order on the page.
 github_repos:
-
+  - Rafael-Silva-Oliveira/NZBridge
+  - Rafael-Silva-Oliveira/numify
+  - Rafael-Silva-Oliveira/EzML
+  - Rafael-Silva-Oliveira/Clinical-Decision-Support-System
+  - Rafael-Silva-Oliveira/segmentation-and-annotation
+  - Rafael-Silva-Oliveira/STNav
