@@ -2,42 +2,35 @@
 layout: page
 permalink: /repositories/
 title: Repositories
-description: A selection of my key repositories. Edit <code>_data/repositories.yml</code> to change which repos are featured.
+description: A selection of my key repositories. Edit `_data/repositories.yml` to change which repos are featured.
 nav: true
 nav_order: 4
 ---
 
-{% if site.data.repositories.github_repos and site.data.repositories.github_repos.size > 0 %}
-
-<div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
-  {% for repo in site.data.repositories.github_repos %}
-    {% include repository/repo.liquid repository=repo %}
-  {% endfor %}
-</div>
-
-{% endif %}
-
-{% if site.data.repositories.github_users %}
-
----
-
-<div class="repositories d-flex flex-wrap justify-content-center align-items-center">
-  {% for user in site.data.repositories.github_users %}
-    <div class="repo p-2" style="max-width: 480px; width: 100%;">
-      <a href="https://github.com/{{ user }}">
-        <img
-          class="only-light w-100"
-          alt="{{ user }} — commits and issues"
-          src="https://github-readme-stats.vercel.app/api/?username={{ user }}&theme={{ site.repo_theme_light }}&show_icons=true&hide=stars,prs,contribs,rank&hide_title=true&hide_border=true&card_width=480"
-        >
-        <img
-          class="only-dark w-100"
-          alt="{{ user }} — commits and issues"
-          src="https://github-readme-stats.vercel.app/api/?username={{ user }}&theme={{ site.repo_theme_dark }}&show_icons=true&hide=stars,prs,contribs,rank&hide_title=true&hide_border=true&card_width=480"
-        >
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+  {% for repo in site.data.repositories.featured %}
+    <div class="col">
+      <a href="https://github.com/{{ repo.owner }}/{{ repo.name }}" target="_blank" rel="noopener" class="text-decoration-none">
+        <div class="card hoverable h-100">
+          <div class="card-body">
+            <h3 class="card-title">
+              <i class="fa-brands fa-github fa-sm me-1"></i>{{ repo.name }}{% if repo.highlight %} <i class="fa-solid fa-star fa-xs text-warning" title="Featured"></i>{% endif %}
+            </h3>
+            <p class="card-text">{{ repo.description }}</p>
+            <p class="post-meta mb-0">
+              {% if repo.language %}<i class="fa-solid fa-code fa-sm"></i> {{ repo.language }}{% endif %}
+              {% if repo.stars %}&nbsp;&middot;&nbsp;<i class="fa-solid fa-star fa-sm"></i> {{ repo.stars }}{% endif %}
+              &nbsp;&middot;&nbsp;<i class="fa-solid fa-user fa-sm"></i> {{ repo.owner }}
+            </p>
+          </div>
+        </div>
       </a>
     </div>
   {% endfor %}
 </div>
 
-{% endif %}
+<p class="mt-4 text-center">
+  <a href="https://github.com/Rafael-Silva-Oliveira" target="_blank" rel="noopener">
+    <i class="fa-brands fa-github"></i> See all repositories on GitHub →
+  </a>
+</p>

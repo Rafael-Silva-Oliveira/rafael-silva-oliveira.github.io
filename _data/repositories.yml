@@ -1,14 +1,38 @@
-github_users:
-  - Rafael-Silva-Oliveira
-
-repo_description_lines_max: 2
-
 # Featured repositories shown on /repositories/
-# Add or remove `owner/repo` entries to curate the grid. Order here = order on the page.
-github_repos:
-  - Rafael-Silva-Oliveira/NZBridge
-  - Rafael-Silva-Oliveira/numify
-  - Rafael-Silva-Oliveira/EzML
-  - Rafael-Silva-Oliveira/Clinical-Decision-Support-System
-  - Rafael-Silva-Oliveira/segmentation-and-annotation
-  - Rafael-Silva-Oliveira/STNav
+# Add or remove entries to curate the grid. Order here = order on the page.
+# Required: name, owner, description.
+# Optional: language (shown as a badge), highlight (shown as a star icon),
+#           homepage (extra link), stars (manually set if you want to display).
+featured:
+  - owner: Rafael-Silva-Oliveira
+    name: NZBridge
+    description: Bidirectional sync between Zotero and Google NotebookLM — push PDFs & URLs as sources, pull AI-generated notes back into Zotero.
+    language: JavaScript
+    stars: 40
+    highlight: true
+
+  - owner: Rafael-Silva-Oliveira
+    name: numify
+    description: Automatically adds hierarchical numeric prefixes to your Zotero collection names. Create, rename, delete, or reorder collections — the numbering stays in sync.
+    language: TypeScript
+    stars: 2
+
+  - owner: Rafael-Silva-Oliveira
+    name: EzML
+    description: Customizable pipeline to train different ML classifiers (15+) from sklearn with hyperparameter tuning, feature selection and feature pre-processing.
+    language: Jupyter Notebook
+
+  - owner: Rafael-Silva-Oliveira
+    name: Clinical-Decision-Support-System
+    description: Clinical Decision Support System project — web app for assisting medical decision-making.
+    language: JavaScript
+
+  - owner: Rafael-Silva-Oliveira
+    name: segmentation-and-annotation
+    description: Tooling for image segmentation and annotation workflows.
+    language: Python
+
+  - owner: Rafael-Silva-Oliveira
+    name: STNav
+    description: Spatial transcriptomics navigation and analysis workflows.
+    language: Jupyter Notebook
