@@ -32,7 +32,7 @@ ninja.data = [{
           },
         },{id: "nav-repositories",
           title: "Repositories",
-          description: "A selection of my key repositories. Edit `_data/repositories.yml` to change which repos are featured.",
+          description: "A selection of my key repositories.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/repositories/";
