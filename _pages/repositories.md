@@ -2,7 +2,7 @@
 layout: page
 permalink: /repositories/
 title: Repositories
-description: A selection of my key repositories. Edit `_data/repositories.yml` to change which repos are featured.
+description: A selection of my key repositories. 
 nav: true
 nav_order: 4
 ---
