@@ -20,7 +20,7 @@ featured:
   - owner: Rafael-Silva-Oliveira
     name: EzML
     description: Customizable pipeline to train different ML classifiers (15+) from sklearn with hyperparameter tuning, feature selection and feature pre-processing.
-    language: Jupyter Notebook
+    language: Python
 
   - owner: Rafael-Silva-Oliveira
     name: Clinical-Decision-Support-System
@@ -35,4 +35,4 @@ featured:
   - owner: Rafael-Silva-Oliveira
     name: STNav
     description: Spatial transcriptomics navigation and analysis workflows.
-    language: Jupyter Notebook
+    language: Python
