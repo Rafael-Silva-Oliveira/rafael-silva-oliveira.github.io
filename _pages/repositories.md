@@ -85,11 +85,13 @@ nav_order: 4
 
 {% assign lang_colors = "JavaScript:#f1e05a,TypeScript:#3178c6,Python:#3572A5,Jupyter Notebook:#DA5B0B,HTML:#e34c26,CSS:#563d7c,Go:#00ADD8,Rust:#dea584,Java:#b07219,C++:#f34b7d,C:#555555,Ruby:#701516,Shell:#89e051,R:#198CE7" | split: "," %}
 
-{% assign all_groups = "" | split: "" %}
+<div class="repositories">
 {% for cat in site.data.repositories.categories %}
 {% assign cat_repos = site.data.repositories.featured | where: "category", cat.key %}
 {% if cat_repos.size > 0 %}
-<a id="{{ cat.key }}" href="#{{ cat.key }}"><h2 class="category">{{ cat.title }}</h2></a>
+<a id="{{ cat.key }}" href="#{{ cat.key }}">
+<h2 class="category">{{ cat.title }}</h2>
+</a>
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 repo-grid mb-4">
 {% for repo in cat_repos %}
 {% assign lang_color = "#8e8e8e" %}
@@ -133,6 +135,7 @@ nav_order: 4
 {% endfor %}
 </div>
 {% endif %}
+</div>
 
 <p class="mt-5 text-center">
   <a href="https://github.com/Rafael-Silva-Oliveira" target="_blank" rel="noopener">

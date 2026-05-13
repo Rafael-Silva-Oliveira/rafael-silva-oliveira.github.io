@@ -43,6 +43,7 @@ featured:
     category: bioinformatics
     description: Tooling for image segmentation and annotation workflows.
     language: Python
+    stars: 1
 
   - owner: Rafael-Silva-Oliveira
     name: Clinical-Decision-Support-System
