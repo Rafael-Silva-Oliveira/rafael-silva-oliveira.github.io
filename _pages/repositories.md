@@ -109,9 +109,9 @@ nav_order: 4
             {% if repo.language %}
               <span class="meta-item"><span class="lang-dot" style="background-color: {{ lang_color }};"></span>{{ repo.language }}</span>
             {% endif %}
-            {% if repo.stars %}
-              <span class="meta-item"><i class="fa-solid fa-star"></i>{{ repo.stars }}</span>
-            {% endif %}
+            <span class="meta-item repo-stars" data-owner="{{ repo.owner }}" data-name="{{ repo.name }}"{% unless repo.stars %} hidden{% endunless %}>
+              <i class="fa-solid fa-star"></i><span class="star-count">{{ repo.stars }}</span>
+            </span>
           </p>
         </div>
       </a>
@@ -124,3 +124,23 @@ nav_order: 4
     <i class="fa-brands fa-github"></i>&nbsp;See all repositories on GitHub&nbsp;→
   </a>
 </p>
+
+<script>
+  (function () {
+    var nodes = document.querySelectorAll('.repo-stars');
+    nodes.forEach(function (el) {
+      var owner = el.getAttribute('data-owner');
+      var name = el.getAttribute('data-name');
+      if (!owner || !name) return;
+      fetch('https://api.github.com/repos/' + owner + '/' + name, { headers: { 'Accept': 'application/vnd.github+json' } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          if (!data || typeof data.stargazers_count !== 'number') return;
+          var countEl = el.querySelector('.star-count');
+          if (countEl) countEl.textContent = data.stargazers_count;
+          el.removeAttribute('hidden');
+        })
+        .catch(function () { /* keep hardcoded fallback */ });
+    });
+  })();
+</script>
