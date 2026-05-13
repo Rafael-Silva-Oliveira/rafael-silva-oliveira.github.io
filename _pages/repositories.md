@@ -85,83 +85,53 @@ nav_order: 4
 
 {% assign lang_colors = "JavaScript:#f1e05a,TypeScript:#3178c6,Python:#3572A5,Jupyter Notebook:#DA5B0B,HTML:#e34c26,CSS:#563d7c,Go:#00ADD8,Rust:#dea584,Java:#b07219,C++:#f34b7d,C:#555555,Ruby:#701516,Shell:#89e051,R:#198CE7" | split: "," %}
 
+{% assign all_groups = "" | split: "" %}
 {% for cat in site.data.repositories.categories %}
-  {% assign cat_repos = site.data.repositories.featured | where: "category", cat.key %}
-  {% if cat_repos.size == 0 %}{% continue %}{% endif %}
-
-  <a id="{{ cat.key }}" href="#{{ cat.key }}"><h2 class="category">{{ cat.title }}</h2></a>
-
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 repo-grid mb-4">
-    {% for repo in cat_repos %}
-      {% assign lang_color = "#8e8e8e" %}
-      {% if repo.language %}
-        {% for entry in lang_colors %}
-          {% assign pair = entry | split: ":" %}
-          {% if pair[0] == repo.language %}
-            {% assign lang_color = pair[1] %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-      <div class="col">
-        <a href="https://github.com/{{ repo.owner }}/{{ repo.name }}" target="_blank" rel="noopener" class="repo-link">
-          <div class="repo-card">
-            <h3 class="repo-title">
-              <i class="fa-brands fa-github"></i>
-              <span>{{ repo.name }}</span>
-              {% if repo.highlight %}<i class="fa-solid fa-star" title="Featured"></i>{% endif %}
-            </h3>
-            <p class="repo-desc">{{ repo.description }}</p>
-            <p class="repo-meta">
-              {% if repo.language %}
-                <span class="meta-item"><span class="lang-dot" style="background-color: {{ lang_color }};"></span>{{ repo.language }}</span>
-              {% endif %}
-              <span class="meta-item repo-stars" data-owner="{{ repo.owner }}" data-name="{{ repo.name }}"{% unless repo.stars %} hidden{% endunless %}>
-                <i class="fa-solid fa-star"></i><span class="star-count">{{ repo.stars }}</span>
-              </span>
-            </p>
-          </div>
-        </a>
-      </div>
-    {% endfor %}
-  </div>
+{% assign cat_repos = site.data.repositories.featured | where: "category", cat.key %}
+{% if cat_repos.size > 0 %}
+<a id="{{ cat.key }}" href="#{{ cat.key }}"><h2 class="category">{{ cat.title }}</h2></a>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 repo-grid mb-4">
+{% for repo in cat_repos %}
+{% assign lang_color = "#8e8e8e" %}
+{% if repo.language %}{% for entry in lang_colors %}{% assign pair = entry | split: ":" %}{% if pair[0] == repo.language %}{% assign lang_color = pair[1] %}{% endif %}{% endfor %}{% endif %}
+<div class="col">
+<a href="https://github.com/{{ repo.owner }}/{{ repo.name }}" target="_blank" rel="noopener" class="repo-link">
+<div class="repo-card">
+<h3 class="repo-title"><i class="fa-brands fa-github"></i><span>{{ repo.name }}</span>{% if repo.highlight %}<i class="fa-solid fa-star" title="Featured"></i>{% endif %}</h3>
+<p class="repo-desc">{{ repo.description }}</p>
+<p class="repo-meta">
+{% if repo.language %}<span class="meta-item"><span class="lang-dot" style="background-color: {{ lang_color }};"></span>{{ repo.language }}</span>{% endif %}
+<span class="meta-item repo-stars" data-owner="{{ repo.owner }}" data-name="{{ repo.name }}"{% unless repo.stars %} hidden{% endunless %}><i class="fa-solid fa-star"></i><span class="star-count">{{ repo.stars }}</span></span>
+</p>
+</div>
+</a>
+</div>
+{% endfor %}
+</div>
+{% endif %}
 {% endfor %}
 
 {% assign uncategorized = site.data.repositories.featured | where_exp: "r", "r.category == nil" %}
 {% if uncategorized.size > 0 %}
-  <a id="other"><h2 class="category">Other</h2></a>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 repo-grid mb-4">
-    {% for repo in uncategorized %}
-      {% assign lang_color = "#8e8e8e" %}
-      {% if repo.language %}
-        {% for entry in lang_colors %}
-          {% assign pair = entry | split: ":" %}
-          {% if pair[0] == repo.language %}
-            {% assign lang_color = pair[1] %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-      <div class="col">
-        <a href="https://github.com/{{ repo.owner }}/{{ repo.name }}" target="_blank" rel="noopener" class="repo-link">
-          <div class="repo-card">
-            <h3 class="repo-title">
-              <i class="fa-brands fa-github"></i>
-              <span>{{ repo.name }}</span>
-              {% if repo.highlight %}<i class="fa-solid fa-star" title="Featured"></i>{% endif %}
-            </h3>
-            <p class="repo-desc">{{ repo.description }}</p>
-            <p class="repo-meta">
-              {% if repo.language %}
-                <span class="meta-item"><span class="lang-dot" style="background-color: {{ lang_color }};"></span>{{ repo.language }}</span>
-              {% endif %}
-              <span class="meta-item repo-stars" data-owner="{{ repo.owner }}" data-name="{{ repo.name }}"{% unless repo.stars %} hidden{% endunless %}>
-                <i class="fa-solid fa-star"></i><span class="star-count">{{ repo.stars }}</span>
-              </span>
-            </p>
-          </div>
-        </a>
-      </div>
-    {% endfor %}
-  </div>
+<a id="other"><h2 class="category">Other</h2></a>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 repo-grid mb-4">
+{% for repo in uncategorized %}
+{% assign lang_color = "#8e8e8e" %}
+{% if repo.language %}{% for entry in lang_colors %}{% assign pair = entry | split: ":" %}{% if pair[0] == repo.language %}{% assign lang_color = pair[1] %}{% endif %}{% endfor %}{% endif %}
+<div class="col">
+<a href="https://github.com/{{ repo.owner }}/{{ repo.name }}" target="_blank" rel="noopener" class="repo-link">
+<div class="repo-card">
+<h3 class="repo-title"><i class="fa-brands fa-github"></i><span>{{ repo.name }}</span>{% if repo.highlight %}<i class="fa-solid fa-star" title="Featured"></i>{% endif %}</h3>
+<p class="repo-desc">{{ repo.description }}</p>
+<p class="repo-meta">
+{% if repo.language %}<span class="meta-item"><span class="lang-dot" style="background-color: {{ lang_color }};"></span>{{ repo.language }}</span>{% endif %}
+<span class="meta-item repo-stars" data-owner="{{ repo.owner }}" data-name="{{ repo.name }}"{% unless repo.stars %} hidden{% endunless %}><i class="fa-solid fa-star"></i><span class="star-count">{{ repo.stars }}</span></span>
+</p>
+</div>
+</a>
+</div>
+{% endfor %}
+</div>
 {% endif %}
 
 <p class="mt-5 text-center">
