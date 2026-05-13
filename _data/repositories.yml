@@ -53,6 +53,6 @@ featured:
 
   - owner: Rafael-Silva-Oliveira
     name: EzML
-    category: ml
+    category: university
     description: Customizable pipeline to train different ML classifiers (15+) from sklearn with hyperparameter tuning, feature selection and feature pre-processing.
     language: Python
