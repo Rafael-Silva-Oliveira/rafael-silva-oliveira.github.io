@@ -1,11 +1,25 @@
 # Featured repositories shown on /repositories/
-# Add or remove entries to curate the grid. Order here = order on the page.
-# Required: name, owner, description.
+# Add or remove entries to curate the grid. Order within each category = order on the page.
+# Required: name, owner, description, category.
 # Optional: language (shown as a badge), highlight (shown as a star icon),
-#           homepage (extra link), stars (manually set if you want to display).
+#           homepage (extra link), stars (fallback before live GitHub count loads).
+#
+# The display order of categories themselves is controlled by `categories:` below.
+# Add a new section by adding a new key here AND listing it under `categories:`.
+categories:
+  - key: zotero
+    title: Zotero
+  - key: bioinformatics
+    title: Bioinformatics
+  - key: university
+    title: University Projects
+  - key: ml
+    title: Machine Learning
+
 featured:
   - owner: Rafael-Silva-Oliveira
     name: NZBridge
+    category: zotero
     description: Bidirectional sync between Zotero and Google NotebookLM — push PDFs & URLs as sources, pull AI-generated notes back into Zotero.
     language: JavaScript
     stars: 40
@@ -13,26 +27,31 @@ featured:
 
   - owner: Rafael-Silva-Oliveira
     name: numify
+    category: zotero
     description: Automatically adds hierarchical numeric prefixes to your Zotero collection names. Create, rename, delete, or reorder collections — the numbering stays in sync.
     language: TypeScript
     stars: 2
 
   - owner: Rafael-Silva-Oliveira
-    name: EzML
-    description: Customizable pipeline to train different ML classifiers (15+) from sklearn with hyperparameter tuning, feature selection and feature pre-processing.
+    name: STNav
+    category: bioinformatics
+    description: Spatial transcriptomics navigation and analysis workflows.
     language: Python
 
   - owner: Rafael-Silva-Oliveira
-    name: Clinical-Decision-Support-System
-    description: Clinical Decision Support System project — web app for assisting medical decision-making.
-    language: JavaScript
-
-  - owner: Rafael-Silva-Oliveira
     name: segmentation-and-annotation
+    category: bioinformatics
     description: Tooling for image segmentation and annotation workflows.
     language: Python
 
   - owner: Rafael-Silva-Oliveira
-    name: STNav
-    description: Spatial transcriptomics navigation and analysis workflows.
+    name: Clinical-Decision-Support-System
+    category: university
+    description: Clinical Decision Support System project — web app for assisting medical decision-making.
+    language: JavaScript
+
+  - owner: Rafael-Silva-Oliveira
+    name: EzML
+    category: ml
+    description: Customizable pipeline to train different ML classifiers (15+) from sklearn with hyperparameter tuning, feature selection and feature pre-processing.
     language: Python
