@@ -81,6 +81,10 @@ nav_order: 4
     color: #f1c40f;
     margin-right: 0.25rem;
   }
+  .repo-grid .repo-meta .fa-fork {
+    color: #3498db; /* A common blue color for forks */
+    margin-right: 0.25rem;
+  }
 </style>
 
 {% assign lang_colors = "JavaScript:#f1e05a,TypeScript:#3178c6,Python:#3572A5,Jupyter Notebook:#DA5B0B,HTML:#e34c26,CSS:#563d7c,Go:#00ADD8,Rust:#dea584,Java:#b07219,C++:#f34b7d,C:#555555,Ruby:#701516,Shell:#89e051,R:#198CE7" | split: "," %}
