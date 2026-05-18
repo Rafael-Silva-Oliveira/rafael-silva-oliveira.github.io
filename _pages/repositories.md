@@ -146,18 +146,38 @@ nav_order: 4
 
 <script>
   (function () {
-    var nodes = document.querySelectorAll('.repo-stars');
-    nodes.forEach(function (el) {
-      var owner = el.getAttribute('data-owner');
-      var name = el.getAttribute('data-name');
+    var metaElements = document.querySelectorAll('.repo-meta');
+    metaElements.forEach(function (metaEl) {
+      // Try to get owner/name from the star element, as it's the original anchor
+      var starEl = metaEl.querySelector('.repo-stars');
+      if (!starEl) return;
+    
+      var owner = starEl.getAttribute('data-owner');
+      var name = starEl.getAttribute('data-name');
       if (!owner || !name) return;
+    
       fetch('https://api.github.com/repos/' + owner + '/' + name, { headers: { 'Accept': 'application/vnd.github+json' } })
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (data) {
-          if (!data || typeof data.stargazers_count !== 'number') return;
-          var countEl = el.querySelector('.star-count');
-          if (countEl) countEl.textContent = data.stargazers_count;
-          el.removeAttribute('hidden');
+          if (!data) return;
+    
+          // The parent meta container should be the element containing both stars and forks
+          var metaEl = starEl.closest('.repo-meta');
+          if (!metaEl) return;
+    
+          // Update stars
+          var starCountEl = metaEl.querySelector('.star-count');
+          if (starCountEl && typeof data.stargazers_count === 'number') {
+            starCountEl.textContent = data.stargazers_count;
+            starCountEl.closest('.repo-stars').removeAttribute('hidden');
+          }
+    
+          // Update forks
+          var forkCountEl = metaEl.querySelector('.fork-count');
+          if (forkCountEl && typeof data.forks_count === 'number') {
+            forkCountEl.textContent = data.forks_count;
+            forkCountEl.closest('.repo-forks').removeAttribute('hidden');
+          }
         })
         .catch(function () { /* keep hardcoded fallback */ });
     });
