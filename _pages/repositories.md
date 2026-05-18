@@ -81,8 +81,8 @@ nav_order: 4
     color: #f1c40f;
     margin-right: 0.25rem;
   }
-  .repo-grid .repo-meta .fa-fork {
-    color: #3498db; /* A common blue color for forks */
+  .repo-grid .repo-meta .fa-code-fork {
+    color: #3498db;
     margin-right: 0.25rem;
   }
 </style>
@@ -108,7 +108,7 @@ nav_order: 4
 <p class="repo-meta">
 {% if repo.language %}<span class="meta-item"><span class="lang-dot" style="background-color: {{ lang_color }};"></span>{{ repo.language }}</span>{% endif %}
 <span class="meta-item repo-stars" data-owner="{{ repo.owner }}" data-name="{{ repo.name }}"{% unless repo.stars %} hidden{% endunless %}><i class="fa-solid fa-star"></i><span class="star-count">{{ repo.stars }}</span></span>
-<span class="meta-item repo-forks" data-owner="{{ repo.owner }}" data-name="{{ repo.name }}"{% unless repo.forks %} hidden{% endunless %}><i class="fa-solid fa-fork"></i><span class="fork-count">{{ repo.forks }}</span></span>
+<span class="meta-item repo-forks" data-owner="{{ repo.owner }}" data-name="{{ repo.name }}"{% unless repo.forks %} hidden{% endunless %}><i class="fa-solid fa-code-fork"></i><span class="fork-count">{{ repo.forks }}</span></span>
 </p>
 </div>
 </a>
