@@ -92,6 +92,7 @@ From there, if you're using [Notero](https://github.com/dvanoni/notero), those n
 - **Smart parent item creation** compatible with Notion sync tools like Notero
 - **Custom tagging** and update capability to prevent duplicate note creation
 - **Collection-notebook mapping management** with sync state reset
+- **Select from your own or group libraries** so that all your work can be added to NotebookLM.
 
 ## Requirements
 

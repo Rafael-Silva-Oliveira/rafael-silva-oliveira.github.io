@@ -14,3 +14,4 @@ vendor
 .venv
 .claude/settings.local.json
 .claude/settings.json
+.kilo/kilo.jsonc
