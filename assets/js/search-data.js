@@ -83,6 +83,9 @@ ninja.data = [{
           section: "News",},{id: "news-released-numify-a-zotero-plugin-that-automatically-adds-hierarchical-numeric-prefixes-to-your-collection-names-create-rename-delete-or-reorder-collections-the-numbering-stays-in-sync-across-all-your-devices",
           title: 'Released Numify, a Zotero plugin that automatically adds hierarchical numeric prefixes to your...',
           description: "",
+          section: "News",},{id: "news-released-paperzorro-an-ai-powered-literature-scout-for-zotero-build-precise-boolean-searches-across-pubmed-arxiv-and-biorxiv-medrxiv-let-a-language-model-filter-the-noise-and-import-only-the-papers-that-matter-with-scheduled-searches-that-keep-your-library-current-automatically",
+          title: 'Released PaperZorro, an AI-powered literature scout for Zotero. Build precise boolean searches across...',
+          description: "",
           section: "News",},{id: "projects-numify",
           title: 'Numify',
           description: "A Zotero plugin that automatically adds hierarchical numeric prefixes to your collection names. Create, rename, delete, or reorder collections — the numbering stays in sync.",
@@ -93,6 +96,11 @@ ninja.data = [{
           description: "A browser extension and Zotero plugin for bidirectional sync between Zotero and Google NotebookLM. Push your research library into NotebookLM for AI-powered analysis, then pull generated notes back into Zotero.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/nzbridge/";
+            },},{id: "projects-paperzorro",
+          title: 'PaperZorro',
+          description: "An AI-powered literature scout for Zotero. Build precise boolean searches across PubMed, arXiv and bioRxiv/medRxiv, let a language model filter the noise, and import only the papers that matter — straight into your library.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/paperzorro/";
             },},{
         id: 'social-cv',
         title: 'CV',
