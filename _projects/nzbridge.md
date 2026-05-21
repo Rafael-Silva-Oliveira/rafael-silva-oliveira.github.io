@@ -3,7 +3,7 @@ layout: page
 title: NZBridge
 description: A browser extension and Zotero plugin for bidirectional sync between Zotero and Google NotebookLM. Push your research library into NotebookLM for AI-powered analysis, then pull generated notes back into Zotero.
 img: assets/img/nzbridge/social-preview.png
-importance: 1
+importance: 2
 category: fun
 github: https://github.com/Rafael-Silva-Oliveira/NZBridge
 slug: nzbridge

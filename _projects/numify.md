@@ -3,7 +3,7 @@ layout: page
 title: Numify
 description: A Zotero plugin that automatically adds hierarchical numeric prefixes to your collection names. Create, rename, delete, or reorder collections — the numbering stays in sync.
 img: assets/img/numify/promo.png
-importance: 2
+importance: 3
 category: fun
 github: https://github.com/Rafael-Silva-Oliveira/numify
 slug: numify
