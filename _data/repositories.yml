@@ -18,13 +18,6 @@ categories:
 
 featured:
   - owner: Rafael-Silva-Oliveira
-    name: paperzorro
-    category: zotero
-    description: AI-powered literature scout for Zotero — build boolean searches across PubMed, arXiv and bioRxiv/medRxiv, let an LLM filter the noise, and import only the papers that matter.
-    language: Python
-    highlight: true
-
-  - owner: Rafael-Silva-Oliveira
     name: NZBridge
     category: zotero
     description: Bidirectional sync between Zotero and Google NotebookLM — push PDFs & URLs as sources, pull AI-generated notes back into Zotero.
@@ -39,6 +32,13 @@ featured:
     language: TypeScript
     stars: 2
 
+  - owner: Rafael-Silva-Oliveira
+    name: paperzorro
+    category: zotero
+    description: AI-powered literature scout for Zotero — build boolean searches across PubMed, arXiv and bioRxiv/medRxiv, let an LLM filter the noise, and import only the papers that matter.
+    language: Python
+    highlight: true
+    
   - owner: Rafael-Silva-Oliveira
     name: STNav
     category: bioinformatics
