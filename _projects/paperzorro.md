@@ -61,7 +61,7 @@ Use the **Builder** to assemble nested `AND` / `OR` / `NOT` groups with a point-
 
 ## Results — review and import
 
-Browse the AI verdicts. Each paper is tagged **YES** or **NO** with a short justification, and you can expand the abstract to read more. Pick a target collection (any collection or sub-collection in your library), check the papers you want, and click **Import Checked to Zotero** — they become proper Zotero items with full metadata.
+Browse the AI verdicts. Each paper is tagged **YES** or **NO** with a justification, and you can expand the abstract to read more. Pick a target collection (any collection or sub-collection in your library), check the papers you want, and click **Import Checked to Zotero** — they become proper Zotero items with full metadata.
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
