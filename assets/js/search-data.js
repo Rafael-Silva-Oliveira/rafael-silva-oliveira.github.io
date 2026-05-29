@@ -44,7 +44,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-practical-guide-to-cell-segmentation-domain-identification-and-cell-type-annotation-in-single-cell-spatial-transcriptomics-visium-hd",
+        },{id: "post-personalizing-radiotherapy-with-rsi-gard-and-rxrsi",
+        
+          title: "Personalizing radiotherapy with RSI, GARD, and RxRSI",
+        
+        description: "A step-by-step tutorial on computing genome-based radiosensitivity biomarkers (RSI, GARD, RxRSI) from public bulk RNA-seq data, with survival modelling and personalized dose estimation",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/distill/";
+          
+        },
+      },{id: "post-practical-guide-to-cell-segmentation-domain-identification-and-cell-type-annotation-in-single-cell-spatial-transcriptomics-visium-hd",
         
           title: "Practical Guide to Cell Segmentation, Domain Identification and Cell Type Annotation in Single-Cell...",
         
