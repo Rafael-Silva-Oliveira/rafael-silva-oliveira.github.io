@@ -44,9 +44,9 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-personalizing-radiotherapy-with-rsi-gard-and-rxrsi",
+        },{id: "post-personalizing-radiotherapy-with-rsi-gard-and-rxrsi-with-bulk-rna-data",
         
-          title: "Personalizing radiotherapy with RSI, GARD, and RxRSI",
+          title: "Personalizing radiotherapy with RSI, GARD, and RxRSI with bulk RNA data",
         
         description: "A step-by-step tutorial on computing genome-based radiosensitivity biomarkers (RSI, GARD, RxRSI) from public bulk RNA-seq data, with survival modelling and personalized dose estimation",
         section: "Posts",
