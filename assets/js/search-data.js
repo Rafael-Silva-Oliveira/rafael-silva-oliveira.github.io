@@ -52,7 +52,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2026/distill/";
+            window.location.href = "/blog/2026/radiosensitivity-biomarker/";
           
         },
       },{id: "post-practical-guide-to-cell-segmentation-domain-identification-and-cell-type-annotation-in-single-cell-spatial-transcriptomics-visium-hd",
