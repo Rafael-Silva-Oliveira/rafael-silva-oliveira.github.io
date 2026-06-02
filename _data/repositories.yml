@@ -48,9 +48,21 @@ featured:
   - owner: Rafael-Silva-Oliveira
     name: segmentation-and-annotation
     category: bioinformatics
-    description: Tooling for image segmentation and annotation workflows.
+    description: Support repository for the blog post on cell segmentation and annotation of single-cell spatial transcriptomics data.
     language: Python
     stars: 1
+
+  - owner: Rafael-Silva-Oliveira
+    name: radiosensitivity-biomarker
+    category: bioinformatics
+    description: Support repository for the blog post on applying RSI, GARD and RxRSI in bulk RNA data for targeted radiation schedules.
+    language: Python
+
+  - owner: Rafael-Silva-Oliveira
+    name: subtyping
+    category: bioinformatics
+    description: Support repository for the blog post on cancer subtyping using cNMF in bulk RNA data.
+    language: Python
 
   - owner: Rafael-Silva-Oliveira
     name: Clinical-Decision-Support-System
