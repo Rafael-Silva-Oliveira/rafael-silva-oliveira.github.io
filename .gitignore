@@ -12,6 +12,7 @@ node_modules/
 vendor
 .idea
 .venv
+.tests
 .claude/settings.local.json
 .claude/settings.json
 .kilo/kilo.jsonc
