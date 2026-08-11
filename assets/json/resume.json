@@ -148,9 +148,253 @@
 	],
 	"certificates": [
 		{
-			"name": "Several - Check my Google Drive folder with all my certificates (or LinkedIn profile)",
+			"name": "Full archive - Google Drive folder with all my certificates (also on my LinkedIn profile)",
 			"url": "https://drive.google.com/drive/folders/1Psdt3eFUYlWNfOr4c-CSRwh7Ig97NlAS?usp=sharing",
-			"icon": "fa-solid fa-location-dot"
+			"icon": "fa-brands fa-google-drive"
+		},
+		{
+			"name": "PyTorch: Fundamentals",
+			"issuer": "DeepLearning.AI (Coursera)",
+			"date": "2026-07-28",
+			"url": "/assets/certificates/2026-pytorch-fundamentals.pdf"
+		},
+		{
+			"name": "UNIX Shell Scripting in Life Sciences",
+			"issuer": "SIB Swiss Institute of Bioinformatics",
+			"date": "2025-11-26",
+			"url": "/assets/certificates/2025-unix-shell-scripting-life-sciences.pdf"
+		},
+		{
+			"name": "Entrepreneurship in Healthcare (5 ECTS, PhD level)",
+			"issuer": "School of Health Innovation - University of Oslo, Karolinska Institutet, NTNU & University of Copenhagen",
+			"date": "2024-11-29",
+			"url": "/assets/certificates/2024-entrepreneurship-in-healthcare.pdf"
+		},
+		{
+			"name": "LangChain & Vector Databases in Production (Gen AI 360)",
+			"issuer": "Activeloop, TowardsAI & Intel Disruptor Initiative",
+			"date": "2024-03-10",
+			"url": "/assets/certificates/2024-langchain-vector-databases-gen-ai-360.pdf"
+		},
+		{
+			"name": "Machine Learning in Python with scikit-learn",
+			"issuer": "Inria - France Université Numérique",
+			"date": "2024-01-12",
+			"url": "/assets/certificates/2024-machine-learning-python-scikit-learn.pdf"
+		},
+		{
+			"name": "Mathematics for Machine Learning and Data Science (Specialization)",
+			"issuer": "DeepLearning.AI (Coursera)",
+			"date": "2023-09-04",
+			"url": "/assets/certificates/2023-mathematics-for-ml-and-data-science-specialization.pdf",
+			"courses": [
+				{
+					"name": "Probability & Statistics for Machine Learning & Data Science",
+					"url": "/assets/certificates/2023-probability-and-statistics-for-ml-and-data-science.pdf"
+				},
+				{
+					"name": "Calculus for Machine Learning and Data Science",
+					"url": "/assets/certificates/2023-calculus-for-ml-and-data-science.pdf"
+				},
+				{
+					"name": "Linear Algebra for Machine Learning and Data Science",
+					"url": "/assets/certificates/2023-linear-algebra-for-ml-and-data-science.pdf"
+				}
+			]
+		},
+		{
+			"name": "Machine Learning (Specialization)",
+			"issuer": "DeepLearning.AI & Stanford University (Coursera)",
+			"date": "2023-01-10",
+			"url": "/assets/certificates/2023-machine-learning-specialization.pdf",
+			"courses": [
+				{
+					"name": "Unsupervised Learning, Recommenders, Reinforcement Learning",
+					"url": "/assets/certificates/2023-unsupervised-learning-recommenders-reinforcement-learning.pdf"
+				},
+				{
+					"name": "Advanced Learning Algorithms",
+					"url": "/assets/certificates/2023-advanced-learning-algorithms.pdf"
+				},
+				{
+					"name": "Supervised Machine Learning: Regression and Classification",
+					"url": "/assets/certificates/2022-supervised-machine-learning.pdf"
+				}
+			]
+		},
+		{
+			"name": "Azure Databricks & Spark Core for Data Engineers (Python/SQL)",
+			"issuer": "Udemy",
+			"date": "2022-12-28",
+			"url": "/assets/certificates/2022-azure-databricks-spark-core.pdf"
+		},
+		{
+			"name": "AI for Medicine (Specialization)",
+			"issuer": "DeepLearning.AI (Coursera)",
+			"date": "2022-12-19",
+			"url": "/assets/certificates/2022-ai-for-medicine-specialization.pdf",
+			"courses": [
+				{
+					"name": "AI for Medical Treatment",
+					"url": "/assets/certificates/2022-ai-for-medical-treatment.pdf"
+				},
+				{
+					"name": "AI for Medical Prognosis",
+					"url": "/assets/certificates/2022-ai-for-medical-prognosis.pdf"
+				},
+				{
+					"name": "AI for Medical Diagnosis",
+					"url": "/assets/certificates/2022-ai-for-medical-diagnosis.pdf"
+				}
+			]
+		},
+		{
+			"name": "Deep Learning (Specialization)",
+			"issuer": "DeepLearning.AI (Coursera)",
+			"date": "2022-10-20",
+			"url": "/assets/certificates/2022-deep-learning-specialization.pdf",
+			"courses": [
+				{
+					"name": "Convolutional Neural Networks",
+					"url": "/assets/certificates/2022-convolutional-neural-networks.pdf"
+				},
+				{
+					"name": "Sequence Models",
+					"url": "/assets/certificates/2022-sequence-models.pdf"
+				},
+				{
+					"name": "Structuring Machine Learning Projects",
+					"url": "/assets/certificates/2022-structuring-machine-learning-projects.pdf"
+				},
+				{
+					"name": "Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization",
+					"url": "/assets/certificates/2022-improving-deep-neural-networks.pdf"
+				},
+				{
+					"name": "Neural Networks and Deep Learning",
+					"url": "/assets/certificates/2022-neural-networks-and-deep-learning.pdf"
+				}
+			]
+		},
+		{
+			"name": "Power BI (25h professional training)",
+			"issuer": "CINEL - Centro de Formação Profissional da Indústria Electrónica, Energia, Telecomunicações e Tecnologias da Informação",
+			"date": "2022-05-18",
+			"note": "certificate available upon request"
+		},
+		{
+			"name": "Aprendizagem Automática e Análise de Dados em Larga Escala (Machine Learning & Large-Scale Data Analysis, 52h)",
+			"issuer": "UNAVE - University of Aveiro",
+			"date": "2021-10-27",
+			"note": "certificate available upon request"
+		},
+		{
+			"name": "Introduction to Pharmacovigilance",
+			"issuer": "Uppsala Monitoring Centre",
+			"date": "2021-08-03",
+			"url": "/assets/certificates/2021-introduction-to-pharmacovigilance.pdf"
+		},
+		{
+			"name": "ICH Good Clinical Practice E6 (R2)",
+			"issuer": "Global Health Training Centre",
+			"date": "2021-03-07",
+			"url": "/assets/certificates/2021-ich-good-clinical-practice-e6-r2.pdf"
+		},
+		{
+			"name": "Transcriptomics 1",
+			"issuer": "Pine Biotech",
+			"date": "2021-02-27",
+			"url": "/assets/certificates/2021-transcriptomics-1.jpg"
+		},
+		{
+			"name": "Introduction to Bioinformatics",
+			"issuer": "Pine Biotech",
+			"date": "2020-09-12",
+			"url": "/assets/certificates/2020-introduction-to-bioinformatics.jpg"
+		},
+		{
+			"name": "Industrial Biotechnology",
+			"issuer": "University of Manchester (Coursera)",
+			"date": "2020-09-10",
+			"url": "/assets/certificates/2020-industrial-biotechnology.pdf"
+		},
+		{
+			"name": "R Programming",
+			"issuer": "Johns Hopkins University (Coursera)",
+			"date": "2020-08-17",
+			"url": "/assets/certificates/2020-r-programming.pdf"
+		},
+		{
+			"name": "Clinical Investigator Certification - Level 1",
+			"issuer": "NOVA Medical School & UNAVE - University of Aveiro",
+			"date": "2020-08-17",
+			"url": "/assets/certificates/2020-clinical-investigator-certification-level-1.png"
+		},
+		{
+			"name": "Technical Writing",
+			"issuer": "Moscow Institute of Physics and Technology (Coursera)",
+			"date": "2020-08-14",
+			"url": "/assets/certificates/2020-technical-writing.pdf"
+		},
+		{
+			"name": "Introduction to Translational Science",
+			"issuer": "University of Rochester (Coursera)",
+			"date": "2020-08-14",
+			"url": "/assets/certificates/2020-introduction-to-translational-science.pdf"
+		},
+		{
+			"name": "Understanding Clinical Research: Behind the Statistics",
+			"issuer": "University of Cape Town (Coursera)",
+			"date": "2020-08-14",
+			"url": "/assets/certificates/2020-understanding-clinical-research.pdf"
+		},
+		{
+			"name": "Reverse and Complement Nucleic Acid Sequences (DNA, RNA) using R",
+			"issuer": "Coursera Project Network",
+			"date": "2020-08-13",
+			"url": "/assets/certificates/2020-reverse-complement-nucleic-acid-sequences-r.pdf"
+		},
+		{
+			"name": "Design and Interpretation of Clinical Trials",
+			"issuer": "Johns Hopkins University (Coursera)",
+			"date": "2020-08-12",
+			"url": "/assets/certificates/2020-design-and-interpretation-of-clinical-trials.pdf"
+		},
+		{
+			"name": "Drug Discovery",
+			"issuer": "University of California San Diego (Coursera)",
+			"date": "2020-08-12",
+			"url": "/assets/certificates/2020-drug-discovery.pdf"
+		},
+		{
+			"name": "Drug Development",
+			"issuer": "University of California San Diego (Coursera)",
+			"date": "2020-08-12",
+			"url": "/assets/certificates/2020-drug-development.pdf"
+		},
+		{
+			"name": "Formação de Cuidadores COVID-19 (16h)",
+			"issuer": "ESSUA - University of Aveiro",
+			"date": "2020-04-21",
+			"note": "certificate available upon request"
+		},
+		{
+			"name": "Great Customer Service with Emotional Intelligence",
+			"issuer": "Udemy",
+			"date": "2020-04-04",
+			"url": "/assets/certificates/2020-great-customer-service-emotional-intelligence.pdf"
+		},
+		{
+			"name": "The Fundamentals of Digital Marketing",
+			"issuer": "Google Digital Workshop, IAB Europe & The Open University",
+			"date": "2020-03-22",
+			"url": "/assets/certificates/2020-fundamentals-of-digital-marketing.pdf"
+		},
+		{
+			"name": "Public Speaking",
+			"issuer": "Speak & Lead - University of Aveiro",
+			"date": "2019-10-17",
+			"url": "/assets/certificates/2019-public-speaking.pdf"
 		}
 	],
 	"publications": [

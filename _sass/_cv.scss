@@ -151,6 +151,86 @@ td.list-group-link {
 }
 
 /*****************************
+ * CV CERTIFICATES styles
+ *****************************/
+
+p.cert-archive {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+
+  i {
+    color: var(--global-theme-color);
+    margin-right: 0.4rem;
+  }
+}
+
+div.cert-year {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.6rem 0 0.75rem;
+
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--global-divider-color);
+  }
+
+  &:first-child {
+    margin-top: 1rem;
+  }
+}
+
+span.cert-year-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--global-theme-color);
+}
+
+div.cert-item {
+  margin-bottom: 0.9rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--global-divider-color);
+}
+
+div.cert-name {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+span.cert-note {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--global-text-color-light);
+}
+
+div.cert-issuer {
+  font-size: 0.75rem;
+  color: var(--global-text-color-light);
+}
+
+ul.cert-courses {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding-left: 0.9rem;
+
+  li {
+    position: relative;
+    font-size: 0.75rem;
+    line-height: 1.5;
+
+    &::before {
+      content: "\2013";
+      position: absolute;
+      left: -0.9rem;
+      color: var(--global-text-color-light);
+    }
+  }
+}
+
+/*****************************
  * CV TOC styles
  *****************************/
 
