@@ -148,11 +148,6 @@
 	],
 	"certificates": [
 		{
-			"name": "Full archive - Google Drive folder with all my certificates (also on my LinkedIn profile)",
-			"url": "https://drive.google.com/drive/folders/1Psdt3eFUYlWNfOr4c-CSRwh7Ig97NlAS?usp=sharing",
-			"icon": "fa-brands fa-google-drive"
-		},
-		{
 			"name": "PyTorch: Techniques and Ecosystem Tools",
 			"issuer": "DeepLearning.AI (Coursera)",
 			"date": "2026-08-15",
