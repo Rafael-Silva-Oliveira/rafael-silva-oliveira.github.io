@@ -153,6 +153,12 @@
 			"icon": "fa-brands fa-google-drive"
 		},
 		{
+			"name": "PyTorch: Techniques and Ecosystem Tools",
+			"issuer": "DeepLearning.AI (Coursera)",
+			"date": "2026-08-15",
+			"url": "/assets/certificates/2026-pytorch-techniques-and-ecosystems.pdf"
+		},
+		{
 			"name": "PyTorch: Fundamentals",
 			"issuer": "DeepLearning.AI (Coursera)",
 			"date": "2026-07-28",
