@@ -406,6 +406,13 @@
 	],
 	"publications": [
 		{
+			"name": "Radiomics and Radiogenomics Platforms Integrating Machine Learning Techniques: A Review",
+			"publisher": "Information Systems and Technologies",
+			"releaseDate": "2024-02-14",
+			"url": "https://link.springer.com/chapter/10.1007/978-3-031-45648-0_42",
+			"summary": "A review article of Radiomics and Radiogenomics platforms. Useful as a literature search that was then used for my Master thesis."
+		},
+		{
 			"name": "Subtyping limited stage small cell lung cancer (LS SCLC) reveals inflammatory subtypes with improved chemoradiotherapy outcomes",
 			"publisher": "Lung Cancer",
 			"releaseDate": "2026-09-02",
@@ -415,14 +422,9 @@
 		{
 			"name": "Genomic Radiosensitivity Reveal Subtype Differences and Predict Outcomes in SCLC",
 			"publisher": "To be published",
-			"releaseDate": "2026"
-		},
-		{
-			"name": "Radiomics and Radiogenomics Platforms Integrating Machine Learning Techniques: A Review",
-			"publisher": "Information Systems and Technologies",
-			"releaseDate": "2024-02-14",
-			"url": "https://link.springer.com/chapter/10.1007/978-3-031-45648-0_42",
-			"summary": "A review article of Radiomics and Radiogenomics platforms. Useful as a literature search that was then used for my Master thesis."
+			"releaseDate": "2026",
+			"url": "",
+			"summary": ""
 		}
 	],
 	"skills": [

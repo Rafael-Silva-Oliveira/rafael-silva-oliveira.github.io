@@ -88,6 +88,9 @@ jobs:
           valueFile: "_config.yml"
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
+      - name: Sync CV publications 📚
+        run: node .github/scripts/sync-cv-publications.mjs
+
       - name: Install and Build 🔧
         run: |
           sudo apt-get update && sudo apt-get install -y imagemagick
@@ -103,3 +106,16 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
+
+      - name: Commit synced CV publications 💾
+        if: github.event_name != 'pull_request'
+        run: |
+          if git diff --quiet -- assets/json/resume.json; then
+            echo "CV publications already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/json/resume.json
+          git commit -m "Sync CV publications from papers.bib"
+          git push origin HEAD:${{ github.ref_name }}
