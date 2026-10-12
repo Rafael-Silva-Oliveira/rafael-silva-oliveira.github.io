@@ -43,16 +43,17 @@
 		{
 			"institution": "Norwegian University of Science and Technology, Trondheim, Norway",
 			"location": "Trondheim, Norway",
-			"url": "https://www.ntnu.no/ansatte/rafael.oliveira",
+			"url": "https://www.ntnu.edu/studies/phmedt",
 			"area": "Medical Technology",
 			"studyType": "PhD (180 ECTS)",
 			"startDate": "2023-09",
-			"endDate": "2026-09",
+			"endDate": "2026-10",
 			"courses": [
-				"Advanced deep learning with Python",
-				"Bioinformatics Methods for Next Generation Sequencing",
-				"Norwegian for Foreigners A2/A1", 
-				"Norwegian for Foreigners B2/B1"]
+				"Advanced deep learning with Python -  7.5 ECTS",
+				"Bioinformatics Methods for Next Generation Sequencing - 7.5 ECTS",
+				"Norwegian for Foreigners Level 1 (A1/A2) - 15 ECTS", 
+				"Norwegian for Foreigners Level 2 (B1/B2) - 15 ECTS",
+				"Norwegian for Foreigners Level 3 (B2/C1) - 15 ECTS"]
 		},
 		{
 			"institution": "University of Aveiro",
